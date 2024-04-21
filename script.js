@@ -1,11 +1,11 @@
 var buttonContainer;
 
 // Wrap the code inside a DOMContentLoaded event listener to ensure it runs after the DOM is fully loaded
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     buttonContainer = document.getElementById("buttonContainer");
 
     // Call the createButtons function initially
-    createButtons();
+    search("");
 });
 
 const wordCategories = {
@@ -36,11 +36,6 @@ function createButtons(strings) {
     } else {
         // If no strings are provided, create buttons for all categories and words
         for (const category in wordCategories) {
-            // Create button for category
-            const categoryButton = document.createElement("button");
-            categoryButton.textContent = category;
-            buttonContainer.appendChild(categoryButton);
-
             // Create buttons for words in category
             for (const word of wordCategories[category]) {
                 const wordButton = document.createElement("button");
@@ -51,18 +46,18 @@ function createButtons(strings) {
     }
 }
 
-
 // Find all words that contain the query
 function search(query) {
-    const categoryResults = [];
     const results = [];
     query = query.toLowerCase();
 
     for (const category in wordCategories) {
         // Search the category name
         if (category.includes(query)) {
-            console.log("Category: " + category);
-            categoryResults.push(category);
+
+            for (const word of wordCategories[category]) {
+                results.push(word);
+            }
         }
 
         // Search the words in the category
@@ -72,11 +67,6 @@ function search(query) {
             }
         }
     }
-
-    // Add categories at the end
-    categoryResults.forEach(category => {
-        results.push(category);
-    });
 
     createButtons(results);
 }
