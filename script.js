@@ -1,17 +1,20 @@
 let buttonContainer;
+// Define wordCategories as an empty object
+const wordCategories = {};
 
 // Wrap the code inside a DOMContentLoaded event listener to ensure it runs after the DOM is fully loaded
 document.addEventListener("DOMContentLoaded", function () {
     buttonContainer = document.getElementById("buttonContainer");
 
     loadCSV("words.csv");
+
+    console.log("wordCategories:", wordCategories);
+
     // Call the createButtons function initially
     search("");
 });
 
-// Define wordCategories as an empty object
-const wordCategories = {};
-
+// Populate wordCategories with data from the CSV file
 function loadCSV(url) {
     fetch(url)
         .then(response => response.text())
@@ -19,8 +22,8 @@ function loadCSV(url) {
             // Parse the CSV data
             const rows = data.split("\n");
             for (const row of rows) {
-                const columns = row.split(",");
-                const category = columns[0].trim(); // Get the category name from the first column
+                const columns = row.split(",").filter(column => column !== "");
+                const category = columns[0]; // Get the category name from the first column
                 const words = columns.slice(1).map(word => word.trim()); // Get the words for the category
 
                 // Add the category and its words to wordCategories
@@ -28,7 +31,8 @@ function loadCSV(url) {
             }
 
             // Call the createButtons function
-            createButtons([]);
+            // createButtons([]);
+            search("");
         })
         .catch(error => {
             console.error("Error loading CSV:", error);
@@ -56,26 +60,41 @@ function createButtons(strings) {
             buttonContainer.appendChild(button);
         });
     } else {
-        // If no strings are provided, create buttons for all categories and words
-        for (const category in wordCategories) {
-            // Create buttons for words in category
-            for (const word of wordCategories[category]) {
-                const wordButton = document.createElement("button");
-                wordButton.textContent = word;
-                buttonContainer.appendChild(wordButton);
-            }
-        }
+        // // If no strings are provided, create buttons for all categories and words
+        // for (const category in wordCategories) {
+        //     // Create buttons for words in category
+        //     for (const word of wordCategories[category]) {
+        //         const wordButton = document.createElement("button");
+        //         wordButton.textContent = word;
+        //         buttonContainer.appendChild(wordButton);
+        //     }
+        // }
     }
 }
 
+// Filter the words based on the search query
+// 3 cases:
+// 1. if query is empty or null, display all buttons.
+// 2. if query is not empty and matches a category name or a word, display matching words.
+// 3. if query is not empty and does not match any category name or word, do not display any buttons.
 function search(query) {
+    if (query == null) {
+        console.error("Query is null. You probably meant to call search with an empty string.");
+        return;
+    }
+
+    query = query.trim().toLowerCase();
+    console.log("Searching for: [" + query + "]")
     const results = [];
-    query = query.toLowerCase();
 
     // If the query is empty or null, display buttons for all words
-    if (!query || query.trim() === "") {
+    if (query === "") {
+        console.log("Empty query. Displaying all buttons");
+
         for (const category in wordCategories) {
+            console.log("Adding all words in category: " + category + " to results.");
             for (const word of wordCategories[category]) {
+                console.log("Adding word: " + word + " to results.");
                 results.push(word);
             }
         }
@@ -109,4 +128,6 @@ function search(query) {
 
     createButtons(results);
 }
+
+
 
