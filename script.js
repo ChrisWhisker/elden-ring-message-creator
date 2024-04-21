@@ -1,4 +1,3 @@
-// console.log("Hello from script.js!");
 
 const wordCategories = {
     "Category1": ["word1", "word2", "word3"],
@@ -12,10 +11,12 @@ const wordCategories = {
 function search(query) {
     const categoryResults = [];
     const results = [];
-    for (const category in wordCategories) {
+    query = query.toLowerCase();
 
+    for (const category in wordCategories) {
         // Search the category name
         if (category.includes(query)) {
+            console.log("Category: " + category);
             categoryResults.push(category);
         }
 
@@ -26,6 +27,29 @@ function search(query) {
             }
         }
     }
-    console.log(results + categoryResults);
-    return results + categoryResults;
+
+    // Add categories at the end
+    categoryResults.forEach(category => {
+        results.push(category);
+    });
+
+    createButtons(results);
+    return results;
+}
+
+function createButtons(strings) {
+    const buttonContainer = document.getElementById("buttonContainer");
+
+    // Remove existing buttons
+    while (buttonContainer.firstChild) {
+        buttonContainer.removeChild(buttonContainer.firstChild);
+    }
+
+
+    // Create buttons for each string
+    strings.forEach(str => {
+        const button = document.createElement("button");
+        button.textContent = str;
+        buttonContainer.appendChild(button);
+    });
 }
