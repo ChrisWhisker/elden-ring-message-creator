@@ -22,7 +22,10 @@ function loadCSV(url) {
             // Parse the CSV data
             const rows = data.split("\n");
             for (const row of rows) {
-                const columns = row.split(",").filter(column => column !== "");
+                // Split the row by commas while handling quoted cells
+                const columns = splitCSVRow(row);
+                if (columns.length === 0) continue; // Skip empty rows
+
                 const category = columns[0]; // Get the category name from the first column
                 const words = columns.slice(1).map(word => word.trim()); // Get the words for the category
 
@@ -38,6 +41,35 @@ function loadCSV(url) {
             console.error("Error loading CSV:", error);
         });
 }
+
+// Function to split a CSV row into columns, handling quoted cells containing commas
+function splitCSVRow(row) {
+    const columns = [];
+    let currentColumn = ''; // Buffer for the current column being processed
+    let insideQuotes = false;
+
+    for (let i = 0; i < row.length; i++) {
+        const char = row[i];
+        if (char === '"') {
+            // Toggle insideQuotes when encountering a quote
+            insideQuotes = !insideQuotes;
+        } else if (char === ',' && !insideQuotes) {
+            // Push the current column to columns array when encountering a comma outside quotes
+            columns.push(currentColumn);
+            currentColumn = ''; // Reset currentColumn buffer
+        } else {
+            // Append the character to the current column buffer
+            currentColumn += char;
+        }
+    }
+
+    // Push the last column to columns array
+    columns.push(currentColumn);
+
+    return columns;
+}
+
+
 
 function createButtons(strings) {
     // Check if buttonContainer exists
@@ -94,7 +126,7 @@ function search(query) {
         for (const category in wordCategories) {
             console.log("Adding all words in category: " + category + " to results.");
             for (const word of wordCategories[category]) {
-                console.log("Adding word: " + word + " to results.");
+                console.log("\tAdding word: \"" + word + "\" to results.");
                 results.push(word);
             }
         }
