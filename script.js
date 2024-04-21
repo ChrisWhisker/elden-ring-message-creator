@@ -4,17 +4,36 @@ var buttonContainer;
 document.addEventListener("DOMContentLoaded", function () {
     buttonContainer = document.getElementById("buttonContainer");
 
+    loadCSV("categories.csv");
     // Call the createButtons function initially
     search("");
 });
 
-const wordCategories = {
-    "Category1": ["word1", "word2", "word3"],
-    "Category2": ["word4", "word5"],
-    "Category3": ["word6", "word7", "word8"],
-    "Category4": ["word9"],
-    "Category5": ["word10", "word11", "word12"]
-};
+// Define wordCategories as an empty object
+const wordCategories = {};
+
+function loadCSV(url) {
+    fetch(url)
+        .then(response => response.text())
+        .then(data => {
+            // Parse the CSV data
+            const rows = data.split("\n");
+            for (const row of rows) {
+                const columns = row.split(",");
+                const category = columns[0].trim(); // Get the category name from the first column
+                const words = columns.slice(1).map(word => word.trim()); // Get the words for the category
+
+                // Add the category and its words to wordCategories
+                wordCategories[category] = words;
+            }
+
+            // Call the createButtons function
+            createButtons([]);
+        })
+        .catch(error => {
+            console.error("Error loading CSV:", error);
+        });
+}
 
 function createButtons(strings) {
     // Check if buttonContainer exists
@@ -28,7 +47,10 @@ function createButtons(strings) {
 
     // If strings is provided and not empty, create buttons for the provided strings
     if (strings && strings.length > 0) {
-        strings.forEach(str => {
+        // Filter out duplicate strings
+        const uniqueStrings = [...new Set(strings)];
+
+        uniqueStrings.forEach(str => {
             const button = document.createElement("button");
             button.textContent = str;
             buttonContainer.appendChild(button);
@@ -46,27 +68,45 @@ function createButtons(strings) {
     }
 }
 
-// Find all words that contain the query
 function search(query) {
     const results = [];
     query = query.toLowerCase();
 
-    for (const category in wordCategories) {
-        // Search the category name
-        if (category.includes(query)) {
-
+    // If the query is empty or null, display buttons for all words
+    if (!query || query.trim() === "") {
+        for (const category in wordCategories) {
             for (const word of wordCategories[category]) {
                 results.push(word);
             }
         }
-
-        // Search the words in the category
-        for (const word of wordCategories[category]) {
-            if (word.includes(query)) {
-                results.push(word);
+    } else {
+        // Search for matching words
+        let found = false;
+        for (const category in wordCategories) {
+            // Search the category name
+            if (category.toLowerCase().includes(query)) {
+                for (const word of wordCategories[category]) {
+                    results.push(word);
+                    found = true;
+                }
             }
+
+            // Search the words in the category
+            for (const word of wordCategories[category]) {
+                if (word.toLowerCase().includes(query)) {
+                    results.push(word);
+                    found = true;
+                }
+            }
+        }
+
+        // If no words match the query, do not display any buttons
+        if (!found) {
+            createButtons([]);
+            return;
         }
     }
 
     createButtons(results);
 }
+
