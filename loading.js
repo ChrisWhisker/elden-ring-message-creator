@@ -20,10 +20,10 @@ function loadCSV(url) {
                 wordCategories[category] = nonEmptyWords;
             }
 
-            search("");
+            search(""); // Trigger search with empty string after CSV data is loaded
         })
         .catch(error => {
-            console.error("Error loading CSV:", error);
+            console.error("Error loading CSV:", error); // Log error if CSV loading fails
         });
 }
 
