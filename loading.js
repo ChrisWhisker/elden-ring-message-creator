@@ -13,8 +13,11 @@ function loadCSV(url) {
                 const category = columns[0]; // Get the category name from the first column
                 const words = columns.slice(1).map(word => word.trim()); // Get the words for the category
 
-                // Add the category and its words to wordCategories
-                wordCategories[category] = words;
+                // Filter out empty strings from words array
+                const nonEmptyWords = words.filter(word => word !== "");
+
+                // Add the category and its non-empty words to wordCategories
+                wordCategories[category] = nonEmptyWords;
             }
 
             search("");
