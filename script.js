@@ -4,7 +4,7 @@ var buttonContainer;
 document.addEventListener("DOMContentLoaded", function () {
     buttonContainer = document.getElementById("buttonContainer");
 
-    loadCSV("categories.csv");
+    loadCSV("words.csv");
     // Call the createButtons function initially
     search("");
 });
