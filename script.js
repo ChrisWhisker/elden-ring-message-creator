@@ -1,4 +1,4 @@
-var buttonContainer;
+let buttonContainer;
 
 // Wrap the code inside a DOMContentLoaded event listener to ensure it runs after the DOM is fully loaded
 document.addEventListener("DOMContentLoaded", function () {
