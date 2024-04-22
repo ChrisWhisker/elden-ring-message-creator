@@ -20,8 +20,11 @@ const wordCategories = {
     "Conjunctions": ["and then", "or", "but", "therefore", "in short", "except", "by the way", "so to speak", "all the more", "\,"]
 };
 
-// Create buttons based on an array of strings
-const createButtons = (strings) => {
+// Create buttons based on an array of objects containing word and category
+const createButtons = (words) => {
+    console.log("Button words: ");
+    console.log(words);
+
     // Check if buttonContainer exists
     if (!buttonContainer) {
         console.error("Button container not found"); // Log an error if buttonContainer is null
@@ -31,19 +34,26 @@ const createButtons = (strings) => {
     // Clear existing buttons in the buttonContainer
     buttonContainer.innerHTML = "";
 
-    // Check if the strings array is empty or null
-    if (!strings || strings.length === 0) {
-        console.error("No strings provided to create buttons"); // Log an error if no strings are provided
-        return; // Exit the function if no strings are provided
+    // Check if the words array is empty or null
+    if (!words || words.length === 0) {
+        console.error("No words provided to create buttons"); // Log an error if no words are provided
+        return; // Exit the function if no words are provided
     }
 
-    // Create a button for each string in the strings array
-    strings.forEach(str => {
+    // Create a button for each word in the words array
+    words.forEach(obj => {
+        if (obj == null || obj == undefined || obj.category == undefined) return; // Skip null or undefined objects (if any
+
         const button = document.createElement("button"); // Create a new button element
-        button.textContent = str; // Set the button text content to the current string
+
+        // Set the button text content to the word
+        button.textContent = obj.word !== undefined ? obj.word : "";
+
+        // Set the category as the mouseover text
+        button.title = obj.category !== undefined ? obj.category : "";
 
         // Apply styles to the button
-        button.style.backgroundColor = "#472f17"; // Set background color to light blue
+        button.style.backgroundColor = "#472f17"; // Set background color to brown
         button.style.padding = "10px 20px"; // Add padding to the button
         button.style.margin = "5px"; // Add margin to the button
         button.style.fontFamily = "body";
@@ -69,7 +79,8 @@ const search = (query) => {
     // Function to add words from a category to the results array
     const addWordsFromCategory = (category) => {
         for (const word of wordCategories[category]) {
-            results.push(word);
+            let wordObj = { category: category, word: word };
+            results.push(wordObj);
         }
     };
 
@@ -81,15 +92,20 @@ const search = (query) => {
     } else {
         let found = false; // Flag to track if any matching words are found
         for (const category in wordCategories) {
+
+            // Add words that match the search query
+            for (const word of wordCategories[category]) {
+                if (word.toLowerCase().includes(query)) {
+                    let wordObj = { category: category, word: word };
+                    results.push(wordObj);
+                    found = true;
+                }
+            }
+
+            // If query matches the category name, add all this category's words 
             if (category.toLowerCase().includes(query)) {
                 addWordsFromCategory(category);
                 found = true;
-            }
-            for (const word of wordCategories[category]) {
-                if (word.toLowerCase().includes(query)) {
-                    results.push(word);
-                    found = true;
-                }
             }
         }
 
@@ -100,8 +116,8 @@ const search = (query) => {
         }
     }
 
-    // console.log("Searching for: \"" + query + "\". Results:");
-    // console.log(results);
+    console.log("Searching for: \"" + query + "\". Results:");
+    console.log(results);
     createButtons(results);
 };
 
