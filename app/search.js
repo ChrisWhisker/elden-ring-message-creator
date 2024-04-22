@@ -20,8 +20,8 @@ const wordCategories = {
     "Conjunctions": ["and then", "or", "but", "therefore", "in short", "except", "by the way", "so to speak", "all the more", "\,"]
 };
 
-// create buttons based on an array of strings
-function createButtons(strings) {
+// Create buttons based on an array of strings
+const createButtons = (strings) => {
     // Check if buttonContainer exists
     if (!buttonContainer) {
         console.error("Button container not found"); // Log an error if buttonContainer is null
@@ -51,6 +51,7 @@ function createButtons(strings) {
     });
 }
 
+// Search wordCategories and create buttons for the matching words
 const search = (query) => {
     if (buttonContainer == null) {
         buttonContainer = document.getElementById("buttonContainer"); // Get the button container element by its ID
@@ -64,36 +65,27 @@ const search = (query) => {
     query = query.trim().toLowerCase(); // Trim and convert the query to lowercase
     const results = []; // Initialize an array to store search results
 
+    // Function to add words from a category to the results array
+    const addWordsFromCategory = (category) => {
+        for (const word of wordCategories[category]) {
+            results.push(word);
+        }
+    };
+
     // If the query is empty, display buttons for all words
     if (query === "") {
-        // Iterate through each category in wordCategories
         for (const category in wordCategories) {
-            // Iterate through each word in the current category and add it to the results array
-            for (const word of wordCategories[category]) {
-                results.push(word);
-            }
+            addWordsFromCategory(category);
         }
     } else {
-        // Search for matching words
         let found = false; // Flag to track if any matching words are found
-        // Iterate through each category in wordCategories
         for (const category in wordCategories) {
-            // Search the category name for the query string
             if (category.toLowerCase().includes(query)) {
-                // console.log("Adding all words in category: " + category + " to results.");
-                // Iterate through each word in the current category and add it to the results array
-                for (const word of wordCategories[category]) {
-                    // console.log("\tAdding word: \"" + word + "\" to results.");
-                    results.push(word);
-                    found = true;
-                }
+                addWordsFromCategory(category);
+                found = true;
             }
-            // Iterate through each word in the current category
             for (const word of wordCategories[category]) {
-                // console.log("Adding all words in category: " + category + " to results.");
-                // Search the word for the query string
                 if (word.toLowerCase().includes(query)) {
-                    // console.log("\tAdding word: \"" + word + "\" to results.");
                     results.push(word);
                     found = true;
                 }
@@ -102,14 +94,14 @@ const search = (query) => {
 
         // If no words match the query, do not display any buttons
         if (!found) {
-            createButtons([]); // Create empty buttons array
-            return; // Exit the function
+            createButtons([]);
+            return;
         }
     }
 
-    console.log("Searching for: \"" + query + "\". Results:"); // Log the search query and results to the console
-    console.log(results); // Log the search results array to the console
-    createButtons(results); // Create buttons for the search results
+    console.log("Searching for: \"" + query + "\". Results:");
+    console.log(results);
+    createButtons(results);
 };
 
 export { search };
