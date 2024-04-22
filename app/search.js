@@ -43,9 +43,10 @@ const createButtons = (strings) => {
         button.textContent = str; // Set the button text content to the current string
 
         // Apply styles to the button
-        button.style.backgroundColor = "lightblue"; // Set background color to light blue
+        button.style.backgroundColor = "#472f17"; // Set background color to light blue
         button.style.padding = "10px 20px"; // Add padding to the button
         button.style.margin = "5px"; // Add margin to the button
+        button.style.fontFamily = "body";
 
         buttonContainer.appendChild(button); // Append the button to the buttonContainer
     });
@@ -99,8 +100,8 @@ const search = (query) => {
         }
     }
 
-    console.log("Searching for: \"" + query + "\". Results:");
-    console.log(results);
+    // console.log("Searching for: \"" + query + "\". Results:");
+    // console.log(results);
     createButtons(results);
 };
 

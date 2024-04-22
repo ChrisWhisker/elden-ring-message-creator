@@ -31,3 +31,24 @@ body {
     text-wrap: balance;
   }
 }
+
+@font-face {
+  font-family: 'Mantinia';
+  src: url('Mantinia.otf') format('truetype');
+  /* Add more font formats (e.g., woff, woff2) if needed */
+}
+
+@font-face {
+  font-family: 'Garamond';
+  src: url('Garamond Premier Pro Regular.ttf') format('truetype');
+  /* Add more font formats (e.g., woff, woff2) if needed */
+}
+
+.title {
+  font-family: 'Mantinia', sans-serif;
+  color: '#dfaf37';
+}
+
+.body {
+  font-family: 'Garamond', sans-serif;
+}
