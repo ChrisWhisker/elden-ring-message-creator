@@ -3,9 +3,24 @@
 let buttonContainer; // Declare a variable to store reference to the button container element
 
 // Define wordCategories as an empty object
-const wordCategories = {};
+const wordCategories = {
+    "Templates": ["**** ahead", "No **** ahead", "**** required ahead", "Be wary of ****", "Try ****", "Likely ****", "First off\, ****", "Seek ****", "Still no ****...", "Why is it always ****?", "If only I had a ****...", "Didn't expect ****...", "Visions of ****...", "Could this be a ****?", "Time for ****", "****\, O ****", "Behold\, ****!", "Offer ****", "Praise the ****!", "Let there be ****", "Ahh\, ****...", "****", "****!", "****?", "****..."],
+    "Enemies": ["enemy", "weak foe", "strong foe", "monster", "dragon", "boss", "sentry", "group", "pack", "decoy", "undead", "soldier", "knight", "cavalier", "archer", "sniper", "mage", "ordnance", "monarch", "lord", "demi-human", "outsider", "giant", "horse", "dog", "wolf", "rat", "beast", "bird", "raptor", "snake", "crab", "prawn", "octopus", "bug", "scarab", "slug", "wraith", "skeleton", "monstrosity", "ill-omened creature"],
+    "People": ["Tarnished", "warrior", "swordfighter", "knight", "samurai", "sorcerer", "cleric", "sage", "merchant", "teacher", "master", "friend", "lover", "old dear", "old codger", "angel", "fat coinpurse", "pauper", "good sort", "wicked sort", "plump sort", "skinny sort", "lovable sort", "pathetic sort", "strange sort", "nimble sort", "laggardly sort", "invisible sort", "unfathomable sort", "giant sort", "sinner", "thief", "liar", "dastard", "traitor", "pair", "trio", "noble", "aristocrat", "hero", "champion", "monarch", "lord", "god"],
+    "Things": ["item", "necessary item", "precious item", "something", "something incredible", "treasure chest", "corpse", "coffin", "trap", "armament", "shield", "bow", "projectile weapon", "armor", "talisman", "skill", "sorcery", "incantation", "map", "material", "flower", "grass", "tree", "fruit", "seed", "mushroom", "tear", "crystal", "butterfly", "bug", "dung", "grace", "door", "key", "ladder", "lever", "lift", "spiritspring", "sending gate", "stone astrolabe", "Birdseye Telescope", "message", "bloodstain", "Erdtree", "Elden Ring"],
+    "Battle Tactics": ["close-quarters battle", "ranged battle", "horseback battle", "luring out", "defeating one-by-one", "taking on all at once", "rushing in", "stealth", "mimicry", "confusion", "pursuit", "fleeing", "summoning", "circling around", "jumping off", "dashing through", "brief respite"],
+    "Actions": ["attacking", "jump attack", "running attack", "critical hit", "two-handing", "blocking", "parrying", "guard counter", "sorcery", "incantation", "skill", "summoning", "throwing", "healing", "running", "rolling", "backstepping", "jumping", "crouching", "target lock", "item crafting", "gesturing"],
+    "Situations": ["morning", "noon", "evening", "night", "clear sky", "overcast", "rain", "storm", "mist", "snow", "patrolling", "procession", "crowd", "surprise attack", "ambush", "pincer attack", "beating to a pulp", "battle", "reinforcements", "ritual", "explosion", "high spot", "defensible spot", "climbable spot", "bright spot", "dark spot", "open area", "cramped area", "hiding place", "sniping spot", "recon spot", "safety", "danger", "gorgeous view", "detour", "hidden path", "secret passage", "shortcut", "dead end", "looking away", "unnoticed", "out of stamina"],
+    "Places": ["high road", "checkpoint", "bridge", "castle", "fort", "city", "ruins", "church", "tower", "camp site", "house", "cemetery", "underground tomb", "tunnel", "cave", "evergaol", "great tree", "cellar", "surface", "underground", "forest", "river", "lake", "bog", "mountain", "valley", "cliff", "waterside", "nest", "hole"],
+    "Directions": ["east", "west", "south", "north", "ahead", "behind", "left", "right", "center", "up", "down", "edge"],
+    "Body Parts": ["head", "stomach", "back", "arms", "legs", "rump", "tail", "core", "fingers"],
+    "Affinities": ["physical", "standard", "striking", "slashing", "piercing", "fire", "lightning", "magic", "holy", "poison", "toxic", "scarlet rot", "blood loss", "frost", "sleep", "madness", "death"],
+    "Concepts": ["life", "Death", "light", "dark", "stars", "fire", "Order", "chaos", "joy", "wrath", "suffering", "sadness", "comfort", "bliss", "misfortune", "good fortune", "bad luck", "hope", "despair", "victory", "defeat", "research", "faith", "abundance", "rot", "loyalty", "injustice", "secret", "opportunity", "pickle", "clue", "friendship", "love", "bravery", "vigor", "fortitude", "confidence", "distracted", "unguarded", "introspection", "regret", "resignation", "futility", "on the brink", "betrayal", "revenge", "destruction", "recklessness", "calmness", "vigilance", "tranquility", "sound", "tears", "sleep", "depths", "dregs", "fear", "sacrifice", "ruin"],
+    "Phrases": ["good luck", "look carefully", "listen carefully", "think carefully", "well done", "I did it!", "I've failed...", "here!", "not here!", "don't you dare!", "do it!", "I can't take this...", "don't think", "so lonely...", "here again...", "just getting started", "stay calm", "keep moving", "turn back", "give up", "don't give up", "help me...", "I don't believe it...", "too high up", "I want to go home...", "it's like a dream...", "seems familiar...", "beautiful...", "you don't have the right", "are you ready?"],
+    "Conjunctions": ["and then", "or", "but", "therefore", "in short", "except", "by the way", "so to speak", "all the more", "\,"]
+};
 
-// Function to create buttons based on an array of strings
+// create buttons based on an array of strings
 function createButtons(strings) {
     // Check if buttonContainer exists
     if (!buttonContainer) {
@@ -26,6 +41,12 @@ function createButtons(strings) {
     strings.forEach(str => {
         const button = document.createElement("button"); // Create a new button element
         button.textContent = str; // Set the button text content to the current string
+
+        // Apply styles to the button
+        button.style.backgroundColor = "lightblue"; // Set background color to light blue
+        button.style.padding = "10px 20px"; // Add padding to the button
+        button.style.margin = "5px"; // Add margin to the button
+
         buttonContainer.appendChild(button); // Append the button to the buttonContainer
     });
 }
@@ -43,7 +64,7 @@ const search = (query) => {
     query = query.trim().toLowerCase(); // Trim and convert the query to lowercase
     const results = []; // Initialize an array to store search results
 
-    // If the query is empty or null, display buttons for all words
+    // If the query is empty, display buttons for all words
     if (query === "") {
         // Iterate through each category in wordCategories
         for (const category in wordCategories) {
@@ -59,16 +80,20 @@ const search = (query) => {
         for (const category in wordCategories) {
             // Search the category name for the query string
             if (category.toLowerCase().includes(query)) {
+                // console.log("Adding all words in category: " + category + " to results.");
                 // Iterate through each word in the current category and add it to the results array
                 for (const word of wordCategories[category]) {
+                    // console.log("\tAdding word: \"" + word + "\" to results.");
                     results.push(word);
                     found = true;
                 }
             }
             // Iterate through each word in the current category
             for (const word of wordCategories[category]) {
+                // console.log("Adding all words in category: " + category + " to results.");
                 // Search the word for the query string
                 if (word.toLowerCase().includes(query)) {
+                    // console.log("\tAdding word: \"" + word + "\" to results.");
                     results.push(word);
                     found = true;
                 }
@@ -85,62 +110,6 @@ const search = (query) => {
     console.log("Searching for: \"" + query + "\". Results:"); // Log the search query and results to the console
     console.log(results); // Log the search results array to the console
     createButtons(results); // Create buttons for the search results
-  };
+};
 
-  // Populate wordCategories with data from the CSV file
-function loadCSV(url) {
-    fetch(url)
-        .then(response => response.text())
-        .then(data => {
-            // Parse the CSV data
-            const rows = data.split("\n");
-            for (const row of rows) {
-                // Split the row by commas while handling quoted cells
-                const columns = splitCSVRow(row);
-                if (columns.length === 0) continue; // Skip empty rows
-
-                const category = columns[0]; // Get the category name from the first column
-                const words = columns.slice(1).map(word => word.trim()); // Get the words for the category
-
-                // Filter out empty strings from words array
-                const nonEmptyWords = words.filter(word => word !== "");
-
-                // Add the category and its non-empty words to wordCategories
-                wordCategories[category] = nonEmptyWords;
-            }
-
-            search(""); // Trigger search with empty string after CSV data is loaded
-        })
-        .catch(error => {
-            console.error("Error loading CSV:", error); // Log error if CSV loading fails
-        });
-}
-
-// Function to split a CSV row into columns, handling quoted cells containing commas
-function splitCSVRow(row) {
-    const columns = [];
-    let currentColumn = ''; // Buffer for the current column being processed
-    let insideQuotes = false;
-
-    for (let i = 0; i < row.length; i++) {
-        const char = row[i];
-        if (char === '"') {
-            // Toggle insideQuotes when encountering a quote
-            insideQuotes = !insideQuotes;
-        } else if (char === ',' && !insideQuotes) {
-            // Push the current column to columns array when encountering a comma outside quotes
-            columns.push(currentColumn);
-            currentColumn = ''; // Reset currentColumn buffer
-        } else {
-            // Append the character to the current column buffer
-            currentColumn += char;
-        }
-    }
-
-    // Push the last column to columns array
-    columns.push(currentColumn);
-
-    return columns;
-}
-
-  export {search, loadCSV};
+export { search };

@@ -1,12 +1,12 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { search, loadCSV } from "./search";
+import { search } from "./search";
 
 // Default Home component
 export default function Home() {
   useEffect(() => {
     // Load CSV data when the component mounts (equivalent to DOMContentLoaded)
-    loadCSV("words.csv");
+    search("");
   }, []); // Empty dependency array ensures the effect runs only once when the component mounts
 
   // State to hold the value of the input text
