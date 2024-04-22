@@ -29,7 +29,8 @@ const Button: React.FC<ButtonProps> = ({ onClick, title, textContent }) => {
                 backgroundColor: "#472f17",
                 padding: "10px 20px",
                 margin: "5px",
-                fontFamily: "body"
+                fontFamily: "body",
+                borderRadius: "9999px" // Make the button pill-shaped
             }}
         >
             {textContent}
