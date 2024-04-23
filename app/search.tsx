@@ -24,20 +24,28 @@ const Button: React.FC<ButtonProps> = ({ onClick, title, textContent }) => {
     return (
         <button
             onClick={onClick}
-            title={title}
+            title={title + ": \"" + textContent + "\""}
             style={{
                 backgroundColor: "#472f17",
                 padding: "10px 20px",
                 margin: "5px",
-                fontFamily: "body",
-                borderRadius: "9999px" // Make the button pill-shaped
+                fontFamily: "body-text",
+                borderRadius: "9999px", // Make the button pill-shaped
+                lineHeight: "normal" // Reset line height to default
             }}
         >
-            {textContent}<br/>
-            <span style={{ fontSize: "12px", padding: "0px 0px", margin: "0px" }}>{title}</span> {/* Add smaller text for category */}
+            {textContent}
+            <span style={{
+                fontSize: "10px",
+                fontFamily: "body-text",
+                color: "grey",
+                display: "block",
+                marginTop: "0px" // Adjust margin to reduce space between text and category
+                }}>{title}</span> {}
         </button>
     );
 };
+
 
 // Define the type for the props of the ButtonContainer component
 interface ButtonContainerProps {

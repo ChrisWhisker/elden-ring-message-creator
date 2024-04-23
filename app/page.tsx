@@ -24,13 +24,13 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center p-24">
       {/* Title and description */}
-      <h1 className="text-6xl title">Elden scribE</h1>
-      <h2 className="text-2xl body">Easily create messages for Elden Ring</h2>
+      <h1 className="text-6xl title-text">Elden scribE</h1>
+      <h2 className="text-2xl body-text">Easily create messages for Elden Ring</h2>
       {/* Spacer to fill extra vertical space */}
       <div className="flex-grow"></div>
       {/* Container for search text and input box */}
-      <div className="z-10 w-full max-w-5xl items-center font-mono text-sm lg:flex">
-        <div className="mr-4">Search:</div>
+      <div className="z-10  w-full max-w-5xl items-center body-text text-sm lg:flex">
+        <div className="mr-4 body-text">Search:</div>
         {/* Input text box with onChange event handler */}
         <input
           type="text"

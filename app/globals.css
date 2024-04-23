@@ -44,11 +44,11 @@ body {
   /* Add more font formats (e.g., woff, woff2) if needed */
 }
 
-.title {
+.title-text {
   font-family: 'Mantinia', sans-serif;
   color: '#dfaf37';
 }
 
-.body {
+.body-text {
   font-family: 'Garamond', sans-serif;
 }
