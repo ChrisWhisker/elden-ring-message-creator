@@ -26,11 +26,8 @@ export default function Home() {
       {/* Title and description */}
       <h1 className="text-6xl title">Elden scribE</h1>
       <h2 className="text-2xl body">Easily create messages for Elden Ring</h2>
-      {/* Add spacer that fills extra vertical space between these */}
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
+      {/* Spacer to fill extra vertical space */}
+      <div className="h-32"></div>
       {/* Container for search text and input box */}
       <div className="z-10 w-full max-w-5xl items-center font-mono text-sm lg:flex">
         <div className="mr-4">Search:</div>
@@ -43,7 +40,8 @@ export default function Home() {
           onChange={handleInputChange} // Call handleInputChange function when text changes
         />
       </div>
-      <br></br>
+      {/* Spacer to fill extra vertical space */}
+      <div className="h-8"></div>
       {/* Container for buttons */}
       <div className="w-full max-w-5xl" style={{ maxHeight: "400px", overflowY: "auto" }}>
         {/* Container for buttons with vertical scroll */}
@@ -53,5 +51,6 @@ export default function Home() {
       </div>
     </main>
   );
+  
   
 }
