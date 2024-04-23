@@ -5,8 +5,8 @@ import { search } from "./search";
 // Default Home component
 export default function Home() {
   useEffect(() => {
-    // Load CSV data when the component mounts (equivalent to DOMContentLoaded)
-    search("");
+    // Code here will be executed when the component mounts
+    search(""); // Call the search function with an empty string as the initial search value
   }, []); // Empty dependency array ensures the effect runs only once when the component mounts
 
   // State to hold the value of the input text
@@ -17,7 +17,7 @@ export default function Home() {
     // Update the state with the new text value
     setSearchText(event.target.value);
     
-    // Call the imported function with the new text as an argument
+    // Call the search function with the new text as an argument
     search(event.target.value);
   };
 
@@ -40,7 +40,7 @@ export default function Home() {
           onChange={handleInputChange} // Call handleInputChange function when text changes
         />
       </div>
-      {/* Spacer to fill extra vertical space */}
+      {/* Spacer to create distance between elements */}
       <div className="h-8"></div>
       {/* Container for buttons */}
       <div className="w-full max-w-5xl" style={{ maxHeight: "400px", overflowY: "auto" }}>
@@ -51,6 +51,4 @@ export default function Home() {
       </div>
     </main>
   );
-  
-  
 }
