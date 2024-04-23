@@ -33,7 +33,8 @@ const Button: React.FC<ButtonProps> = ({ onClick, title, textContent }) => {
                 borderRadius: "9999px" // Make the button pill-shaped
             }}
         >
-            {textContent}
+            {textContent}<br/>
+            <span style={{ fontSize: "12px", padding: "0px 0px", margin: "0px" }}>{title}</span> {/* Add smaller text for category */}
         </button>
     );
 };

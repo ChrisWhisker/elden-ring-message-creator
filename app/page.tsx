@@ -26,6 +26,11 @@ export default function Home() {
       {/* Title and description */}
       <h1 className="text-6xl title">Elden scribE</h1>
       <h2 className="text-2xl body">Easily create messages for Elden Ring</h2>
+      {/* Add spacer that fills extra vertical space between these */}
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
       {/* Container for search text and input box */}
       <div className="z-10 w-full max-w-5xl items-center font-mono text-sm lg:flex">
         <div className="mr-4">Search:</div>
@@ -38,9 +43,15 @@ export default function Home() {
           onChange={handleInputChange} // Call handleInputChange function when text changes
         />
       </div>
-      <div id="buttonContainer">
-        {/* Buttons will be dynamically added here */}
-    </div>
+      <br></br>
+      {/* Container for buttons */}
+      <div className="w-full max-w-5xl" style={{ maxHeight: "400px", overflowY: "auto" }}>
+        {/* Container for buttons with vertical scroll */}
+        <div id="buttonContainer" className="flex justify-between">
+          {/* Buttons will be dynamically added here */}
+        </div>
+      </div>
     </main>
   );
+  
 }
