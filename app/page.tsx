@@ -27,7 +27,7 @@ export default function Home() {
       <h1 className="text-6xl title">Elden scribE</h1>
       <h2 className="text-2xl body">Easily create messages for Elden Ring</h2>
       {/* Spacer to fill extra vertical space */}
-      <div className="h-32"></div>
+      <div className="flex-grow"></div>
       {/* Container for search text and input box */}
       <div className="z-10 w-full max-w-5xl items-center font-mono text-sm lg:flex">
         <div className="mr-4">Search:</div>
@@ -41,9 +41,9 @@ export default function Home() {
         />
       </div>
       {/* Spacer to create distance between elements */}
-      <div className="h-8"></div>
+      <div className="h-4"></div>
       {/* Container for buttons */}
-      <div className="w-full max-w-5xl" style={{ maxHeight: "400px", overflowY: "auto" }}>
+      <div className="w-full max-w-5xl" style={{ height: "400px", overflowY: "auto" }}>
         {/* Container for buttons with vertical scroll */}
         <div id="buttonContainer" className="flex justify-between">
           {/* Buttons will be dynamically added here */}
