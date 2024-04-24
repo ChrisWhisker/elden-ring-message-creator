@@ -49,6 +49,10 @@ export default function Home() {
           {/* Buttons will be dynamically added here */}
         </div>
       </div>
+      <div id="sentenceContainer" className="body-text text-center w-full max-w-5xl border border-gray-300 p-4 m-4">
+        Your message will appear here.
+      </div>
+      {/* Spacer to create distance between elements */}
       <div className="h-4"></div>
       <div className="body-text" style={{color: "grey"}}>
           Created by Chris Worcester | <u><a href="https://www.linkedin.com/in/chrisworcester/" target="_blank" rel="noopener noreferrer">LinkedIn</a></u> | <u><a href="https://github.com/ChrisWhisker" target="_blank" rel="noopener noreferrer">Github</a></u>
