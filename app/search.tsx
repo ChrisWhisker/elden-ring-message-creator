@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 
 // Define the type for the object containing word categories
 interface WordCategory {
@@ -46,7 +46,6 @@ const Button: React.FC<ButtonProps> = ({ onClick, title, textContent }) => {
     );
 };
 
-
 // Define the type for the props of the ButtonContainer component
 interface ButtonContainerProps {
     words: WordObject[];
@@ -70,8 +69,6 @@ const ButtonContainer: React.FC<ButtonContainerProps> = ({ words }) => {
 
 // Search function to filter words and create buttons
 const search = (query: string) => {
-    let buttonContainer: HTMLElement | null = document.getElementById("buttonContainer");
-
     if (query == null) {
         console.error("Query is null. You probably meant to call search with an empty string.");
         return;
@@ -121,7 +118,8 @@ const search = (query: string) => {
 const renderButtons = (words: WordObject[]) => {
     const buttonContainer = document.getElementById("buttonContainer");
     if (buttonContainer) {
-        ReactDOM.render(<ButtonContainer words={words} />, buttonContainer);
+        const root = createRoot(buttonContainer);
+        root.render(<ButtonContainer words={words} />);
     } else {
         console.error("Button container not found");
     }
