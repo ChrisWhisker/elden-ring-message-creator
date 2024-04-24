@@ -58,6 +58,7 @@ class Message {
     conjunction: WordObject | null = null;
     clauses: WordObject[] = []; // All words that aren't templates or conjunctions
     asString: string = "";
+    onUpdate: ((message: string) => void) | null = null; // Callback function for message update
 
     private static instance: Message | null = null;
 
@@ -115,6 +116,11 @@ class Message {
 
         console.log("New string: " + newString);
         this.asString = newString;
+
+        // Call the onUpdate callback if it's set
+        if (this.onUpdate) {
+            this.onUpdate(this.asString);
+        }
     }
 
     add(word: WordObject): boolean {
@@ -317,4 +323,4 @@ const wordCategories: WordCategory = {
     "Conjunctions": ["and then", "or", "but", "therefore", "in short", "except", "by the way", "so to speak", "all the more", "\,"]
 };
 
-export { search };
+export { search, Message};
