@@ -22,7 +22,7 @@ export default function Home() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col items-center p-24">
+    <main className="flex min-h-screen flex-col items-center p-24 pb-6">
       {/* Title and description */}
       <h1 className="text-6xl title-text">Elden scribE</h1>
       <h2 className="text-2xl body-text">Easily create messages for Elden Ring</h2>
@@ -48,6 +48,10 @@ export default function Home() {
         <div id="buttonContainer" className="flex justify-between">
           {/* Buttons will be dynamically added here */}
         </div>
+      </div>
+      <div className="h-4"></div>
+      <div className="body-text" style={{color: "grey"}}>
+          Created by Chris Worcester | <u><a href="https://www.linkedin.com/in/chrisworcester/" target="_blank" rel="noopener noreferrer">LinkedIn</a></u> | <u><a href="https://github.com/ChrisWhisker" target="_blank" rel="noopener noreferrer">Github</a></u>
       </div>
     </main>
   );
