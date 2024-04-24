@@ -93,7 +93,7 @@ class Message {
                 newString += this.templates[0].word + " ";
             }
         } else if (this.clauses.length > 0) {
-            newString += this.clauses[0].word + " ";
+            newString += "[template] " + this.clauses[0].word + " ";
         }
 
         // Add the conjunction
@@ -111,7 +111,7 @@ class Message {
                 newString += this.templates[1].word + " ";
             }
         } else if (this.clauses.length > 1) {
-            newString += this.clauses[1].word + " ";
+            newString += "[template] " + this.clauses[1].word + " ";
         }
 
         console.log("New string: " + newString);
@@ -192,9 +192,7 @@ const Button: React.FC<ButtonProps> = ({ onClick, title, textContent }) => {
         const messageInstance = Message.getInstance(); // Get the singleton instance of Message
         const wordObject = new WordObject(title, textContent); // Assuming you have a way to create a WordObject
         const added = messageInstance.add(wordObject); // Call the add function
-        if (added) {
-            console.log("Word added successfully.");
-        } else {
+        if (!added) {
             console.log("Failed to add word.");
         }
     };
