@@ -1,7 +1,4 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-    basePath: "/elden-scribe",
-    output: "export"
-};
+const nextConfig = {};
 
 export default nextConfig;
