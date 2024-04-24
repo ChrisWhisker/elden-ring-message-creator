@@ -95,17 +95,18 @@ const ButtonContainer: React.FC<ButtonContainerProps> = ({ words }) => {
 
 // Search function to filter words and create buttons
 const search = (query: string) => {
+    // Prevent failing on string functions
     if (query == null) {
-        console.error("Query is null. You probably meant to call search with an empty string.");
-        return;
+        query === "";
     }
-
     query = query.trim().toLowerCase();
     const results: WordObject[] = [];
 
+    // Will add all words from a category to the results array
     const addWordsFromCategory = (category: string) => {
         for (const word of wordCategories[category]) {
             let wordObj: WordObject = new WordObject(category, word);
+            // Don't add duplicates
             if (!wordObj.isInArray(results)) {
                 results.push(wordObj);
             }
@@ -118,25 +119,21 @@ const search = (query: string) => {
             addWordsFromCategory(category);
         }
     } else {
-        let found = false;
+        // Search for query in all categories
         for (const category in wordCategories) {
             for (const word of wordCategories[category]) {
                 if (word.toLowerCase().includes(query)) {
                     let wordObj: WordObject = new WordObject(category, word);
+                    // Don't add duplicates
                     if (!wordObj.isInArray(results)) {
                         results.push(wordObj);
-                        found = true;
                     }
                 }
             }
+            // Add all words from the category if the category name matches the query
             if (category.toLowerCase().includes(query)) {
                 addWordsFromCategory(category);
-                found = true;
             }
-        }
-        if (!found) {
-            renderButtons([]);
-            return;
         }
     }
 
