@@ -29,12 +29,147 @@ class WordObject {
     // Check if the WordObject is in an array
     // Use this instead of arr.includes(this)
     isInArray(arr: WordObject[]): boolean {
-        for (const listItem of arr) {
-            if (this.equals(listItem)) {
-                return true;
+        return this.indexInArray(arr) !== -1;
+    }
+
+    // Get the index of the WordObject in an array or -1 if not found
+    indexInArray(arr: WordObject[]): number {
+        for (let i = 0; i < arr.length; i++) {
+            if (this.equals(arr[i])) {
+                return i;
             }
         }
+        return -1;
+    }
+
+    removeFromArray(arr: WordObject[]): boolean {
+        const index = this.indexInArray(arr);
+        if (index !== -1) {
+            arr.splice(index, 1);
+            return true;
+        }
         return false;
+    }
+}
+
+// Define the type for the message
+class Message {
+    templates: WordObject[] = [];
+    conjunction: WordObject | null = null;
+    clauses: WordObject[] = []; // All words that aren't templates or conjunctions
+    asString: string = "";
+
+    private static instance: Message | null = null;
+
+    private constructor() {
+        // Private constructor to prevent instantiation outside the class
+    }
+
+    // Static method to get the singleton instance
+    public static getInstance(): Message {
+        // If the instance doesn't exist, create a new one
+        if (!Message.instance) {
+            Message.instance = new Message();
+        }
+        // Return the existing instance
+        return Message.instance;
+    }
+
+    // Override the toString method to return a unique value for each WordObject
+    toString(): string {
+        return this.asString;
+    }
+
+    updateString(): void {
+        let newString: string = "";
+
+        // Add the first template & clause
+        if (this.templates.length > 0) {
+            if (this.clauses.length > 0) {
+                newString += this.templates[0].word.replaceAll("****", this.clauses[0].word) + " ";
+            }
+            else {
+                newString += this.templates[0].word + " ";
+            }
+        } else if (this.clauses.length > 0) {
+            newString += this.clauses[0].word + " ";
+        }
+
+        // Add the conjunction
+        if (this.conjunction != null) {
+            newString += this.conjunction.word + " ";
+        } else  if (this.templates.length > 1) {
+            newString += "[conjunction] ";
+        }
+
+        // Add the second template & clause
+        if (this.templates.length > 1) {
+            if (this.clauses.length > 1) {
+                newString += this.templates[1].word.replaceAll("****", this.clauses[1].word) + " ";
+            } else {
+                newString += this.templates[1].word + " ";
+            }
+        } else if (this.clauses.length > 1) {
+            newString += this.clauses[1].word + " ";
+        }
+
+        console.log("New string: " + newString);
+        setMessageText(newString);
+        this.asString = newString;
+    }
+
+    add(word: WordObject): boolean {
+        switch (word.category) {
+            case "Templates":
+                if (this.templates.length < 2) {
+                    this.templates.push(word);
+                } else {
+                    console.error("Only two templates allowed");
+                    return false;
+                }
+                break;
+            case "Conjunctions":
+                if (this.conjunction == null) {
+                    this.conjunction = word;
+                } else {
+                    console.error("Only 1 conjunction allowed");
+                    return false;
+                }
+                break;
+            default:
+                if (this.clauses.length < 2) {
+                    this.clauses.push(word);
+                } else {
+                    console.error("Only two clauses allowed");
+                    return false;
+                }
+                break;
+        }
+        this.updateString();
+        return true;
+    }
+
+    remove(word: WordObject): boolean {
+        switch (word.category) {
+            case "Templates":
+                if (!word.removeFromArray(this.templates)) {
+                    return false;
+                }
+                break;
+            case "Conjunctions":
+                if (this.conjunction == null) {
+                    return false;
+                }
+                this.conjunction = null;
+                break;
+            default: // Clauses
+                if (!word.removeFromArray(this.clauses)) {
+                    return false;
+                }
+                break;
+        }
+        this.updateString();
+        return true;
     }
 }
 
@@ -47,9 +182,21 @@ interface ButtonProps {
 
 // Button component to render buttons
 const Button: React.FC<ButtonProps> = ({ onClick, title, textContent }) => {
+    // Assuming you have access to the Message instance in your component
+    const handleMessageAdd = () => {
+        const messageInstance = Message.getInstance(); // Get the singleton instance of Message
+        const wordObject = new WordObject(title, textContent); // Assuming you have a way to create a WordObject
+        const added = messageInstance.add(wordObject); // Call the add function
+        if (added) {
+            console.log("Word added successfully.");
+        } else {
+            console.log("Failed to add word.");
+        }
+    };
+
     return (
         <button
-            onClick={onClick}
+            onClick={handleMessageAdd} // Call handleMessageAdd instead of onClick directly
             title={title + ": \"" + textContent + "\""}
             style={{
                 backgroundColor: "#472f17",
