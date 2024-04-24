@@ -114,7 +114,6 @@ class Message {
         }
 
         console.log("New string: " + newString);
-        setMessageText(newString);
         this.asString = newString;
     }
 
