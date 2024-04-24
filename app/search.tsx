@@ -7,9 +7,35 @@ interface WordCategory {
 }
 
 // Define the type for the object containing word and category
-interface WordObject {
+class WordObject {
     category: string;
     word: string;
+
+    constructor(category: string, word: string) {
+        this.category = category;
+        this.word = word;
+    }
+
+    // Override the toString method to return a unique value for each WordObject
+    toString(): string {
+        return `${this.category}:${this.word}`;
+    }
+
+    // Override the equals method to compare objects based on their properties
+    equals(other: WordObject): boolean {
+        return this.toString() === other.toString();
+    }
+
+    // Check if the WordObject is in an array
+    // Use this instead of arr.includes(this)
+    isInArray(arr: WordObject[]): boolean {
+        for (const listItem of arr) {
+            if (this.equals(listItem)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
 
 // Define the type for the props of the Button component
@@ -79,11 +105,14 @@ const search = (query: string) => {
 
     const addWordsFromCategory = (category: string) => {
         for (const word of wordCategories[category]) {
-            let wordObj: WordObject = { category: category, word: word };
-            results.push(wordObj);
+            let wordObj: WordObject = new WordObject(category, word);
+            if (!wordObj.isInArray(results)) {
+                results.push(wordObj);
+            }
         }
     };
 
+    // Add all words if query is empty
     if (query === "") {
         for (const category in wordCategories) {
             addWordsFromCategory(category);
@@ -93,9 +122,11 @@ const search = (query: string) => {
         for (const category in wordCategories) {
             for (const word of wordCategories[category]) {
                 if (word.toLowerCase().includes(query)) {
-                    let wordObj: WordObject = { category: category, word: word };
-                    results.push(wordObj);
-                    found = true;
+                    let wordObj: WordObject = new WordObject(category, word);
+                    if (!wordObj.isInArray(results)) {
+                        results.push(wordObj);
+                        found = true;
+                    }
                 }
             }
             if (category.toLowerCase().includes(query)) {
@@ -109,8 +140,8 @@ const search = (query: string) => {
         }
     }
 
-    console.log("Searching for: \"" + query + "\". Results:");
-    console.log(results);
+    // console.log("Searching for: \"" + query + "\". Results:");
+    // console.log(results);
     renderButtons(results);
 };
 
