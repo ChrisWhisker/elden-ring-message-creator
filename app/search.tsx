@@ -1,182 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-
-// Define the type for the object containing word categories
-interface WordCategory {
-    [category: string]: string[];
-}
-
-// Define the type for the object containing word and category
-class WordObject {
-    category: string;
-    word: string;
-
-    constructor(category: string, word: string) {
-        this.category = category;
-        this.word = word;
-    }
-
-    // Override the toString method to return a unique value for each WordObject
-    toString(): string {
-        return `${this.category}:${this.word}`;
-    }
-
-    // Override the equals method to compare objects based on their properties
-    equals(other: WordObject): boolean {
-        return this.toString() === other.toString();
-    }
-
-    // Check if the WordObject is in an array
-    // Use this instead of arr.includes(this)
-    isInArray(arr: WordObject[]): boolean {
-        return this.indexInArray(arr) !== -1;
-    }
-
-    // Get the index of the WordObject in an array or -1 if not found
-    indexInArray(arr: WordObject[]): number {
-        for (let i = 0; i < arr.length; i++) {
-            if (this.equals(arr[i])) {
-                return i;
-            }
-        }
-        return -1;
-    }
-
-    removeFromArray(arr: WordObject[]): boolean {
-        const index = this.indexInArray(arr);
-        if (index !== -1) {
-            arr.splice(index, 1);
-            return true;
-        }
-        return false;
-    }
-}
-
-// Define the type for the message
-class Message {
-    templates: WordObject[] = [];
-    conjunction: WordObject | null = null;
-    clauses: WordObject[] = []; // All words that aren't templates or conjunctions
-    asString: string = "";
-    onUpdate: ((message: string) => void) | null = null; // Callback function for message update
-
-    private static instance: Message | null = null;
-
-    private constructor() {
-        // Private constructor to prevent instantiation outside the class
-    }
-
-    // Static method to get the singleton instance
-    public static getInstance(): Message {
-        // If the instance doesn't exist, create a new one
-        if (!Message.instance) {
-            Message.instance = new Message();
-        }
-        // Return the existing instance
-        return Message.instance;
-    }
-
-    // Override the toString method to return a unique value for each WordObject
-    toString(): string {
-        return this.asString;
-    }
-
-    updateString(): void {
-        let newString: string = "";
-
-        // Add the first template & clause
-        if (this.templates.length > 0) {
-            if (this.clauses.length > 0) {
-                newString += this.templates[0].word.replaceAll("****", this.clauses[0].word) + " ";
-            }
-            else {
-                newString += this.templates[0].word + " ";
-            }
-        } else if (this.clauses.length > 0) {
-            newString += "[template] " + this.clauses[0].word + " ";
-        }
-
-        // Add the conjunction
-        if (this.conjunction != null) {
-            newString += this.conjunction.word + " ";
-        } else  if (this.templates.length > 1) {
-            newString += "[conjunction] ";
-        }
-
-        // Add the second template & clause
-        if (this.templates.length > 1) {
-            if (this.clauses.length > 1) {
-                newString += this.templates[1].word.replaceAll("****", this.clauses[1].word) + " ";
-            } else {
-                newString += this.templates[1].word + " ";
-            }
-        } else if (this.clauses.length > 1) {
-            newString += "[template] " + this.clauses[1].word + " ";
-        }
-
-        console.log("New string: " + newString);
-        this.asString = newString;
-
-        // Call the onUpdate callback if it's set
-        if (this.onUpdate) {
-            this.onUpdate(this.asString);
-        }
-    }
-
-    add(word: WordObject): boolean {
-        switch (word.category) {
-            case "Templates":
-                if (this.templates.length < 2) {
-                    this.templates.push(word);
-                } else {
-                    console.error("Only two templates allowed");
-                    return false;
-                }
-                break;
-            case "Conjunctions":
-                if (this.conjunction == null) {
-                    this.conjunction = word;
-                } else {
-                    console.error("Only 1 conjunction allowed");
-                    return false;
-                }
-                break;
-            default:
-                if (this.clauses.length < 2) {
-                    this.clauses.push(word);
-                } else {
-                    console.error("Only two clauses allowed");
-                    return false;
-                }
-                break;
-        }
-        this.updateString();
-        return true;
-    }
-
-    remove(word: WordObject): boolean {
-        switch (word.category) {
-            case "Templates":
-                if (!word.removeFromArray(this.templates)) {
-                    return false;
-                }
-                break;
-            case "Conjunctions":
-                if (this.conjunction == null) {
-                    return false;
-                }
-                this.conjunction = null;
-                break;
-            default: // Clauses
-                if (!word.removeFromArray(this.clauses)) {
-                    return false;
-                }
-                break;
-        }
-        this.updateString();
-        return true;
-    }
-}
+import Message from './message';
+import WordObject from './word';
 
 // Define the type for the props of the Button component
 interface ButtonProps {
@@ -243,6 +68,17 @@ const ButtonContainer: React.FC<ButtonContainerProps> = ({ words }) => {
     );
 };
 
+// Render the buttons
+const renderButtons = (words: WordObject[]) => {
+    const buttonContainer = document.getElementById("buttonContainer");
+    if (buttonContainer) {
+        const root = createRoot(buttonContainer);
+        root.render(<ButtonContainer words={words} />);
+    } else {
+        console.error("Button container not found");
+    }
+};
+
 // Search function to filter words and create buttons
 const search = (query: string) => {
     // Prevent failing on string functions
@@ -292,19 +128,8 @@ const search = (query: string) => {
     renderButtons(results);
 };
 
-// Render the buttons
-const renderButtons = (words: WordObject[]) => {
-    const buttonContainer = document.getElementById("buttonContainer");
-    if (buttonContainer) {
-        const root = createRoot(buttonContainer);
-        root.render(<ButtonContainer words={words} />);
-    } else {
-        console.error("Button container not found");
-    }
-};
-
 // Word categories object
-const wordCategories: WordCategory = {
+const wordCategories: any = {
     "Templates": ["**** ahead", "No **** ahead", "**** required ahead", "Be wary of ****", "Try ****", "Likely ****", "First off\, ****", "Seek ****", "Still no ****...", "Why is it always ****?", "If only I had a ****...", "Didn't expect ****...", "Visions of ****...", "Could this be a ****?", "Time for ****", "****\, O ****", "Behold\, ****!", "Offer ****", "Praise the ****!", "Let there be ****", "Ahh\, ****...", "****", "****!", "****?", "****..."],
     "Enemies": ["enemy", "weak foe", "strong foe", "monster", "dragon", "boss", "sentry", "group", "pack", "decoy", "undead", "soldier", "knight", "cavalier", "archer", "sniper", "mage", "ordnance", "monarch", "lord", "demi-human", "outsider", "giant", "horse", "dog", "wolf", "rat", "beast", "bird", "raptor", "snake", "crab", "prawn", "octopus", "bug", "scarab", "slug", "wraith", "skeleton", "monstrosity", "ill-omened creature"],
     "People": ["Tarnished", "warrior", "swordfighter", "knight", "samurai", "sorcerer", "cleric", "sage", "merchant", "teacher", "master", "friend", "lover", "old dear", "old codger", "angel", "fat coinpurse", "pauper", "good sort", "wicked sort", "plump sort", "skinny sort", "lovable sort", "pathetic sort", "strange sort", "nimble sort", "laggardly sort", "invisible sort", "unfathomable sort", "giant sort", "sinner", "thief", "liar", "dastard", "traitor", "pair", "trio", "noble", "aristocrat", "hero", "champion", "monarch", "lord", "god"],
@@ -321,4 +146,4 @@ const wordCategories: WordCategory = {
     "Conjunctions": ["and then", "or", "but", "therefore", "in short", "except", "by the way", "so to speak", "all the more", "\,"]
 };
 
-export { search, Message};
+export { search };

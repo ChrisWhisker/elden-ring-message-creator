@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { search, Message } from "./search";
+import { search } from "./search";
+import Message from './message';
 
 // Default Home component
 export default function Home() {
