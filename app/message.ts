@@ -1,10 +1,10 @@
-import WordObject from './word';
+import Word from './word';
 
 // Define the type for the message
 export default class Message {
-    templates: WordObject[] = [];
-    conjunction: WordObject | null = null;
-    clauses: WordObject[] = []; // All words that aren't templates or conjunctions
+    templates: Word[] = [];
+    conjunction: Word | null = null;
+    clauses: Word[] = []; // All words that aren't templates or conjunctions
     asString: string = "";
     onUpdate: ((message: string) => void) | null = null; // Callback function for message update
 
@@ -71,7 +71,7 @@ export default class Message {
         }
     }
 
-    add(word: WordObject): boolean {
+    add(word: Word): boolean {
         switch (word.category) {
             case "Templates":
                 if (this.templates.length < 2) {
@@ -102,7 +102,7 @@ export default class Message {
         return true;
     }
 
-    remove(word: WordObject): boolean {
+    remove(word: Word): boolean {
         switch (word.category) {
             case "Templates":
                 if (!word.removeFromArray(this.templates)) {

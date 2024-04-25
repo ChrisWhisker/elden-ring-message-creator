@@ -1,7 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import Message from './message';
-import WordObject from './word';
+import Word from './word';
 
 // Define the type for the props of the Button component
 interface ButtonProps {
@@ -15,7 +15,7 @@ const Button: React.FC<ButtonProps> = ({ onClick, title, textContent }) => {
     // Assuming you have access to the Message instance in your component
     const handleMessageAdd = () => {
         const messageInstance = Message.getInstance(); // Get the singleton instance of Message
-        const wordObject = new WordObject(title, textContent); // Assuming you have a way to create a WordObject
+        const wordObject = new Word(title, textContent); // Assuming you have a way to create a WordObject
         const added = messageInstance.add(wordObject); // Call the add function
         if (!added) {
             console.log("Failed to add word.");
@@ -49,7 +49,7 @@ const Button: React.FC<ButtonProps> = ({ onClick, title, textContent }) => {
 
 // Define the type for the props of the ButtonContainer component
 interface ButtonContainerProps {
-    words: WordObject[];
+    words: Word[];
 }
 
 // ButtonContainer component to contain buttons
@@ -69,7 +69,7 @@ const ButtonContainer: React.FC<ButtonContainerProps> = ({ words }) => {
 };
 
 // Render the buttons
-const renderButtons = (words: WordObject[]) => {
+const renderButtons = (words: Word[]) => {
     const buttonContainer = document.getElementById("buttonContainer");
     if (buttonContainer) {
         const root = createRoot(buttonContainer);
@@ -86,12 +86,12 @@ const search = (query: string) => {
         query === "";
     }
     query = query.trim().toLowerCase();
-    const results: WordObject[] = [];
+    const results: Word[] = [];
 
     // Will add all words from a category to the results array
     const addWordsFromCategory = (category: string) => {
         for (const word of wordCategories[category]) {
-            let wordObj: WordObject = new WordObject(category, word);
+            let wordObj: Word = new Word(category, word);
             // Don't add duplicates
             if (!wordObj.isInArray(results)) {
                 results.push(wordObj);
@@ -109,7 +109,7 @@ const search = (query: string) => {
         for (const category in wordCategories) {
             for (const word of wordCategories[category]) {
                 if (word.toLowerCase().includes(query)) {
-                    let wordObj: WordObject = new WordObject(category, word);
+                    let wordObj: Word = new Word(category, word);
                     // Don't add duplicates
                     if (!wordObj.isInArray(results)) {
                         results.push(wordObj);
