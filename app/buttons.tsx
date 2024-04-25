@@ -12,11 +12,14 @@ interface ButtonProps {
 
 // Button component to render buttons
 const Button: React.FC<ButtonProps> = ({ onClick, title, textContent }) => {
-    // Assuming you have access to the Message instance in your component
+    // Function to handle adding a word to the message
     const handleMessageAdd = () => {
-        const messageInstance = Message.getInstance(); // Get the singleton instance of Message
-        const wordObject = new Word(title, textContent); // Assuming you have a way to create a WordObject
-        const added = messageInstance.add(wordObject); // Call the add function
+        // Get the singleton instance of Message
+        const messageInstance = Message.getInstance();
+        // Create a Word object
+        const word = new Word(title, textContent);
+        // Call the add function and check if it was successful
+        const added = messageInstance.add(word);
         if (!added) {
             console.log("Failed to add word.");
         }
@@ -25,7 +28,7 @@ const Button: React.FC<ButtonProps> = ({ onClick, title, textContent }) => {
     return (
         <button
             onClick={handleMessageAdd} // Call handleMessageAdd instead of onClick directly
-            title={title + ": \"" + textContent + "\""}
+            title={`${title}: "${textContent}"`}
             style={{
                 backgroundColor: "#472f17",
                 padding: "10px 20px",
@@ -42,7 +45,7 @@ const Button: React.FC<ButtonProps> = ({ onClick, title, textContent }) => {
                 color: "grey",
                 display: "block",
                 marginTop: "0px" // Adjust margin to reduce space between text and category
-                }}>{title}</span> {}
+            }}>{title}</span>
         </button>
     );
 };
@@ -59,7 +62,7 @@ const ButtonContainer: React.FC<ButtonContainerProps> = ({ words }) => {
             {words.map((obj, index) => (
                 <Button
                     key={index}
-                    onClick={() => {}}
+                    onClick={() => { }}
                     title={obj.category}
                     textContent={obj.word}
                 />

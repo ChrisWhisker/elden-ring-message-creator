@@ -1,27 +1,26 @@
 import renderButtons from './buttons';
 import Word from './word';
 
-// Search function to filter words and create buttons
+// Search for words and filter results
 const search = (query: string) => {
-    // Prevent failing on string functions
-    if (query == null) {
-        query === "";
-    }
-    query = query.trim().toLowerCase();
+    // Ensure query is not null and convert to lowercase
+    query = query ? query.trim().toLowerCase() : "";
+
+    // Array to store search results
     const results: Word[] = [];
 
-    // Will add all words from a category to the results array
+    // Add words from a category to results array
     const addWordsFromCategory = (category: string) => {
         for (const word of wordCategories[category]) {
             let wordObj: Word = new Word(category, word);
-            // Don't add duplicates
+            // Check for duplicates before adding
             if (!wordObj.isInArray(results)) {
                 results.push(wordObj);
             }
         }
     };
 
-    // Add all words if query is empty
+    // If query is empty, add all words from all categories
     if (query === "") {
         for (const category in wordCategories) {
             addWordsFromCategory(category);
@@ -32,7 +31,7 @@ const search = (query: string) => {
             for (const word of wordCategories[category]) {
                 if (word.toLowerCase().includes(query)) {
                     let wordObj: Word = new Word(category, word);
-                    // Don't add duplicates
+                    // Check for duplicates before adding
                     if (!wordObj.isInArray(results)) {
                         results.push(wordObj);
                     }
@@ -45,8 +44,7 @@ const search = (query: string) => {
         }
     }
 
-    // console.log("Searching for: \"" + query + "\". Results:");
-    // console.log(results);
+    // Render buttons for the search results
     renderButtons(results);
 };
 

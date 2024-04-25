@@ -2,53 +2,60 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Define custom CSS variables for colors */
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --foreground-rgb: 0, 0, 0; /* Default foreground color */
+  --background-start-rgb: 214, 219, 220; /* Default background gradient start color */
+  --background-end-rgb: 255, 255, 255; /* Default background gradient end color */
 }
 
+/* Media query for dark mode */
 @media (prefers-color-scheme: dark) {
   :root {
-    --foreground-rgb: 201, 168, 96;
-    --background-start-rgb: 7, 23, 24;
-    --background-end-rgb: 18, 41, 40;
+    --foreground-rgb: 201, 168, 96; /* Dark mode foreground color */
+    --background-start-rgb: 7, 23, 24; /* Dark mode background gradient start color */
+    --background-end-rgb: 18, 41, 40; /* Dark mode background gradient end color */
   }
 }
 
+/* Body styles */
 body {
-  color: rgb(var(--foreground-rgb));
+  color: rgb(var(--foreground-rgb)); /* Set text color using custom variable */
   background: linear-gradient(
       to bottom,
       transparent,
-      rgb(var(--background-end-rgb))
+      rgb(var(--background-end-rgb)) /* Background gradient end color */
     )
-    rgb(var(--background-start-rgb));
+    rgb(var(--background-start-rgb)); /* Background gradient start color */
 }
 
+/* Utility classes */
 @layer utilities {
   .text-balance {
-    text-wrap: balance;
+    text-wrap: balance; /* Text wrap balance utility */
   }
 }
 
+/* Font declarations */
 @font-face {
   font-family: 'Mantinia';
-  src: url('Mantinia.otf') format('truetype');
+  src: url('fonts/Mantinia.otf') format('truetype'); /* Font file path and format */
   /* Add more font formats (e.g., woff, woff2) if needed */
 }
 
 @font-face {
   font-family: 'Garamond';
-  src: url('Garamond Premier Pro Regular.ttf') format('truetype');
+  src: url('fonts/Garamond Premier Pro Regular.ttf') format('truetype'); /* Font file path and format */
   /* Add more font formats (e.g., woff, woff2) if needed */
 }
 
+/* Title text styles */
 .title-text {
-  font-family: 'Mantinia', sans-serif;
-  color: '#dfaf37';
+  font-family: 'Mantinia', sans-serif; /* Set font family */
+  color: '#dfaf37'; /* Title text color */
 }
 
+/* Body text styles */
 .body-text {
-  font-family: 'Garamond', sans-serif;
+  font-family: 'Garamond', sans-serif; /* Set font family */
 }

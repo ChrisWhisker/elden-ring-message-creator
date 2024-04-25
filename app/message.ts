@@ -8,6 +8,7 @@ export default class Message {
     asString: string = "";
     onUpdate: ((message: string) => void) | null = null; // Callback function for message update
 
+    // Singleton instance
     private static instance: Message | null = null;
 
     private constructor() {
@@ -29,6 +30,7 @@ export default class Message {
         return this.asString;
     }
 
+    // Update the message string
     updateString(): void {
         let newString: string = "";
 
@@ -36,8 +38,7 @@ export default class Message {
         if (this.templates.length > 0) {
             if (this.clauses.length > 0) {
                 newString += this.templates[0].word.replaceAll("****", this.clauses[0].word) + " ";
-            }
-            else {
+            } else {
                 newString += this.templates[0].word + " ";
             }
         } else if (this.clauses.length > 0) {
@@ -47,7 +48,7 @@ export default class Message {
         // Add the conjunction
         if (this.conjunction != null) {
             newString += this.conjunction.word + " ";
-        } else  if (this.templates.length > 1) {
+        } else if (this.templates.length > 1) {
             newString += "[conjunction] ";
         }
 
@@ -71,6 +72,7 @@ export default class Message {
         }
     }
 
+    // Add a word to the message
     add(word: Word): boolean {
         switch (word.category) {
             case "Templates":
@@ -85,7 +87,7 @@ export default class Message {
                 if (this.conjunction == null) {
                     this.conjunction = word;
                 } else {
-                    console.error("Only 1 conjunction allowed");
+                    console.error("Only one conjunction allowed");
                     return false;
                 }
                 break;
@@ -102,6 +104,7 @@ export default class Message {
         return true;
     }
 
+    // Remove a word from the message
     remove(word: Word): boolean {
         switch (word.category) {
             case "Templates":
