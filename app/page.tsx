@@ -48,9 +48,9 @@ export default function Home() {
             <h2 className="text-2xl body-text">Easily create messages for Elden Ring</h2>
             {/* Spacer to fill extra vertical space */}
             <div className="flex-grow"></div>
-            {/* Container for search text and input box */}
+            {/* Container for filter label and input box */}
             <div className="z-10 w-full max-w-5xl items-center body-text text-sm lg:flex">
-                <div className="mr-4 body-text">Search:</div>
+                <div className="mr-4 body-text">Filter words:</div>
                 {/* Input text box with onChange event handler */}
                 <input
                     type="text"
