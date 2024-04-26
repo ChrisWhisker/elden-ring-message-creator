@@ -1,6 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import Message from "./message";
+import { search } from './search';
 import Word from "./word";
 
 // Define the type for the props of the Button component
@@ -22,6 +23,16 @@ const Button: React.FC<ButtonProps> = ({ onClick, title, textContent }) => {
         const added = messageInstance.add(word);
         if (!added) {
             console.log("Failed to add word.");
+        } else {
+            console.log("Word added successfully.");
+        }
+
+        const input = document.getElementById('inputBox') as HTMLInputElement;
+        if (input) {
+            // Search with existing filter to remove unavailable words
+            search(input.value);
+        } else {
+            console.log('Filter input box could not be found.');
         }
     };
 

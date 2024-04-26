@@ -1,11 +1,13 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { search } from "./search";
 import Message from './message';
 
 // Default Home component
 export default function Home() {
+    const inputRef = useRef(null);
+
     // useEffect hook to run code when the component mounts
     useEffect(() => {
         search(""); // Call the search function with an empty string as the initial search value
@@ -53,6 +55,8 @@ export default function Home() {
                 <div className="mr-4 body-text">Filter words:</div>
                 {/* Input text box with onChange event handler */}
                 <input
+                    id="inputBox"
+                    ref={inputRef}
                     type="text"
                     className="border border-gray-300 px-3 py-1 rounded-md"
                     placeholder="finger"

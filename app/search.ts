@@ -1,5 +1,6 @@
 import renderButtons from './buttons';
 import Word from './word';
+import Message from './message';
 
 // Search for words and filter results
 const search = (query: string) => {
@@ -9,14 +10,37 @@ const search = (query: string) => {
     // Array to store search results
     const results: Word[] = [];
 
-    // Add words from a category to results array
+    // Add a single word to the results array
+    const addWord = (category: string, word: string) => {
+        // Check if the word can be added based on the category
+        switch(category) {
+            case "Templates":
+                if (Message.getInstance().templates.length > 1) {
+                    return;
+                }
+                break;
+            case "Conjunctions":
+                if (Message.getInstance().conjunction != null) {
+                    return;
+                }
+                break;
+            default:
+                if (Message.getInstance().clauses.length > 1) {
+                    return;
+                }
+                break;
+        }
+        let wordObj: Word = new Word(category, word);
+        // Check for duplicates before adding
+        if (!wordObj.isInArray(results)) {
+            results.push(wordObj);
+        }
+    }
+
+    // Add all words from a category to results array
     const addWordsFromCategory = (category: string) => {
         for (const word of wordCategories[category]) {
-            let wordObj: Word = new Word(category, word);
-            // Check for duplicates before adding
-            if (!wordObj.isInArray(results)) {
-                results.push(wordObj);
-            }
+            addWord(category, word);
         }
     };
 
@@ -30,11 +54,7 @@ const search = (query: string) => {
         for (const category in wordCategories) {
             for (const word of wordCategories[category]) {
                 if (word.toLowerCase().includes(query)) {
-                    let wordObj: Word = new Word(category, word);
-                    // Check for duplicates before adding
-                    if (!wordObj.isInArray(results)) {
-                        results.push(wordObj);
-                    }
+                    addWord(category, word);
                 }
             }
             // Add all words from the category if the category name matches the query
