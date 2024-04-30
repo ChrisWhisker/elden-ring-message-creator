@@ -6,11 +6,17 @@ import Message from './message';
 
 // Default Home component
 export default function Home() {
-    const inputRef = useRef(null);
+    const inputRef = useRef<HTMLInputElement>(null); // Specify the type of the ref
 
     // useEffect hook to run code when the component mounts
     useEffect(() => {
-        search(""); // Call the search function with an empty string as the initial search value
+        // Call the search function with an empty string as the initial search value
+        search("");
+
+        // Focus the input element when the component mounts
+        if (inputRef.current) {
+            inputRef.current.focus();
+        }
     }, []); // Empty dependency array ensures the effect runs only once when the component mounts
 
     // State to hold the value of the input text
@@ -59,7 +65,6 @@ export default function Home() {
                     ref={inputRef}
                     type="text"
                     className="border border-gray-300 px-3 py-1 rounded-md"
-                    placeholder="finger"
                     value={searchText}
                     onChange={handleInputChange} // Call handleInputChange function when text changes
                 />
