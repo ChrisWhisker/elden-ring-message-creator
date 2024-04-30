@@ -5,7 +5,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-    title: "Elden Scribe ",
+    title: "Elden Scribe | Write Elden Ring messages",
     description: "Write Elden Ring messages",
 };
 
