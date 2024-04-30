@@ -6,6 +6,7 @@ export default class Message {
     conjunction: Word | null = null;
     clauses: Word[] = []; // All words that aren't templates or conjunctions
     asString: string = "";
+    clickableTextObjects = []; // Array of clickable text objects TODO: Implement this
     onUpdate: ((message: string) => void) | null = null; // Callback function for message update
 
     // Singleton instance
@@ -30,8 +31,8 @@ export default class Message {
         return this.asString;
     }
 
-    // Update the message string
-    updateString(): void {
+    // Update the message string TODO: Also update the clickableTextObjects (one for each Word object in the message)
+    update(): void {
         let newString: string = "";
 
         // Add the first template & clause
@@ -100,7 +101,7 @@ export default class Message {
                 }
                 break;
         }
-        this.updateString();
+        this.update();
         return true;
     }
 
@@ -124,7 +125,7 @@ export default class Message {
                 }
                 break;
         }
-        this.updateString();
+        this.update();
         return true;
     }
 }
