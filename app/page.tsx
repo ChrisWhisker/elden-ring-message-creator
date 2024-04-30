@@ -1,12 +1,13 @@
-"use client";
+"use client"; // Enables useState, useEffect, and useRef hooks
 
+// Import necessary dependencies
 import React, { useState, useEffect, useRef } from "react";
-import { search } from "./search";
-import Message from './message';
+import { search } from "./search"; // Import the search function from the search module
+import Message from './message'; // Import the Message component
 
-// Default Home component
+// Define the default Home component
 export default function Home() {
-    const inputRef = useRef<HTMLInputElement>(null); // Specify the type of the ref
+    const inputRef = useRef<HTMLInputElement>(null); // Create a ref to hold a reference to the input element
 
     // useEffect hook to run code when the component mounts
     useEffect(() => {
@@ -15,14 +16,14 @@ export default function Home() {
 
         // Focus the input element when the component mounts
         if (inputRef.current) {
-            inputRef.current.focus();
+            inputRef.current.focus(); // Ensure the inputRef.current is not null before focusing
         }
     }, []); // Empty dependency array ensures the effect runs only once when the component mounts
 
     // State to hold the value of the input text
-    const [searchText, setSearchText] = useState("");
+    const [searchText, setSearchText] = useState(""); // Initialize searchText state with an empty string
     // State to hold the message text
-    const [messageText, setMessageText] = useState("Your message will appear here.");
+    const [messageText, setMessageText] = useState("Your message will appear here."); // Initialize messageText state with a default message
 
     // Function to handle text change in the input box
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -50,6 +51,7 @@ export default function Home() {
     }, []); // Empty dependency array ensures the effect runs only once when the component mounts
 
     return (
+        // Main container for the Home component
         <main className="flex min-h-screen flex-col items-center p-24 pb-6">
             {/* Title and description */}
             <h1 className="text-6xl title-text">Elden scribE</h1>
@@ -62,7 +64,7 @@ export default function Home() {
                 {/* Input text box with onChange event handler */}
                 <input
                     id="inputBox"
-                    ref={inputRef}
+                    ref={inputRef} // Connect the ref to the input element
                     type="text"
                     className="border border-gray-300 px-3 py-1 rounded-md"
                     value={searchText}
@@ -86,6 +88,7 @@ export default function Home() {
             <div className="h-4"></div>
             {/* Footer */}
             <div className="body-text" style={{ color: "grey" }}>
+                {/* Footer links */}
                 Created by Chris Worcester |{" "}
                 <u>
                     <a href="https://www.linkedin.com/in/chrisworcester/" target="_blank" rel="noopener noreferrer">
@@ -99,6 +102,6 @@ export default function Home() {
                     </a>
                 </u>
             </div>
-        </main>
+        </main> // End of main container
     );
 }
