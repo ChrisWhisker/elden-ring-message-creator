@@ -37,44 +37,36 @@ export default class Message {
             );
         }
 
-        const addTemplateLinks = (template: Word, clause?: Word) => {
-            const clauseIndex = template.word.indexOf("****");
-            addHyperlink(template, template.word.substring(0, clauseIndex));
-            if (clause) {
-                addHyperlink(clause, clause.word);
+        const addTemplateAndClause = (template: Word, clause: Word) => {
+            if (template != null) { // If template exists
+                if (clause != null) { // If clause exists
+                    const clauseIndex = template.word.indexOf("****");
+                    addHyperlink(template, template.word.substring(0, clauseIndex));
+                    if (clause != null) {
+                        addHyperlink(clause, clause.word);
+                    }
+                    addHyperlink(template, template.word.substring(clauseIndex + 4));
+                } else { // If clause does not exist
+                    addHyperlink(template, template.word + " ");
+                }
+            } else if (clause != null) { // If clause exists
+                // Add template without clause
+                addHyperlink(null, "[template] " + clause.word + " ");
+            } else {
+                // Add template without clause
+                addHyperlink(null, "[template] ");
             }
-            addHyperlink(template, template.word.substring(clauseIndex + 4));
         }
 
-        // Add the first template & clause
-        if (this.templates.length > 0) { // Check if the first template exists
-            if (this.clauses.length > 0) {
-                addTemplateLinks(this.templates[0], this.clauses[0]);
-            } else {
-                addHyperlink(this.templates[0], this.templates[0].word + " ");
-            }
-        } else if (this.clauses.length > 0) {
-            // Add template without clause
-            addHyperlink(null, "[template] " + this.clauses[0].word + " ");
-        }
+        // Add the first part of the message
+        addTemplateAndClause(this.templates[0], this.clauses[0]);
 
         // Add the conjunction
         if (this.conjunction != null) { // Check if the conjunction exists
             addHyperlink(this.conjunction, " " + this.conjunction.word + " ");
         } else if (this.templates.length > 1 || this.clauses.length > 1) {
             addHyperlink(null, " [conjunction] ");
-        }
-
-        // Add the second template & clause
-        if (this.templates.length > 1) { // Check if the second template exists
-            if (this.clauses.length > 1) {
-                addTemplateLinks(this.templates[1], this.clauses[1]);
-            } else {
-                addHyperlink(this.templates[1], this.templates[1].word + " ");
-            }
-        } else if (this.clauses.length > 1) {
-            // Add template without clause
-            addHyperlink(null, "[template] " + this.clauses[1].word + " ");
+            addTemplateAndClause(this.templates[1], this.clauses[1]);
         }
 
         // Update the wordLinks array with the new hyperlinks
