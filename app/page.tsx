@@ -23,7 +23,7 @@ export default function Home() {
     // State to hold the value of the input text
     const [searchText, setSearchText] = useState(""); // Initialize searchText state with an empty string
     // State to hold the message text
-    const [messageText, setMessageText] = useState("Your message will appear here."); // Initialize messageText state with a default message
+    const [messageLinks, setMessageLinks] = useState(); // Initialize messageText state with a default message
 
     // Function to handle text change in the input box
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,14 +35,8 @@ export default function Home() {
 
     // useEffect hook to listen for changes in the Message instance
     useEffect(() => {
-        // Define a function to update the message text when the Message instance changes
-        const updateMessageText = (newMessage: string) => {
-            // Update the message text in the state
-            setMessageText(newMessage);
-        };
-
         // Set the callback function for message updates
-        Message.getInstance().onUpdate = updateMessageText;
+        Message.getInstance().onUpdate = setMessageLinks;
 
         // Remove the callback function when the component unmounts
         return () => {
@@ -82,7 +76,7 @@ export default function Home() {
             </div>
             {/* Display the message text */}
             <div id="messageContainer" className="body-text text-center w-full max-w-5xl border border-gray-300 p-4 m-4">
-                {messageText}
+                {messageLinks}
             </div>
             {/* Spacer to create distance between elements */}
             <div className="h-4"></div>
