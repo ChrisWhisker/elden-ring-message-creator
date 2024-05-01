@@ -5,7 +5,6 @@ export default class Message {
     templates: Word[] = [];
     conjunction: Word | null = null;
     clauses: Word[] = []; // All words that aren't templates or conjunctions
-    asString: string = "";
     wordLinks: JSX.Element[] = []; // Array of hyperlinks for each Word in the message
     onUpdate: ((links: JSX.Element[]) => {}) | null = null; // Callback function for message update
 
@@ -26,16 +25,8 @@ export default class Message {
         return Message.instance;
     }
 
-    // Override the toString method to return a unique value for each WordObject
-    toString(): string {
-        return this.asString;
-    }
-
     // Update the message string and hyperlinks array
     update(): void {
-        console.log("Updating message...");
-
-        let newString: string = "";
         let hyperlinks: JSX.Element[] = []; // Temporary array to hold word hyperlinks
 
         const addHyperlink = (word: Word | null, linkText: string) => {
@@ -46,58 +37,46 @@ export default class Message {
             );
         }
 
+        const addTemplateLinks = (template: Word, clause?: Word) => {
+            const clauseIndex = template.word.indexOf("****");
+            addHyperlink(template, template.word.substring(0, clauseIndex));
+            if (clause) {
+                addHyperlink(clause, clause.word);
+            }
+            addHyperlink(template, template.word.substring(clauseIndex + 4));
+        }
+
         // Add the first template & clause
         if (this.templates.length > 0) { // Check if the first template exists
             if (this.clauses.length > 0) {
-                newString += this.templates[0].word.replaceAll("****", this.clauses[0].word) + " ";
-                const clauseIndex = this.templates[0].word.indexOf("****");
-                // Add first part of template
-                addHyperlink(this.templates[0], this.templates[0].word.substring(0, clauseIndex) + " ");
-                // Add clause
-                addHyperlink(this.clauses[0], this.clauses[0].word + " ");
-                // Add second part of template
-                addHyperlink(this.templates[0], this.templates[0].word.substring(clauseIndex + 4) + " ");
+                addTemplateLinks(this.templates[0], this.clauses[0]);
             } else {
-                newString += this.templates[0].word + " ";
                 addHyperlink(this.templates[0], this.templates[0].word + " ");
             }
         } else if (this.clauses.length > 0) {
-            newString += "[template] " + this.clauses[0].word + " ";
             // Add template without clause
-            addHyperlink(null, "[template] ");
+            addHyperlink(null, "[template] " + this.clauses[0].word + " ");
         }
 
         // Add the conjunction
         if (this.conjunction != null) { // Check if the conjunction exists
-            newString += this.conjunction.word + " ";
-            addHyperlink(this.conjunction, this.conjunction.word + " ");
-        } else if (this.templates.length > 1) {
-            newString += "[conjunction] ";
-            addHyperlink(null, "[conjunction] ");
+            addHyperlink(this.conjunction, " " + this.conjunction.word + " ");
+        } else if (this.templates.length > 1 || this.clauses.length > 1) {
+            addHyperlink(null, " [conjunction] ");
         }
 
+        // Add the second template & clause
         if (this.templates.length > 1) { // Check if the second template exists
             if (this.clauses.length > 1) {
-                newString += this.templates[1].word.replaceAll("****", this.clauses[1].word) + " ";
-                const clauseIndex = this.templates[1].word.indexOf("****");
-                // Add first part of template
-                addHyperlink(this.templates[1], this.templates[1].word.substring(0, clauseIndex) + " ");
-                // Add clause
-                addHyperlink(this.clauses[1], this.clauses[1].word + " ");
-                // Add second part of template
-                addHyperlink(this.templates[1], this.templates[1].word.substring(clauseIndex + 4) + " ");
+                addTemplateLinks(this.templates[1], this.clauses[1]);
             } else {
-                newString += this.templates[1].word + " ";
                 addHyperlink(this.templates[1], this.templates[1].word + " ");
             }
         } else if (this.clauses.length > 1) {
-            newString += "[template] " + this.clauses[1].word + " ";
             // Add template without clause
-            addHyperlink(null, "[template] ");
+            addHyperlink(null, "[template] " + this.clauses[1].word + " ");
         }
 
-        // Update the asString property with the new string
-        this.asString = newString;
         // Update the wordLinks array with the new hyperlinks
         this.wordLinks = hyperlinks;
 
