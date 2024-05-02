@@ -13,6 +13,7 @@ export default function Home() {
     useEffect(() => {
         // Call the search function with an empty string as the initial search value
         search("");
+        Message.getInstance().update(); // Update the message text
 
         // Focus the input element when the component mounts
         if (inputRef.current) {
