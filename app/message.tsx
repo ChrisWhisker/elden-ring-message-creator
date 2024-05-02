@@ -37,7 +37,7 @@ export default class Message {
                     onClick={() => word && this.handleClick(word)} // Only invoke handleClick if word is not null
                     disabled={word === null} // Disable the button if word is null
                     style={{ marginLeft: '2px', marginRight: '2px' }} // Adjust the margin as needed
-                    title={word ? word.word : undefined} // Conditionally set tooltip text
+                    title={word ? word.category + ": " + word.word : undefined} // Conditionally set tooltip text
                 >
                     {word ? <u>{buttonText}</u> : buttonText}
                 </button>
