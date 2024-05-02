@@ -69,4 +69,15 @@ const search = (query: string) => {
     renderButtons(results);
 };
 
-export { search };
+// Refilter the search results using the existing query
+const refilter = () => {
+    const input = document.getElementById('inputBox') as HTMLInputElement;
+    if (input) {
+        // Search with existing filter to remove unavailable words
+        search(input.value);
+    } else {
+        console.log('Filter input box could not be found.');
+    }
+}
+
+export { search, refilter };

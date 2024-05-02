@@ -1,7 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import Message from "./message";
-import { search } from './search';
+import { refilter } from './search';
 import Word from "./word";
 
 // Define the type for the props of the Button component
@@ -15,25 +15,16 @@ interface ButtonProps {
 const Button: React.FC<ButtonProps> = ({ onClick, title, textContent }) => {
     // Function to handle adding a word to the message
     const handleMessageAdd = () => {
-        // Get the singleton instance of Message
-        const messageInstance = Message.getInstance();
-        // Create a Word object
         const word = new Word(title, textContent);
         // Call the add function and check if it was successful
-        const added = messageInstance.add(word);
+        const added = Message.getInstance().add(word);
         if (!added) {
             console.log("Failed to add word.");
         } else {
-            console.log("Word added successfully.");
+            console.log("'" + title + "' added successfully.");
         }
 
-        const input = document.getElementById('inputBox') as HTMLInputElement;
-        if (input) {
-            // Search with existing filter to remove unavailable words
-            search(input.value);
-        } else {
-            console.log('Filter input box could not be found.');
-        }
+        refilter();
     };
 
     return (
