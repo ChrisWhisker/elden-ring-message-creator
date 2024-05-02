@@ -1,4 +1,5 @@
 import Word from './word';
+import { refilter } from './search';
 
 // Define the type for the message
 export default class Message {
@@ -25,23 +26,27 @@ export default class Message {
         return Message.instance;
     }
 
-    // Update the message string and buttons array
+    // Update the buttons array
     update(): void {
         let buttons: JSX.Element[] = []; // Temporary array to hold word buttons
 
         const addButton = (word: Word | null, buttonText: string) => {
+            console.log("Adding button: ", buttonText);
             buttons.push(
                 <button
-                    onClick={() => this.handleClick(word)}
+                    onClick={() => word && this.handleClick(word)} // Only invoke handleClick if word is not null
+                    disabled={word === null} // Disable the button if word is null
                     style={{ marginLeft: '2px', marginRight: '2px' }} // Adjust the margin as needed
                     title={word ? word.word : undefined} // Conditionally set tooltip text
                 >
-                    <u>{buttonText}</u>
+                    {word ? <u>{buttonText}</u> : buttonText}
                 </button>
             );
         }
 
         const addTemplateAndClause = (template: Word, clause: Word) => {
+            console.log("Adding template and clause: ", template, clause);
+
             if (template != null) { // If template exists
                 if (clause != null) { // If clause exists
                     const clauseIndex = template.word.indexOf("****");
@@ -51,30 +56,36 @@ export default class Message {
                     }
                     addButton(template, template.word.substring(clauseIndex + 4));
                 } else { // If clause does not exist
-                    addButton(template, template.word + " ");
+                    addButton(template, template.word);
                 }
             } else if (clause != null) { // If clause exists
                 // Add template without clause
-                addButton(null, "[template] " + clause.word + " ");
+                addButton(null, "[template]");
+                addButton(clause, clause.word);
             } else {
                 // Add template without clause
-                addButton(null, "[template] ");
+                addButton(null, "[template]");
             }
         }
 
-        // Add the first part of the message
-        addTemplateAndClause(this.templates[0], this.clauses[0]);
+        if (this.templates.length == 0 && this.clauses.length == 0 && !this.conjunction) {
+            // If no words are present, display a placeholder message
+            addButton(null, "Your message will appear here.");
+        } else {
+            // Add the first part of the message
+            addTemplateAndClause(this.templates[0], this.clauses[0]);
 
-        // Add the conjunction
-        if (this.conjunction != null) { // Check if the conjunction exists
-            addButton(this.conjunction, " " + this.conjunction.word + " ");
-        } else if (this.templates.length > 1 || this.clauses.length > 1) {
-            addButton(null, " [conjunction] ");
-        }
+            // Add the conjunction
+            if (this.conjunction != null) { // Check if the conjunction exists
+                addButton(this.conjunction, this.conjunction.word);
+            } else if (this.templates.length > 1 || this.clauses.length > 1) {
+                addButton(null, "[conjunction]");
+            }
 
-        // Add the second part of the message
-        if (this.templates.length > 1 || this.clauses.length > 1) {
-            addTemplateAndClause(this.templates[1], this.clauses[1]);
+            // Add the second part of the message
+            if (this.templates.length > 1 || this.clauses.length > 1) {
+                addTemplateAndClause(this.templates[1], this.clauses[1]);
+            }
         }
 
         // Update the wordButtons array with the new buttons
@@ -93,7 +104,8 @@ export default class Message {
             return;
         }
         console.log("Clicked on word:", word.word);
-        // You can perform any desired action here when a button is clicked
+        this.remove(word);
+        refilter(); // Redo the search to update the buttons
     }
 
     // Add a word to the message
@@ -130,6 +142,8 @@ export default class Message {
 
     // Remove a word from the message
     remove(word: Word): boolean {
+        console.log("Removing word: " + word.word + "(" + word.category + ")");
+
         switch (word.category) {
             case "Templates":
                 if (!word.removeFromArray(this.templates)) {
