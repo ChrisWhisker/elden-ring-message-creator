@@ -23,8 +23,8 @@ export default function Home() {
 
     // State to hold the value of the input text
     const [searchText, setSearchText] = useState(""); // Initialize searchText state with an empty string
-    // State to hold the message text
-    const [messageLinks, setMessageLinks] = useState(); // Initialize messageText state with a default message
+    // State to hold the message buttons
+    const [messageButtons, setMessageButtons] = useState<JSX.Element[]>([]);
 
     // Function to handle text change in the input box
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,8 +36,14 @@ export default function Home() {
 
     // useEffect hook to listen for changes in the Message instance
     useEffect(() => {
+        // Define a callback function that matches the expected type
+        const handleUpdate: (buttons: JSX.Element[]) => {} = (buttons: JSX.Element[]) => {
+            setMessageButtons(buttons);
+            return {}; // Return an empty object as required by the type
+        };
+
         // Set the callback function for message updates
-        Message.getInstance().onUpdate = setMessageLinks;
+        Message.getInstance().onUpdate = handleUpdate;
 
         // Remove the callback function when the component unmounts
         return () => {
@@ -77,7 +83,7 @@ export default function Home() {
             </div>
             {/* Display the message text */}
             <div id="messageContainer" className="body-text text-center w-full max-w-5xl border border-gray-300 p-4 m-4">
-                {messageLinks}
+                {messageButtons}
             </div>
             {/* Spacer to create distance between elements */}
             <div className="h-4"></div>
