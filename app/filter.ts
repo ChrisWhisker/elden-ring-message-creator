@@ -2,6 +2,7 @@ import renderButtons from './buttons';
 import Word from './word';
 import Message from './message';
 import { wordCategories } from './wordCategories';
+import ButtonRenderer from './buttons';
 
 export default class Filter {
 
@@ -66,7 +67,7 @@ export default class Filter {
         }
 
         // Render buttons for the search results
-        renderButtons(results);
+        ButtonRenderer.renderButtons(results);
     }
 
     // Refilter the search results using the existing query
