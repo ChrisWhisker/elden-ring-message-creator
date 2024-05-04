@@ -3,9 +3,14 @@ import { refilter } from './search';
 
 // Define the type for the message
 export default class Message {
-    templates: Word[] = [];
+    // Words that make up a message
+    template1: Word | null = null;
+    template2: Word | null = null;
     conjunction: Word | null = null;
-    clauses: Word[] = []; // All words that aren't templates or conjunctions
+    clause1: Word | null = null;
+    clause2: Word | null = null;
+
+    messageText: string = ""; // The text of the message
     wordButtons: JSX.Element[] = []; // Array of buttons for each Word in the message
     onUpdate: ((buttons: JSX.Element[]) => {}) | null = null; // Callback function for message update
 
@@ -44,11 +49,11 @@ export default class Message {
             );
         }
 
-        const addTemplateAndClause = (template: Word, clause: Word) => {
+        const addTemplateAndClause = (template: Word | null, clause: Word | null) => {
             console.log("Adding template and clause: ", template, clause);
 
-            if (template != null) { // If template exists
-                if (clause != null) { // If clause exists
+            if (template) { // If template exists
+                if (clause) { // If clause exists
                     const clauseIndex = template.word.indexOf("****");
                     addButton(template, template.word.substring(0, clauseIndex));
                     if (clause != null) {
@@ -68,24 +73,16 @@ export default class Message {
             }
         }
 
-        if (this.templates.length == 0 && this.clauses.length == 0 && !this.conjunction) {
+        if (!this.template1 && !this.template2 && !this.conjunction && !this.clause1 && !this.clause2) {
             // If no words are present, display a placeholder message
             addButton(null, "Your message will appear here.");
         } else {
             // Add the first part of the message
-            addTemplateAndClause(this.templates[0], this.clauses[0]);
-
+            addTemplateAndClause(this.template1, this.clause1);
             // Add the conjunction
-            if (this.conjunction != null) { // Check if the conjunction exists
-                addButton(this.conjunction, this.conjunction.word);
-            } else if (this.templates.length > 1 || this.clauses.length > 1) {
-                addButton(null, "[conjunction]");
-            }
-
+            addButton(this.conjunction, this.conjunction ? this.conjunction.word : "[conjunction]");
             // Add the second part of the message
-            if (this.templates.length > 1 || this.clauses.length > 1) {
-                addTemplateAndClause(this.templates[1], this.clauses[1]);
-            }
+            addTemplateAndClause(this.template2, this.clause2);
         }
 
         // Update the wordButtons array with the new buttons
@@ -112,15 +109,17 @@ export default class Message {
     add(word: Word): boolean {
         switch (word.category) {
             case "Templates":
-                if (this.templates.length < 2) {
-                    this.templates.push(word);
+                if (!this.template1) {
+                    this.template1 = word;
+                } else if (!this.template2) {
+                    this.template2 = word;
                 } else {
                     console.error("Only two templates allowed");
                     return false;
                 }
                 break;
             case "Conjunctions":
-                if (this.conjunction == null) {
+                if (!this.conjunction) {
                     this.conjunction = word;
                 } else {
                     console.error("Only one conjunction allowed");
@@ -128,13 +127,14 @@ export default class Message {
                 }
                 break;
             default:
-                if (this.clauses.length < 2) {
-                    this.clauses.push(word);
+                if (!this.clause1) {
+                    this.clause1 = word;
+                } else if (!this.clause2) {
+                    this.clause2 = word;
                 } else {
                     console.error("Only two clauses allowed");
                     return false;
                 }
-                break;
         }
         this.update();
         return true;
@@ -146,21 +146,33 @@ export default class Message {
 
         switch (word.category) {
             case "Templates":
-                if (!word.removeFromArray(this.templates)) {
+                if (this.template2) {
+                    this.template2 = null;
+                } else if (this.template1) {
+                    this.template1 = null;
+                } else {
+                    console.error("Word is not in message");
                     return false;
                 }
                 break;
             case "Conjunctions":
-                if (this.conjunction == null) {
+                if (this.conjunction) {
+                    this.conjunction = null;
+                } else {
+                    console.error("Word is not in message");
                     return false;
                 }
-                this.conjunction = null;
                 break;
             default: // Clauses
-                if (!word.removeFromArray(this.clauses)) {
-                    return false;
-                }
-                break;
+            if (this.clause2) {
+                this.clause2 = null;
+            } else if (this.clause1) {
+                this.clause1 = null;
+            } else {
+                console.error("Word is not in message");
+                return false;
+            }
+            break;
         }
         this.update();
         return true;

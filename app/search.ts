@@ -14,19 +14,19 @@ const search = (query: string) => {
     // Add a single word to the results array
     const addWord = (category: string, word: string) => {
         // Check if the word can be added based on the category
-        switch(category) {
+        switch (category) {
             case "Templates":
-                if (Message.getInstance().templates.length > 1) {
+                if (Message.getInstance().template1 && Message.getInstance().template2) {
                     return;
                 }
                 break;
             case "Conjunctions":
-                if (Message.getInstance().conjunction != null) {
+                if (Message.getInstance().conjunction) {
                     return;
                 }
                 break;
             default:
-                if (Message.getInstance().clauses.length > 1) {
+                if (Message.getInstance().clause1 && Message.getInstance().clause2) {
                     return;
                 }
                 break;
