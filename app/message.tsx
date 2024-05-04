@@ -1,5 +1,5 @@
 import Word from './word';
-import { refilter } from './search';
+import Filter from './search';
 
 // Define the type for the message
 export default class Message {
@@ -102,7 +102,7 @@ export default class Message {
         }
         console.log("Clicked on word:", word.word);
         this.remove(word);
-        refilter(); // Redo the search to update the buttons
+        Filter.refilter(); // Redo the search to update the buttons
     }
 
     // Add a word to the message
@@ -164,15 +164,15 @@ export default class Message {
                 }
                 break;
             default: // Clauses
-            if (this.clause2) {
-                this.clause2 = null;
-            } else if (this.clause1) {
-                this.clause1 = null;
-            } else {
-                console.error("Word is not in message");
-                return false;
-            }
-            break;
+                if (this.clause2) {
+                    this.clause2 = null;
+                } else if (this.clause1) {
+                    this.clause1 = null;
+                } else {
+                    console.error("Word is not in message");
+                    return false;
+                }
+                break;
         }
         this.update();
         return true;

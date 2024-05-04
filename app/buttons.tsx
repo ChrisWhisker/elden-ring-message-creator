@@ -1,7 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import Message from "./message";
-import { refilter } from './search';
+import Filter from './search';
 import Word from "./word";
 
 // Define the type for the props of the Button component
@@ -24,7 +24,7 @@ const Button: React.FC<ButtonProps> = ({ onClick, title, textContent }) => {
             console.log("'" + title + "' added successfully.");
         }
 
-        refilter();
+        Filter.refilter();
     };
 
     return (

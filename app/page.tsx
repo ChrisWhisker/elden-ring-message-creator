@@ -2,7 +2,7 @@
 
 // Import necessary dependencies
 import React, { useState, useEffect, useRef } from "react";
-import { search } from "./search"; // Import the search function from the search module
+import Filter from "./search"; // Import the Filter class
 import Message from './message'; // Import the Message component
 
 // Define the default Home component
@@ -12,7 +12,7 @@ export default function Home() {
     // useEffect hook to run code when the component mounts
     useEffect(() => {
         // Call the search function with an empty string as the initial search value
-        search("");
+        Filter.filterWords();
         Message.getInstance().update(); // Update the message text
 
         // Focus the input element when the component mounts
