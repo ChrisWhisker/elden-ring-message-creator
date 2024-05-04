@@ -52,7 +52,7 @@ export default function Home() {
 
     return (
         // Main container for the Home component
-        <main className="flex min-h-screen flex-col items-center p-24 pb-6">
+        <main className="flex min-h-screen flex-col items-center p-6 lg:p-24 xl:p-24"> {/* Adjusted padding */}
             {/* Title and description */}
             <h1 className="text-6xl title-text">Elden scribE</h1>
             <h2 className="text-2xl body-text">Easily create messages for Elden Ring</h2>
@@ -74,9 +74,9 @@ export default function Home() {
             {/* Spacer to create distance between elements */}
             <div className="h-4"></div>
             {/* Container for buttons */}
-            <div className="w-full max-w-5xl" style={{ height: "400px", overflowY: "auto" }}>
+            <div className="w-full max-w-5xl overflow-auto sm:h-64 md:h-96 lg:h-128 xl:h-144">
                 {/* Container for buttons with vertical scroll */}
-                <div id="buttonContainer" className="flex justify-between">
+                <div id="buttonContainer" className="flex justify-between flex-wrap">
                     {/* Buttons will be dynamically added here */}
                 </div>
             </div>
