@@ -8,49 +8,45 @@ export default class Filter {
     static query = "";
 
     // Filter words based on the query
-    static filterWords = (newQuery?: string | null) => {
+    static filterWords(newQuery: string | null = null): void {
         // Ensure query is not null and convert to lowercase
         this.query = newQuery ? newQuery.trim().toLowerCase() : "";
 
         // Array to store search results
         const results: Word[] = [];
 
-        // Add a single word to the results array
-        const addWord = (category: string, word: string) => {
-            // Check if the word can be added based on the category
+        // Check if a word can be added based on the category
+        const canAddWord = (category: string): boolean => {
             switch (category) {
                 case "Templates":
-                    if (Message.getInstance().template1 && Message.getInstance().template2) {
-                        return;
-                    }
-                    break;
+                    return !Message.getInstance().template1 || !Message.getInstance().template2;
                 case "Conjunctions":
-                    if (Message.getInstance().conjunction) {
-                        return;
-                    }
-                    break;
+                    return !Message.getInstance().conjunction;
                 default:
-                    if (Message.getInstance().clause1 && Message.getInstance().clause2) {
-                        return;
-                    }
-                    break;
+                    return !Message.getInstance().clause1 || !Message.getInstance().clause2;
             }
-            let wordObj: Word = new Word(category, word);
-            // Check for duplicates before adding
-            if (!wordObj.isInArray(results)) {
-                results.push(wordObj);
+        };
+
+        // Add a single word to the results array
+        const addWord = (category: string, word: string): void => {
+            if (canAddWord(category)) {
+                const wordObj = new Word(category, word);
+                // Check for duplicates before adding
+                if (!wordObj.isInArray(results)) {
+                    results.push(wordObj);
+                }
             }
-        }
+        };
 
         // Add all words from a category to results array
-        const addWordsFromCategory = (category: string) => {
+        const addWordsFromCategory = (category: string): void => {
             for (const word of wordCategories[category]) {
                 addWord(category, word);
             }
         };
 
         // If query is empty, add all words from all categories
-        if (this.query === "") {
+        if (!this.query) {
             for (const category in wordCategories) {
                 addWordsFromCategory(category);
             }
@@ -74,7 +70,7 @@ export default class Filter {
     }
 
     // Refilter the search results using the existing query
-    static refilter = () => {
-        this.filterWords(Filter.query);
+    static refilter(): void {
+        this.filterWords(this.query);
     }
 }

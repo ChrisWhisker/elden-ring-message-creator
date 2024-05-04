@@ -12,7 +12,7 @@ export default class Message {
 
     messageText: string = ""; // The text of the message
     wordButtons: JSX.Element[] = []; // Array of buttons for each Word in the message
-    onUpdate: ((buttons: JSX.Element[]) => {}) | null = null; // Callback function for message update
+    onUpdate: ((buttons: JSX.Element[]) => void) | null = null; // Callback function for message update
 
     // Singleton instance
     private static instance: Message | null = null;
@@ -33,45 +33,41 @@ export default class Message {
 
     // Update the buttons array
     update(): void {
-        let buttons: JSX.Element[] = []; // Temporary array to hold word buttons
+        const buttons: JSX.Element[] = []; // Temporary array to hold word buttons
 
         const addButton = (word: Word | null, buttonText: string) => {
-            console.log("Adding button: ", buttonText);
+            console.log("Adding button:", buttonText);
             buttons.push(
                 <button
                     onClick={() => word && this.handleClick(word)} // Only invoke handleClick if word is not null
-                    disabled={word === null} // Disable the button if word is null
-                    style={{ marginLeft: '2px', marginRight: '2px' }} // Adjust the margin as needed
-                    title={word ? word.category + ": " + word.word : undefined} // Conditionally set tooltip text
+                    disabled={!word} // Disable the button if word is null
+                    style={{ margin: '0 2px' }} // Adjust the margin as needed
+                    title={word ? `${word.category}: ${word.word}` : undefined} // Conditionally set tooltip text
                 >
                     {word ? <u>{buttonText}</u> : buttonText}
                 </button>
             );
-        }
+        };
 
         const addTemplateAndClause = (template: Word | null, clause: Word | null) => {
-            console.log("Adding template and clause: ", template, clause);
+            console.log("Adding template and clause:", template, clause);
 
             if (template) { // If template exists
                 if (clause) { // If clause exists
                     const clauseIndex = template.word.indexOf("****");
                     addButton(template, template.word.substring(0, clauseIndex));
-                    if (clause != null) {
-                        addButton(clause, clause.word);
-                    }
+                    addButton(clause, clause.word);
                     addButton(template, template.word.substring(clauseIndex + 4));
                 } else { // If clause does not exist
                     addButton(template, template.word);
                 }
-            } else if (clause != null) { // If clause exists
-                // Add template without clause
+            } else if (clause) { // If clause exists
                 addButton(null, "[template]");
                 addButton(clause, clause.word);
             } else {
-                // Add template without clause
                 addButton(null, "[template]");
             }
-        }
+        };
 
         if (!this.template1 && !this.template2 && !this.conjunction && !this.clause1 && !this.clause2) {
             // If no words are present, display a placeholder message
@@ -95,11 +91,7 @@ export default class Message {
     }
 
     // Function to handle click events on buttons
-    private handleClick(word: Word | null): void {
-        if (word == null) {
-            console.log("Clicked on null");
-            return;
-        }
+    private handleClick(word: Word): void {
         console.log("Clicked on word:", word.word);
         this.remove(word);
         Filter.refilter(); // Redo the search to update the buttons
@@ -107,7 +99,7 @@ export default class Message {
 
     // Add a word to the message
     add(word: Word): boolean {
-        console.log("Adding word: " + word.word + "(" + word.category + ")");
+        console.log(`Adding word: ${word.word} (${word.category})`);
 
         switch (word.category) {
             case "Templates":
@@ -144,7 +136,7 @@ export default class Message {
 
     // Remove a word from the message
     remove(word: Word): boolean {
-        console.log("Removing word: " + word.word + "(" + word.category + ")");
+        console.log(`Removing word: ${word.toString})`);
 
         switch (word) {
             case this.template1:

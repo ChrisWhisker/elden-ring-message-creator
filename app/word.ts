@@ -22,12 +22,12 @@ export default class Word {
     // Compare objects based on their properties
     equivalent(other: Word | null): boolean {
         // Check if toString representations of both objects are equal
-        return other ? this.toString() === other.toString() : false;
+        return !!other && this.toString() === other.toString();
     }
 
     // Compare objects based on their properties and id
     identical(other: Word | null): boolean {
-        return other ? this.equivalent(other) && this.id === other.id : false;
+        return !!other && this.equivalent(other) && this.id === other.id;
     }
 
     // Check if the Word is in an array

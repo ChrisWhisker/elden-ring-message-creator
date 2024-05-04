@@ -1,9 +1,8 @@
 "use client"; // Enables useState, useEffect, and useRef hooks
 
-// Import necessary dependencies
 import React, { useState, useEffect, useRef } from "react";
-import Filter from "./filter"; // Import the Filter class
-import Message from './message'; // Import the Message component
+import Filter from "./filter";
+import Message from './message';
 
 // Define the default Home component
 export default function Home() {
@@ -17,9 +16,9 @@ export default function Home() {
 
         // Focus the input element when the component mounts
         if (inputRef.current) {
-            inputRef.current.focus(); // Ensure the inputRef.current is not null before focusing
+            inputRef.current.focus();
         }
-    }, []); // Empty dependency array ensures the effect runs only once when the component mounts
+    }, []);
 
     // State to hold the value of the input text
     const [searchText, setSearchText] = useState(""); // Initialize searchText state with an empty string
@@ -31,7 +30,7 @@ export default function Home() {
         // Update the state with the new text value
         setSearchText(event.target.value);
         // Call the search function with the new text as an argument
-        search(event.target.value);
+        Filter.filterWords(event.target.value);
     };
 
     // useEffect hook to listen for changes in the Message instance
