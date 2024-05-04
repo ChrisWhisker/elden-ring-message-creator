@@ -72,11 +72,16 @@ class ButtonContainer extends React.Component<{ words: Word[] }> {
 
 // ButtonRenderer class to render the buttons
 class ButtonRenderer {
+    static root: any; // Declare a static variable to store the root
+
     static renderButtons(words: Word[]): void {
         const buttonContainer = document.getElementById("buttonContainer");
         if (buttonContainer) {
-            const root = createRoot(buttonContainer);
-            root.render(<ButtonContainer words={words} />);
+            if (!ButtonRenderer.root) {
+                // If root doesn't exist, create it
+                ButtonRenderer.root = createRoot(buttonContainer);
+            }
+            ButtonRenderer.root.render(<ButtonContainer words={words} />);
         } else {
             console.error("Button container not found");
         }
