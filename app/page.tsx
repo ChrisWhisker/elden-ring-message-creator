@@ -2,7 +2,7 @@
 
 // Import necessary dependencies
 import React, { useState, useEffect, useRef } from "react";
-import Filter from "./search"; // Import the Filter class
+import Filter from "./filter"; // Import the Filter class
 import Message from './message'; // Import the Message component
 
 // Define the default Home component

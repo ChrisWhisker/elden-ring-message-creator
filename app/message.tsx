@@ -1,5 +1,5 @@
 import Word from './word';
-import Filter from './search';
+import Filter from './filter';
 
 // Define the type for the message
 export default class Message {
@@ -107,6 +107,8 @@ export default class Message {
 
     // Add a word to the message
     add(word: Word): boolean {
+        console.log("Adding word: " + word.word + "(" + word.category + ")");
+
         switch (word.category) {
             case "Templates":
                 if (!this.template1) {
@@ -144,36 +146,26 @@ export default class Message {
     remove(word: Word): boolean {
         console.log("Removing word: " + word.word + "(" + word.category + ")");
 
-        switch (word.category) {
-            case "Templates":
-                if (this.template2) {
-                    this.template2 = null;
-                } else if (this.template1) {
-                    this.template1 = null;
-                } else {
-                    console.error("Word is not in message");
-                    return false;
-                }
+        switch (word) {
+            case this.template1:
+                this.template1 = null;
                 break;
-            case "Conjunctions":
-                if (this.conjunction) {
-                    this.conjunction = null;
-                } else {
-                    console.error("Word is not in message");
-                    return false;
-                }
+            case this.template2:
+                this.template2 = null;
                 break;
-            default: // Clauses
-                if (this.clause2) {
-                    this.clause2 = null;
-                } else if (this.clause1) {
-                    this.clause1 = null;
-                } else {
-                    console.error("Word is not in message");
-                    return false;
-                }
+            case this.conjunction:
+                this.conjunction = null;
                 break;
-        }
+            case this.clause1:
+                this.clause1 = null;
+                break;
+            case this.clause2:
+                this.clause2 = null;
+                break;
+            default:
+                console.error("Word is not in message");
+                return false;
+        }    
         this.update();
         return true;
     }

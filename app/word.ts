@@ -2,11 +2,15 @@
 export default class Word {
     category: string;
     word: string;
+    id: number;
+
+    static nextId: number = 0;
 
     constructor(category: string, word: string) {
         // Initialize Word with category and word
         this.category = category;
         this.word = word;
+        this.id = Word.nextId++;
     }
 
     // Override the toString method to return a unique value for each Word
@@ -15,10 +19,15 @@ export default class Word {
         return `${this.category}:${this.word}`;
     }
 
-    // Override the equals method to compare objects based on their properties
-    equals(other: Word): boolean {
+    // Compare objects based on their properties
+    equivalent(other: Word | null): boolean {
         // Check if toString representations of both objects are equal
-        return this.toString() === other.toString();
+        return other ? this.toString() === other.toString() : false;
+    }
+
+    // Compare objects based on their properties and id
+    identical(other: Word | null): boolean {
+        return other ? this.equivalent(other) && this.id === other.id : false;
     }
 
     // Check if the Word is in an array
@@ -32,7 +41,7 @@ export default class Word {
     indexInArray(arr: Word[]): number {
         // Iterate through the array to find the index of the Word
         for (let i = 0; i < arr.length; i++) {
-            if (this.equals(arr[i])) {
+            if (this.equivalent(arr[i])) {
                 // Return the index if Word is found
                 return i;
             }

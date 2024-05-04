@@ -1,7 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import Message from "./message";
-import Filter from './search';
+import Filter from './filter';
 import Word from "./word";
 
 // Define the type for the props of the Button component
