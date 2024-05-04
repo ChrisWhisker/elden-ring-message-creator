@@ -1,11 +1,9 @@
-import renderButtons from './buttons';
 import Word from './word';
 import Message from './message';
 import { wordCategories } from './wordCategories';
 import ButtonRenderer from './buttons';
 
 export default class Filter {
-
     static query = "";
 
     // Filter words based on the query
@@ -18,13 +16,14 @@ export default class Filter {
 
         // Check if a word can be added based on the category
         const canAddWord = (category: string): boolean => {
+            const instance = Message.getInstance();
             switch (category) {
                 case "Templates":
-                    return !Message.getInstance().template1 || !Message.getInstance().template2;
+                    return !instance.template1 || !instance.template2;
                 case "Conjunctions":
-                    return !Message.getInstance().conjunction;
+                    return !instance.conjunction;
                 default:
-                    return !Message.getInstance().clause1 || !Message.getInstance().clause2;
+                    return !instance.clause1 || !instance.clause2;
             }
         };
 
