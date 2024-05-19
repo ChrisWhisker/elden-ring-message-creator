@@ -11,8 +11,6 @@ export class Button extends React.Component<{ word: Word }> {
         const added = Message.getInstance().add(this);
         if (!added) {
             console.error(`Failed to add '${word.word}'.`);
-        } else {
-            console.log(`'${word.word}' added successfully.`);
         }
         Filter.refilter();
     };
