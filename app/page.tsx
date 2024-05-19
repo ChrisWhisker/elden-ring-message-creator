@@ -22,6 +22,8 @@ export default function Home() {
 
     // State to hold the value of the input text
     const [searchText, setSearchText] = useState(""); // Initialize searchText state with an empty string
+    // State to hold the message text
+    const [messageText, setMessageText] = useState("");
     // State to hold the message buttons
     const [messageButtons, setMessageButtons] = useState<JSX.Element[]>([]);
 
@@ -37,6 +39,7 @@ export default function Home() {
     useEffect(() => {
         // Define a callback function that matches the expected type
         const handleUpdate: (buttons: JSX.Element[]) => {} = (buttons: JSX.Element[]) => {
+            setMessageText(Message.getInstance().messageText);
             setMessageButtons(buttons);
             return {}; // Return an empty object as required by the type
         };
@@ -52,7 +55,7 @@ export default function Home() {
 
     return (
         // Main container for the Home component
-        <main className="flex min-h-screen flex-col items-center p-6 lg:p-24 xl:p-24"> {/* Adjusted padding */}
+        <main className="flex min-h-screen flex-col items-center p-6 lg:p-24 xl:p-24">
             {/* Title and description */}
             <h1 className="text-6xl title-text">Elden scribE</h1>
             <h2 className="text-2xl body-text">Easily create messages for Elden Ring</h2>
@@ -80,9 +83,13 @@ export default function Home() {
                     {/* Buttons will be dynamically added here */}
                 </div>
             </div>
-            {/* Display the message text */}
-            <div id="messageContainer" className="body-text text-center w-full max-w-5xl border border-gray-300 p-4 m-4 flex flex-col items-center">
-                <div>{"This is the text of your message"}</div>
+            {/* Display the message text and buttons */}
+            <div id="messageContainer"
+                className="body-text text-center w-full max-w-5xl p-4 m-4 flex flex-col items-center"
+                style={{ borderColor: '#dfaf37', borderWidth: '1px', borderStyle: 'solid' }}>
+                <div>
+                    {messageText}
+                </div>
                 <div className="flex justify-center w-full">
                     {messageButtons}
                 </div>
