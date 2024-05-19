@@ -6,20 +6,39 @@ import Word from "./word";
 
 // Button component to render buttons
 export class Button extends React.Component<{ word: Word }> {
+
+    private inMessage: boolean = false;
+
+    getInMessage(): boolean { return this.inMessage; }
+
     handleMessageAdd = () => {
-        const word = this.props.word;
-        const added = Message.getInstance().add(this);
-        if (!added) {
-            console.error(`Failed to add '${word.word}'.`);
+        let copy: Button = new Button(this.props);
+        const word = copy.props.word;
+        console.log("Adding word:", word.word);
+        
+        copy.inMessage = true;
+        const added = Message.getInstance().add(copy);
+        if (added) {
+            Filter.refilter();
         }
-        Filter.refilter();
     };
+
+    handleMessageRemove = () => {
+        const word = this.props.word;
+        console.log("Removing word:", word.word);
+        
+        const removed = Message.getInstance().remove(this);
+        if (removed) {
+            Filter.refilter();
+        }
+        
+    }
 
     render() {
         const word = this.props.word;
         return (
             <button
-                onClick={this.handleMessageAdd}
+                onClick={this.inMessage ? this.handleMessageRemove : this.handleMessageAdd}
                 title={`${word.category}: "${word.word}"`}
                 style={{
                     backgroundColor: "#472f17",

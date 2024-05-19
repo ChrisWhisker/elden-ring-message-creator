@@ -25,7 +25,7 @@ export default function Home() {
     // State to hold the message text
     const [messageText, setMessageText] = useState("");
     // State to hold the message buttons
-    const [messageButtons, setMessageButtons] = useState<JSX.Element[]>([]);
+    const [renderedButtons, setRenderedButtons] = useState<JSX.Element[]>([]);
 
     // Function to handle text change in the input box
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -40,7 +40,7 @@ export default function Home() {
         // Define a callback function that matches the expected type
         const handleUpdate: () => {} = () => {
             setMessageText(Message.getInstance().messageText);
-            setMessageButtons(Message.getInstance().wordButtons);
+            setRenderedButtons(Message.getInstance().renderedButtons);
             return {}; // Return an empty object as required by the type
         };
 
@@ -91,7 +91,7 @@ export default function Home() {
                     {messageText}
                 </div>
                 <div className="flex justify-center w-full">
-                    {messageButtons}
+                    {renderedButtons}
                 </div>
             </div>
             {/* Spacer to create distance between elements */}

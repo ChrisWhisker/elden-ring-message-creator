@@ -6,13 +6,14 @@ import { Button } from './buttons';
 export default class Message {
     // Words that make up a message
     template1: Button | null = null;
-    template2: Button | null = null;
-    conjunction: Button | null = null;
     clause1: Button | null = null;
+    conjunction: Button | null = null;
+    template2: Button | null = null;
     clause2: Button | null = null;
 
     messageText: string = ""; // The text of the message
-    wordButtons: JSX.Element[] = []; // Array of buttons for each Word in the message
+    wordButtons: Button[] = []; // Array of buttons for each Word in the message
+    renderedButtons: JSX.Element[] = [];
     onUpdate: (() => void) | null = null; // Callback function for message update
 
     // Singleton instance
@@ -34,7 +35,7 @@ export default class Message {
 
     // Update the buttons array
     update(): void {
-        const buttons: JSX.Element[] = []; // Temporary array to hold word buttons
+        const buttons: Button[] = []; // Temporary array to hold word buttons
 
         const addTemplateAndClause = (template: Button | null, clause: Button | null) => {
             console.log("Adding template and clause:", template, clause);
@@ -43,14 +44,14 @@ export default class Message {
                 if (clause) { // If clause exists
                     const clauseIndex = template.props.word.word.indexOf("****");
                     this.messageText += `${template.props.word.word.substring(0, clauseIndex)}${clause.props.word.word}${template.props.word.word.substring(clauseIndex + 4)}`;
-                    buttons.push(clause.render());
+                    buttons.push(clause);
                 } else { // If clause does not exist
                     this.messageText += template.props.word.word;
                 }
-                buttons.push(template.render());
+                buttons.push(template);
             } else if (clause) { // If clause exists
                 this.messageText += `[template] ${clause.props.word.word}`;
-                buttons.push(clause.render());
+                buttons.push(clause);
             } else {
                 this.messageText += "[template]";
             }
@@ -66,7 +67,7 @@ export default class Message {
             // Add the conjunction
             this.messageText += ` ${this.conjunction ? this.conjunction.props.word.word : "[conjunction]"} `;
             if (this.conjunction) {
-                buttons.push(this.conjunction.render());
+                buttons.push(this.conjunction);
             }
             // Add the second part of the message
             addTemplateAndClause(this.template2, this.clause2);
@@ -74,6 +75,10 @@ export default class Message {
 
         // Update the wordButtons array with the new buttons
         this.wordButtons = buttons;
+        this.renderedButtons = [];
+        for (const button of this.wordButtons) {
+            this.renderedButtons.push(button.render());
+        }
 
         // Call the onUpdate callback if it's set
         if (this.onUpdate) {
@@ -95,7 +100,7 @@ export default class Message {
     add(button: Button): boolean {
         const word: Word = button.props.word;
         console.log(`Adding word: ${word.word} (${word.category})`);
-        this.wordButtons.push(button.render());
+        this.wordButtons.push(button);
 
         switch (word.category) {
             case "Templates":
