@@ -13,8 +13,7 @@ export default class Message {
 
     messageText: string = ""; // The text of the message
     wordButtons: JSX.Element[] = []; // Array of buttons for each Word in the message
-    onUpdate: ((buttons: JSX.Element[]) => void) | null = null;
-    // onUpdate: ((message: Message) => void) | null = null; // Callback function for message update
+    onUpdate: (() => void) | null = null; // Callback function for message update
 
     // Singleton instance
     private static instance: Message | null = null;
@@ -95,7 +94,7 @@ export default class Message {
 
         // Call the onUpdate callback if it's set
         if (this.onUpdate) {
-            this.onUpdate(this.wordButtons);
+            this.onUpdate();
         }
 
         console.log("Updated message:", this.messageText);

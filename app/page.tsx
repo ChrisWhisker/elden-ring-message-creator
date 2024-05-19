@@ -38,9 +38,9 @@ export default function Home() {
     // useEffect hook to listen for changes in the Message instance
     useEffect(() => {
         // Define a callback function that matches the expected type
-        const handleUpdate: (buttons: JSX.Element[]) => {} = (buttons: JSX.Element[]) => {
+        const handleUpdate: () => {} = () => {
             setMessageText(Message.getInstance().messageText);
-            setMessageButtons(buttons);
+            setMessageButtons(Message.getInstance().wordButtons);
             return {}; // Return an empty object as required by the type
         };
 
