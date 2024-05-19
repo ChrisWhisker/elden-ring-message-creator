@@ -32,6 +32,7 @@ export class Button extends React.Component<{ word: Word }> {
         const word = this.props.word;
         return (
             <button
+                key = {word.toString()}
                 onClick={this.inMessage ? this.handleMessageRemove : this.handleMessageAdd}
                 title={`${word.category}: "${word.word}"`}
                 style={{
