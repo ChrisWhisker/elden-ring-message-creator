@@ -59,25 +59,32 @@ export default class Message {
                     addButton(template, template.word.substring(0, clauseIndex));
                     addButton(clause, clause.word);
                     addButton(template, template.word.substring(clauseIndex + 4));
+                    this.messageText += `${template.word.substring(0, clauseIndex)}${clause.word}${template.word.substring(clauseIndex + 4)}`;
                 } else { // If clause does not exist
                     addButton(template, template.word);
+                    this.messageText += template.word;
                 }
             } else if (clause) { // If clause exists
                 addButton(null, "[template]");
                 addButton(clause, clause.word);
+                this.messageText += `[template] ${clause.word}`;
             } else {
                 addButton(null, "[template]");
+                this.messageText += "[template]";
             }
         };
 
         if (!this.template1 && !this.template2 && !this.conjunction && !this.clause1 && !this.clause2) {
             // If no words are present, display a placeholder message
             addButton(null, "Your message will appear here.");
+            this.messageText = "Your message will appear here.";
         } else {
+            this.messageText = ""; // Clear the message text
             // Add the first part of the message
             addTemplateAndClause(this.template1, this.clause1);
             // Add the conjunction
             addButton(this.conjunction, this.conjunction ? this.conjunction.word : "[conjunction]");
+            this.messageText += ` ${this.conjunction ? this.conjunction.word : "[conjunction]"} `;
             // Add the second part of the message
             addTemplateAndClause(this.template2, this.clause2);
         }
