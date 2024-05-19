@@ -1,5 +1,5 @@
 // Word categories object
-export const wordCategories: any = {
+const wordCategories: any = {
     "Templates":
         [
             "**** ahead", "No **** ahead", "**** required ahead", "Be wary of ****", "Try ****",
@@ -110,3 +110,5 @@ export const wordCategories: any = {
             "all the more", ","
         ]
 };
+
+export default wordCategories;
