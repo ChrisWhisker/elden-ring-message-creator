@@ -33,27 +33,23 @@ export default class Message {
         return Message.instance;
     }
 
-    // Update the buttons array
+    // Update the message text and buttons array
     update(): void {
         const buttons: Button[] = []; // Temporary array to hold word buttons
 
         const addTemplateAndClause = (template: Button | null, clause: Button | null) => {
-            console.log("Adding template and clause:", template, clause);
-
             if (template) { // If template exists
+                buttons.push(template);
                 if (clause) { // If clause exists
                     const clauseIndex = template.props.word.word.indexOf("****");
-                    this.messageText += `${template.props.word.word.substring(0, clauseIndex)}${clause.props.word.word}${template.props.word.word.substring(clauseIndex + 4)}`;
+                    this.messageText += `${template.props.word.word.substring(0, clauseIndex)}${clause.props.word.word}${template.props.word.word.substring(clauseIndex + 4)} `;
                     buttons.push(clause);
                 } else { // If clause does not exist
-                    this.messageText += template.props.word.word;
+                    this.messageText += template.props.word.word + " ";
                 }
-                buttons.push(template);
             } else if (clause) { // If clause exists
-                this.messageText += `[template] ${clause.props.word.word}`;
+                this.messageText += `[template] ${clause.props.word.word} `;
                 buttons.push(clause);
-            } else {
-                this.messageText += "[template]";
             }
         };
 
@@ -65,9 +61,11 @@ export default class Message {
             // Add the first part of the message
             addTemplateAndClause(this.template1, this.clause1);
             // Add the conjunction
-            this.messageText += ` ${this.conjunction ? this.conjunction.props.word.word : "[conjunction]"} `;
             if (this.conjunction) {
+                this.messageText += this.conjunction.props.word.word + " ";
                 buttons.push(this.conjunction);
+            } else if (this.template2 || this.clause2) {
+                this.messageText += "[conjunction] ";
             }
             // Add the second part of the message
             addTemplateAndClause(this.template2, this.clause2);
@@ -84,9 +82,6 @@ export default class Message {
         if (this.onUpdate) {
             this.onUpdate();
         }
-
-        console.log("Updated message:", this.messageText);
-        console.log("Updated buttons:", this.wordButtons);
     }
 
     // Function to handle click events on buttons
@@ -137,7 +132,7 @@ export default class Message {
 
     // Remove a word from the message
     remove(button: Button): boolean {
-        console.log(`Removing word: ${button.props.word.word.toString})`);
+        console.log(`Removing word: ${button.props.word.word}`);
 
         switch (button) {
             case this.template1:

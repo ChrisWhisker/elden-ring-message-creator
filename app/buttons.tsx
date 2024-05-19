@@ -13,9 +13,6 @@ export class Button extends React.Component<{ word: Word }> {
 
     handleMessageAdd = () => {
         let copy: Button = new Button(this.props);
-        const word = copy.props.word;
-        console.log("Adding word:", word.word);
-        
         copy.inMessage = true;
         const added = Message.getInstance().add(copy);
         if (added) {
@@ -24,9 +21,6 @@ export class Button extends React.Component<{ word: Word }> {
     };
 
     handleMessageRemove = () => {
-        const word = this.props.word;
-        console.log("Removing word:", word.word);
-        
         const removed = Message.getInstance().remove(this);
         if (removed) {
             Filter.refilter();
