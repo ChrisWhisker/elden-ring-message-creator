@@ -1,7 +1,7 @@
 import Word from './word';
 import Message from './message';
 import { wordCategories } from './wordCategories';
-import ButtonRenderer from './buttons';
+import { ButtonRenderer } from './buttons';
 
 export default class Filter {
     static query = "";

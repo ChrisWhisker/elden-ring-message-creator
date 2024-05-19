@@ -5,10 +5,10 @@ import Filter from './filter';
 import Word from "./word";
 
 // Button component to render buttons
-class Button extends React.Component<{ word: Word }> {
+export class Button extends React.Component<{ word: Word }> {
     handleMessageAdd = () => {
         const word = this.props.word;
-        const added = Message.getInstance().add(word);
+        const added = Message.getInstance().add(this);
         if (!added) {
             console.error(`Failed to add '${word.word}'.`);
         } else {
@@ -63,7 +63,7 @@ class ButtonContainer extends React.Component<{ words: Word[] }> {
 }
 
 // ButtonRenderer class to render the buttons
-class ButtonRenderer {
+export class ButtonRenderer {
     static root: any; // Declare a static variable to store the root
 
     static renderButtons(words: Word[]): void {
@@ -79,5 +79,3 @@ class ButtonRenderer {
         }
     }
 }
-
-export default ButtonRenderer;

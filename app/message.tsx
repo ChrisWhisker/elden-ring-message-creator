@@ -1,5 +1,6 @@
 import Word from './word';
 import Filter from './filter';
+import { Button } from './buttons';
 
 // Define the type for the message
 export default class Message {
@@ -88,6 +89,8 @@ export default class Message {
         if (this.onUpdate) {
             this.onUpdate(this.wordButtons);
         }
+
+        console.log("Updated message:", this.messageText);
     }
 
     // Function to handle click events on buttons
@@ -98,7 +101,8 @@ export default class Message {
     }
 
     // Add a word to the message
-    add(word: Word): boolean {
+    add(button: Button): boolean {
+        const word: Word = button.props.word;
         console.log(`Adding word: ${word.word} (${word.category})`);
 
         switch (word.category) {
@@ -157,7 +161,7 @@ export default class Message {
             default:
                 console.error("Word is not in message");
                 return false;
-        }    
+        }
         this.update();
         return true;
     }
