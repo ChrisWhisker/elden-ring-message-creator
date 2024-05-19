@@ -76,13 +76,16 @@ export default function Home() {
             {/* Container for buttons */}
             <div className="w-full max-w-5xl overflow-auto sm:h-64 md:h-96 lg:h-128 xl:h-144">
                 {/* Container for buttons with vertical scroll */}
-                <div id="buttonContainer" className="flex justify-between flex-wrap">
+                <div id="wordBank" className="flex justify-between flex-wrap">
                     {/* Buttons will be dynamically added here */}
                 </div>
             </div>
             {/* Display the message text */}
-            <div id="messageContainer" className="body-text text-center w-full max-w-5xl border border-gray-300 p-4 m-4">
-                {messageButtons}
+            <div id="messageContainer" className="body-text text-center w-full max-w-5xl border border-gray-300 p-4 m-4 flex flex-col items-center">
+                <div>{"This is the text of your message"}</div>
+                <div className="flex justify-center w-full">
+                    {messageButtons}
+                </div>
             </div>
             {/* Spacer to create distance between elements */}
             <div className="h-4"></div>

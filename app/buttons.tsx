@@ -45,12 +45,12 @@ export class Button extends React.Component<{ word: Word }> {
     }
 }
 
-// ButtonContainer component to contain buttons
-class ButtonContainer extends React.Component<{ words: Word[] }> {
+// WordBank component to contain buttons
+class WordBank extends React.Component<{ words: Word[] }> {
     render() {
         const { words } = this.props;
         return (
-            <div id="buttonContainer">
+            <div id="wordBank">
                 {words.map((obj, index) => (
                     <Button
                         key={obj.toString()}
@@ -67,13 +67,13 @@ export class ButtonRenderer {
     static root: any; // Declare a static variable to store the root
 
     static renderButtons(words: Word[]): void {
-        const buttonContainer = document.getElementById("buttonContainer");
-        if (buttonContainer) {
+        const wordBank = document.getElementById("wordBank");
+        if (wordBank) {
             if (!ButtonRenderer.root) {
                 // If root doesn't exist, create it
-                ButtonRenderer.root = createRoot(buttonContainer);
+                ButtonRenderer.root = createRoot(wordBank);
             }
-            ButtonRenderer.root.render(<ButtonContainer words={words} />);
+            ButtonRenderer.root.render(<WordBank words={words} />);
         } else {
             console.error("Button container not found");
         }
