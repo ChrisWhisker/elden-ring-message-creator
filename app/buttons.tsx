@@ -4,32 +4,25 @@ import Message from "./message";
 import Filter from './filter';
 import Word from "./word";
 
-// Define the type for the props of the Button component
-interface ButtonProps {
-    title: string;
-    textContent: string;
-}
-
 // Button component to render buttons
-class Button extends React.Component<ButtonProps> {
+class Button extends React.Component<{ word: Word }> {
     handleMessageAdd = () => {
-        const { title, textContent } = this.props;
-        const word = new Word(title, textContent);
+        const word = this.props.word;
         const added = Message.getInstance().add(word);
         if (!added) {
-            console.error(`Failed to add '${title}'.`);
+            console.error(`Failed to add '${word.word}'.`);
         } else {
-            console.log(`'${title}' added successfully.`);
+            console.log(`'${word.word}' added successfully.`);
         }
         Filter.refilter();
     };
 
     render() {
-        const { title, textContent } = this.props;
+        const word = this.props.word;
         return (
             <button
                 onClick={this.handleMessageAdd}
-                title={`${title}: "${textContent}"`}
+                title={`${word.category}: "${word.word}"`}
                 style={{
                     backgroundColor: "#472f17",
                     padding: "10px 20px",
@@ -39,14 +32,14 @@ class Button extends React.Component<ButtonProps> {
                     lineHeight: "normal"
                 }}
             >
-                {textContent}
+                {word.word}
                 <span style={{
                     fontSize: "10px",
                     fontFamily: "body-text",
                     color: "grey",
                     display: "block",
                     marginTop: "0px"
-                }}>{title}</span>
+                }}>{word.category}</span>
             </button>
         );
     }
@@ -60,9 +53,8 @@ class ButtonContainer extends React.Component<{ words: Word[] }> {
             <div id="buttonContainer">
                 {words.map((obj, index) => (
                     <Button
-                        key={index}
-                        title={obj.category}
-                        textContent={obj.word}
+                        key={obj.toString()}
+                        word={obj}
                     />
                 ))}
             </div>
