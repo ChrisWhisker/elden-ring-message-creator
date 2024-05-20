@@ -4,9 +4,9 @@
 
 /* Define custom CSS variables for colors */
 :root {
-  --foreground-rgb: 0, 0, 0; /* Default foreground color */
-  --background-start-rgb: 214, 219, 220; /* Default background gradient start color */
-  --background-end-rgb: 255, 255, 255; /* Default background gradient end color */
+  --foreground-rgb: 201, 168, 96; /* Default foreground color */
+  --background-start-rgb: 7, 23, 24; /* Default background gradient start color */
+  --background-end-rgb: 18, 41, 40; /* Default background gradient end color */
 }
 
 /* Media query for dark mode */
