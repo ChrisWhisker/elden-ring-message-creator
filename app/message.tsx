@@ -41,14 +41,14 @@ export default class Message {
             if (template) { // If template exists
                 buttons.push(template);
                 if (clause) { // If clause exists
-                    const clauseIndex = template.props.word.word.indexOf("****");
-                    this.messageText += `${template.props.word.word.substring(0, clauseIndex)}${clause.props.word.word}${template.props.word.word.substring(clauseIndex + 4)} `;
+                    const regex = /\*\*\*\*/g;
+                    this.messageText += template.props.word.text.replace(regex, clause.props.word.text) + ' ';
                     buttons.push(clause);
                 } else { // If clause does not exist
-                    this.messageText += template.props.word.word + " ";
+                    this.messageText += template.props.word.text + " ";
                 }
             } else if (clause) { // If clause exists
-                this.messageText += `[template] ${clause.props.word.word} `;
+                this.messageText += `[template] ${clause.props.word.text} `;
                 buttons.push(clause);
             }
         };
@@ -62,7 +62,7 @@ export default class Message {
             addTemplateAndClause(this.template1, this.clause1);
             // Add the conjunction
             if (this.conjunction) {
-                this.messageText += this.conjunction.props.word.word + " ";
+                this.messageText += this.conjunction.props.word.text + " ";
                 buttons.push(this.conjunction);
             } else if (this.template2 || this.clause2) {
                 this.messageText += "[conjunction] ";
@@ -86,7 +86,7 @@ export default class Message {
 
     // Function to handle click events on buttons
     private handleClick(button: Button): void {
-        console.log("Clicked on word:", button.props.word.word);
+        console.log("Clicked on word:", button.props.word.text);
         this.remove(button);
         Filter.refilter(); // Redo the search to update the buttons
     }
@@ -94,7 +94,7 @@ export default class Message {
     // Add a word to the message
     add(button: Button): boolean {
         const word: Word = button.props.word;
-        console.log(`Adding word: ${word.word} (${word.category})`);
+        console.log(`Adding word: ${word.text} (${word.category})`);
         this.wordButtons.push(button);
 
         switch (word.category) {
@@ -132,7 +132,7 @@ export default class Message {
 
     // Remove a word from the message
     remove(button: Button): boolean {
-        console.log(`Removing word: ${button.props.word.word}`);
+        console.log(`Removing word: ${button.props.word.text}`);
 
         switch (button) {
             case this.template1:
