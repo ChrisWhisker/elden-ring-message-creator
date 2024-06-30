@@ -34,7 +34,7 @@ export class Button extends React.Component<{ word: Word }> {
             <button
                 key={word.toString()}
                 onClick={this.inMessage ? this.handleMessageRemove : this.handleMessageAdd}
-                title={`${word.category}: "${word.word}"`}
+                title={`${word.category}: "${word.text}"`}
                 style={{
                     backgroundColor: "#472f17",
                     padding: "10px 20px",
@@ -44,7 +44,7 @@ export class Button extends React.Component<{ word: Word }> {
                     lineHeight: "normal"
                 }}
             >
-                {word.word}
+                {word.text}
                 <span style={{
                     fontSize: "10px",
                     fontFamily: "body-text",

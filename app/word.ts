@@ -1,22 +1,22 @@
 // Define the type for the object containing word and category
 export default class Word {
     category: string;
-    word: string;
+    text: string;
     id: number;
 
     static nextId: number = 0;
 
-    constructor(category: string, word: string) {
-        // Initialize Word with category and word
+    constructor(category: string, text: string) {
+        // Initialize Word with category and text
         this.category = category;
-        this.word = word;
+        this.text = text;
         this.id = Word.nextId++;
     }
 
     // Override the toString method to return a unique value for each Word
     toString(): string {
-        // Concatenate category and word to form a unique identifier
-        return `${this.category}:${this.word}`;
+        // Concatenate category and text to form a unique identifier
+        return `${this.category}:${this.text}`;
     }
 
     // Compare objects based on their properties
