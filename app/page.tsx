@@ -55,7 +55,7 @@ export default function Home() {
 
     return (
         // Main container for the Home component
-        <main className="flex min-h-screen flex-col items-center p-6 lg:p-24 xl:p-24">
+        <main className="flex min-h-screen flex-col items-center p-4 lg:p-8 xl:p-12">
             {/* Title and description */}
             <h1 className="text-6xl title-text">Elden scribE</h1>
             <h2 className="text-2xl body-text">Easily create messages for Elden Ring</h2>
