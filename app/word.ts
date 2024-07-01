@@ -16,7 +16,7 @@ export default class Word {
     // Override the toString method to return a unique value for each Word
     toString(): string {
         // Concatenate category and text to form a unique identifier
-        return `${this.category}:${this.text}`;
+        return `${this.category}:${this.text}/${this.id}`;
     }
 
     // Compare objects based on their properties

@@ -39,6 +39,7 @@ export default class Message {
 
         const addTemplateAndClause = (template: Button | null, clause: Button | null) => {
             if (template) { // If template exists
+                template.id = Word.nextId++;;
                 buttons.push(template);
                 if (clause) { // If clause exists
                     const regex = /\*\*\*\*/g;
@@ -95,6 +96,12 @@ export default class Message {
     add(button: Button): boolean {
         const word: Word = button.props.word;
         console.log(`Adding word: ${word.text} (${word.category})`);
+
+        if (this.wordButtons.includes(button)) {
+            console.error("Word is already in message");
+            return false;
+        }
+        
         this.wordButtons.push(button);
 
         switch (word.category) {
