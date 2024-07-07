@@ -39,7 +39,6 @@ export default class Message {
 
         const addTemplateAndClause = (template: Button | null, clause: Button | null) => {
             if (template) { // If template exists
-                template.id = Word.nextId++;;
                 buttons.push(template);
                 if (clause) { // If clause exists
                     const regex = /\*\*\*\*/g;
