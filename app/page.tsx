@@ -4,57 +4,54 @@ import React, { useState, useEffect, useRef } from "react";
 import Filter from "./filter";
 import Message from './message';
 
-// Define the default Home component
-export default function Home() {
-    const inputRef = useRef<HTMLInputElement>(null); // Create a ref to hold a reference to the input element
+const Home = () => {
+    const inputRef = useRef<HTMLInputElement>(null); // Ref for the input element
 
-    // useEffect hook to run code when the component mounts
-    useEffect(() => {
-        // Call the search function with an empty string as the initial search value
-        Filter.filterWords();
-        Message.getInstance().update(); // Update the message text
-
-        // Focus the input element when the component mounts
-        if (inputRef.current) {
-            inputRef.current.focus();
-        }
-    }, []);
-
-    // State to hold the value of the input text
-    const [searchText, setSearchText] = useState(""); // Initialize searchText state with an empty string
-    // State to hold the message text
-    const [messageText, setMessageText] = useState("");
-    // State to hold the message buttons
+    // State for input text, message text, and message buttons
+    const [searchText, setSearchText] = useState<string>("");
+    const [messageText, setMessageText] = useState<string>("");
     const [renderedButtons, setRenderedButtons] = useState<JSX.Element[]>([]);
 
-    // Function to handle text change in the input box
+    // useEffect to run code when component mounts
+    useEffect(() => {
+        const handleMount = () => {
+            Filter.filterWords();
+            Message.getInstance().update(); // Update message text
+
+            if (inputRef.current) {
+                inputRef.current.focus(); // Focus input element
+            }
+        };
+
+        handleMount();
+
+        return () => {
+            Message.getInstance().onUpdate = null; // Cleanup
+        };
+    }, []);
+
+    // Function to handle text change in input box
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        // Update the state with the new text value
-        setSearchText(event.target.value);
-        // Call the search function with the new text as an argument
-        Filter.filterWords(event.target.value);
+        const { value } = event.target;
+        setSearchText(value);
+        Filter.filterWords(value); // Call filter function
     };
 
-    // useEffect hook to listen for changes in the Message instance
+    // useEffect to listen for changes in Message instance
     useEffect(() => {
-        // Define a callback function that matches the expected type
-        const handleUpdate: () => {} = () => {
+        const handleUpdate = () => {
             setMessageText(Message.getInstance().messageText);
             setRenderedButtons(Message.getInstance().renderedButtons);
-            return {}; // Return an empty object as required by the type
         };
 
-        // Set the callback function for message updates
         Message.getInstance().onUpdate = handleUpdate;
 
-        // Remove the callback function when the component unmounts
         return () => {
-            Message.getInstance().onUpdate = null;
+            Message.getInstance().onUpdate = null; // Cleanup
         };
-    }, []); // Empty dependency array ensures the effect runs only once when the component mounts
+    }, []);
 
     return (
-        // Main container for the Home component
         <main className="flex flex-col min-h-screen items-center p-4 lg:p-8 xl:p-12">
             <div id="Header" className="text-center">
                 <h1 className="text-6xl title-text">
@@ -64,32 +61,25 @@ export default function Home() {
                 </h1>
                 <h2 className="text-lg body-text">Easily create messages for Elden Ring</h2>
             </div>
-            {/* Spacer to fill extra vertical space */}
             <div className="h-4"></div>
             <div id="Filter label & input" className="z-10 w-full max-w-5xl items-center body-text text-sm lg:flex">
                 <div className="mr-4 body-text">Filter words:</div>
                 <input
                     id="inputBox"
-                    ref={inputRef} // Connect the ref to the input element
+                    ref={inputRef}
                     type="text"
                     className="border border-gray-300 px-3 py-1 rounded-md"
                     value={searchText}
-                    onChange={handleInputChange} // Call handleInputChange function when text changes
+                    onChange={handleInputChange}
                 />
             </div>
-            {/* Spacer to create distance between elements */}
             <div className="h-4"></div>
-            {/* Container for buttons */}
             <div className="w-full max-w-5xl flex-grow flex flex-col overflow-hidden">
-                {/* Container for buttons with vertical scroll */}
                 <div id="wordBank" className="flex justify-between flex-wrap flex-grow overflow-auto" style={{ maxHeight: 'calc(100vh - 320px)' }}>
-                    {/* Buttons will be dynamically added here */}
+                    {/* Placeholder for dynamically added buttons */}
                 </div>
             </div>
-            {/* Display the message text and buttons */}
-            <div id="messageContainer"
-                className="body-text text-center w-full max-w-5xl p-4 m-4 flex flex-col items-center"
-                style={{ borderColor: '#dfaf37', borderWidth: '1px', borderStyle: 'solid' }}>
+            <div id="messageContainer" className="body-text text-center w-full max-w-5xl p-4 m-4 flex flex-col items-center" style={{ borderColor: '#dfaf37', borderWidth: '1px', borderStyle: 'solid' }}>
                 <div>
                     {messageText}
                 </div>
@@ -97,9 +87,7 @@ export default function Home() {
                     {renderedButtons}
                 </div>
             </div>
-            {/* Footer */}
             <div className="body-text mt-auto text-center" style={{ color: "grey" }}>
-                {/* Footer links */}
                 Created by Chris Worcester |{" "}
                 <u>
                     <a href="https://www.linkedin.com/in/chrisworcester/" target="_blank" rel="noopener noreferrer">
@@ -113,6 +101,8 @@ export default function Home() {
                     </a>
                 </u>
             </div>
-        </main> // End of main container
+        </main>
     );
-}
+};
+
+export default Home;
