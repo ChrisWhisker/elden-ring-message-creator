@@ -76,7 +76,7 @@ const Home = () => {
             </div>
             <div className="h-4"></div>
             <div className="w-full max-w-5xl flex-grow flex flex-col overflow-hidden">
-                <div id="wordBank" className="flex justify-between flex-wrap flex-grow overflow-auto" style={{ maxHeight: 'calc(100vh - 400px)' }}>
+                <div id="wordBank" className="flex justify-between flex-wrap flex-grow overflow-auto" style={{ maxHeight: 'calc(100vh - 275px)' }}>
                     {/* Placeholder for dynamically added buttons */}
                 </div>
             </div>
@@ -88,7 +88,7 @@ const Home = () => {
                     {renderedButtons}
                 </div>
             </div>
-            <div className="body-text mt-auto text-center" style={{ color: "grey" }}>
+            <div className="body-text mt-auto text-center" style={{ color: "grey", fontSize: '0.8rem' }}>
                 Created by Chris Worcester |{" "}
                 <u>
                     <a href="https://www.linkedin.com/in/chrisworcester/" target="_blank" rel="noopener noreferrer">
@@ -101,6 +101,7 @@ const Home = () => {
                         Github
                     </a>
                 </u>
+                <br />© 2024 Chris Worcester. All Rights Reserved.
             </div>
         </main>
     );
