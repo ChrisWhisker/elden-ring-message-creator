@@ -56,11 +56,16 @@ export default function Home() {
     return (
         // Main container for the Home component
         <main className="flex flex-col min-h-screen items-center p-4 lg:p-8 xl:p-12">
-            <div id="Header">
-                <h1 className="text-6xl title-text">Elden scribE</h1>
-                <h2 className="text-2xl body-text">Easily create messages for Elden Ring</h2>
+            <div id="Header" className="text-center">
+                <h1 className="text-6xl title-text">
+                    <span style={{ fontSize: '3.33rem' }}>E</span>
+                    <span style={{ fontSize: '3rem' }}>lden scrib</span>
+                    <span style={{ fontSize: '3.33rem' }}>E</span>
+                </h1>
+                <h2 className="text-lg body-text">Easily create messages for Elden Ring</h2>
             </div>
-            {/* Spacer to fill extra vertical space */} <div className="h-4"></div>
+            {/* Spacer to fill extra vertical space */}
+            <div className="h-4"></div>
             <div id="Filter label & input" className="z-10 w-full max-w-5xl items-center body-text text-sm lg:flex">
                 <div className="mr-4 body-text">Filter words:</div>
                 <input
@@ -77,7 +82,7 @@ export default function Home() {
             {/* Container for buttons */}
             <div className="w-full max-w-5xl flex-grow flex flex-col overflow-hidden">
                 {/* Container for buttons with vertical scroll */}
-                <div id="wordBank" className="flex justify-between flex-wrap flex-grow overflow-auto" style={{ maxHeight: 'calc(100vh - 310px)' }}>
+                <div id="wordBank" className="flex justify-between flex-wrap flex-grow overflow-auto" style={{ maxHeight: 'calc(100vh - 320px)' }}>
                     {/* Buttons will be dynamically added here */}
                 </div>
             </div>
@@ -93,7 +98,7 @@ export default function Home() {
                 </div>
             </div>
             {/* Footer */}
-            <div className="body-text mt-auto" style={{ color: "grey" }}>
+            <div className="body-text mt-auto text-center" style={{ color: "grey" }}>
                 {/* Footer links */}
                 Created by Chris Worcester |{" "}
                 <u>
