@@ -64,23 +64,26 @@ const Home = () => {
             </div>
             <div className="h-4"></div>
             <div id="Filter label & input" className="z-10 w-full max-w-5xl items-center body-text text-sm lg:flex">
-                <div className="mr-4 body-text">Filter words:</div>
+                <div className="mr-4 body-text text-gray-400">Filter words:</div>
                 <input
                     id="inputBox"
                     ref={inputRef}
                     type="text"
-                    className="border border-gray-300 px-3 py-1 rounded-md"
+                    className="border border-gray-700 px-3 py-1 rounded-md bg-gray-800 text-white placeholder-gray-400 focus:outline-none"
                     value={searchText}
                     onChange={handleInputChange}
                 />
             </div>
             <div className="h-4"></div>
             <div className="w-full max-w-5xl flex-grow flex flex-col overflow-hidden">
-                <div id="wordBank" className="flex justify-between flex-wrap flex-grow overflow-auto"
+                <div id="wordBank"
+                    className="flex justify-between flex-wrap flex-grow overflow-auto"
                     style={{
                         maxHeight: 'calc(100vh - 275px)',
                         borderRadius: 5,
-                        backgroundColor: 'rgba(47,47,40, .5)'
+                        backgroundColor: 'rgba(25, 25, 25, .5)',
+                        scrollbarWidth: 'thin',
+                        scrollbarColor: '#d4af37 rgba(0, 0, 0, 0.5)'
                     }}>
                     {/* Placeholder for dynamically added buttons */}
                 </div>
