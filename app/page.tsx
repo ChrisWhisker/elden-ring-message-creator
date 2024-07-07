@@ -55,16 +55,14 @@ export default function Home() {
 
     return (
         // Main container for the Home component
-        <main className="flex min-h-screen flex-col items-center p-4 lg:p-8 xl:p-12">
-            {/* Title and description */}
-            <h1 className="text-6xl title-text">Elden scribE</h1>
-            <h2 className="text-2xl body-text">Easily create messages for Elden Ring</h2>
-            {/* Spacer to fill extra vertical space */}
-            <div className="flex-grow"></div>
-            {/* Container for filter label and input box */}
-            <div className="z-10 w-full max-w-5xl items-center body-text text-sm lg:flex">
+        <main className="flex flex-col min-h-screen items-center p-4 lg:p-8 xl:p-12">
+            <div id="Header">
+                <h1 className="text-6xl title-text">Elden scribE</h1>
+                <h2 className="text-2xl body-text">Easily create messages for Elden Ring</h2>
+            </div>
+            {/* Spacer to fill extra vertical space */} <div className="h-4"></div>
+            <div id="Filter label & input" className="z-10 w-full max-w-5xl items-center body-text text-sm lg:flex">
                 <div className="mr-4 body-text">Filter words:</div>
-                {/* Input text box with onChange event handler */}
                 <input
                     id="inputBox"
                     ref={inputRef} // Connect the ref to the input element
@@ -77,9 +75,9 @@ export default function Home() {
             {/* Spacer to create distance between elements */}
             <div className="h-4"></div>
             {/* Container for buttons */}
-            <div className="w-full max-w-5xl overflow-auto sm:h-64 md:h-96 lg:h-128 xl:h-144">
+            <div className="w-full max-w-5xl flex-grow flex flex-col overflow-hidden">
                 {/* Container for buttons with vertical scroll */}
-                <div id="wordBank" className="flex justify-between flex-wrap">
+                <div id="wordBank" className="flex justify-between flex-wrap flex-grow overflow-auto" style={{ maxHeight: 'calc(100vh - 310px)' }}>
                     {/* Buttons will be dynamically added here */}
                 </div>
             </div>
@@ -94,10 +92,8 @@ export default function Home() {
                     {renderedButtons}
                 </div>
             </div>
-            {/* Spacer to create distance between elements */}
-            <div className="h-4"></div>
             {/* Footer */}
-            <div className="body-text" style={{ color: "grey" }}>
+            <div className="body-text mt-auto" style={{ color: "grey" }}>
                 {/* Footer links */}
                 Created by Chris Worcester |{" "}
                 <u>
