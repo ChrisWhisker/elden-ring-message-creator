@@ -76,11 +76,22 @@ const Home = () => {
             </div>
             <div className="h-4"></div>
             <div className="w-full max-w-5xl flex-grow flex flex-col overflow-hidden">
-                <div id="wordBank" className="flex justify-between flex-wrap flex-grow overflow-auto" style={{ maxHeight: 'calc(100vh - 275px)', borderRadius:5, backgroundColor: 'rgba(47,47,40, .5)' }}>
+                <div id="wordBank" className="flex justify-between flex-wrap flex-grow overflow-auto"
+                    style={{
+                        maxHeight: 'calc(100vh - 275px)',
+                        borderRadius: 5,
+                        backgroundColor: 'rgba(47,47,40, .5)'
+                    }}>
                     {/* Placeholder for dynamically added buttons */}
                 </div>
             </div>
-            <div id="messageContainer" className="body-text text-center w-full max-w-5xl p-4 m-4 flex flex-col items-center" style={{ borderColor: '#dfaf37', borderWidth: '1px', borderStyle: 'solid' }}>
+            <div id="messageContainer"
+                className="body-text text-center w-full max-w-5xl p-4 m-4 flex flex-col items-center"
+                style={{
+                    borderColor: '#dfaf37',
+                    borderWidth: '1px',
+                    borderStyle: 'solid'
+                }}>
                 <div>
                     {messageText}
                 </div>
