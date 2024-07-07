@@ -45,6 +45,7 @@ const Home = () => {
         };
 
         Message.getInstance().onUpdate = handleUpdate;
+        Message.getInstance().update();
 
         return () => {
             Message.getInstance().onUpdate = null; // Cleanup

@@ -1,8 +1,8 @@
+// Define the type for the message
 import Word from './word';
 import Filter from './filter';
 import { Button } from './buttons';
 
-// Define the type for the message
 export default class Message {
     // Words that make up a message
     template1: Button | null = null;
@@ -78,10 +78,15 @@ export default class Message {
             this.renderedButtons.push(button.render());
         }
 
-        // Call the onUpdate callback if it's set
-        if (this.onUpdate) {
-            this.onUpdate();
+        // Set onUpdate callback if not already set, then call it
+        if (!this.onUpdate) {
+            console.log("Setting onUpdate callback");
+            this.onUpdate = () => {}; // Replace with your desired behavior if not set
         }
+
+        // Call the onUpdate callback
+        console.log("Calling onUpdate callback");
+        this.onUpdate();
     }
 
     // Function to handle click events on buttons
