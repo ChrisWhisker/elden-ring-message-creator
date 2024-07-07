@@ -1,4 +1,5 @@
-// Word categories object
+// Original order:
+/*
 const wordCategories: any = {
     "Templates":
         [
@@ -108,6 +109,111 @@ const wordCategories: any = {
         [
             "and then", "or", "but", "therefore", "in short", "except", "by the way", "so to speak",
             "all the more", ","
+        ]
+};
+*/
+
+// Alphabetical order:
+const wordCategories: any = {
+    "Templates":
+        [
+            "Ahh, ****...", "Be wary of ****", "Behold, ****!", "Could this be a ****?", "Didn't expect ****...",
+            "First off, ****", "If only I had a ****...", "Let there be ****", "Likely ****", "No **** ahead",
+            "Offer ****", "Praise the ****!", "Seek ****", "Still no ****...", "Time for ****", "Try ****",
+            "Visions of ****...", "Why is it always ****?", "****", "****!", "****?", "****...", "**** ahead",
+            "**** required ahead"
+        ],
+    "Enemies":
+        [
+            "archer", "beast", "bird", "boss", "bug", "cavalier", "crab", "decoy", "demi-human", "dog", "dragon",
+            "enemy", "giant", "group", "horse", "ill-omened creature", "knight", "mage", "monarch", "monstrosity",
+            "monster", "octopus", "ordnance", "outsider", "pack", "prawn", "rat", "raptor", "skeleton", "snake",
+            "sniper", "soldier", "sentry", "scarab", "slug", "strong foe", "undead", "weak foe", "wolf"
+        ],
+    "People":
+        [
+            "angel", "aristocrat", "champion", "cleric", "dastard", "fat coinpurse", "friend", "giant sort", "god",
+            "good sort", "hero", "invisible sort", "knight", "laggardly sort", "liar", "lovable sort", "lover", "lord",
+            "master", "merchant", "monarch", "nimble sort", "noble", "old codger", "old dear", "pauper",
+            "pathetic sort", "plump sort", "pair", "sage", "samurai", "skinny sort", "sinner", "sorcerer", "sort",
+            "strange sort", "swordfighter", "sorcerer", "teacher", "thief", "traitor", "trio", "Tarnished",
+            "unfathomable sort", "warrior", "wicked sort"
+        ],
+    "Things":
+        [
+            "armor", "armament", "Birdseye Telescope", "bloodstain", "bow", "butterfly", "coffin", "corpse", "crystal",
+            "door", "dung", "Elden Ring", "Erdtree", "flower", "fruit", "grace", "grass", "incantation", "item", "key",
+            "ladder", "lift", "map", "material", "message", "mushroom", "necessary item", "precious item",
+            "projectile weapon", "seed", "sending gate", "shield", "skill", "sorcery", "something",
+            "something incredible", "spiritspring", "stone astrolabe", "talisman", "tear", "trap", "tree",
+            "treasure chest"
+        ],
+    "Battle Tactics":
+        [
+            "brief respite", "circling around", "close-quarters battle", "confusion", "dashing through",
+            "defeating one-by-one", "jumping off", "luring out", "mimicry", "pursuit", "ranged battle", "rushing in",
+            "stealth", "taking on all at once"
+        ],
+
+    "Actions":
+        [
+            "attacking", "backstepping", "blocking", "critical hit", "gesturing", "healing", "incantation",
+            "item crafting", "jump attack", "parrying", "running", "running attack", "rolling", "skill", "sorcery",
+            "summoning", "throwing", "two-handing", "target lock"
+        ],
+
+    "Situations":
+        [
+            "ambush", "battle", "beating to a pulp", "bright spot", "climbable spot", "crowd", "cramped area", "danger",
+            "dark spot", "dead end", "defensible spot", "explosion", "evening", "gorgeous view", "high spot",
+            "hiding place", "mist", "morning", "noon", "open area", "overcast", "patrolling", "pincer attack",
+            "procession", "rain", "reinforcements", "ritual", "secret passage", "shortcut", "sniping spot", "snow",
+            "storm", "surprise attack", "unnoticed", "valley"
+        ],
+
+    "Places":
+        [
+            "bog", "bridge", "camp site", "castle", "cave", "cellar", "cemetery", "church", "city", "evergaol",
+            "forest", "fort", "great tree", "high road", "hole", "house", "lake", "mountain", "nest", "river", "ruins",
+            "surface", "tower", "tunnel", "underground", "underground tomb", "valley", "waterside"
+        ],
+
+    "Directions":
+        [
+            "ahead", "behind", "center", "down", "east", "edge", "left", "north", "right", "south", "up", "west"
+        ],
+
+    "Body Parts":
+        [
+            "arms", "back", "core", "fingers", "head", "legs", "rump", "stomach", "tail"
+        ],
+
+    "Affinities":
+        [
+            "blood loss", "death", "fire", "frost", "holy", "magic", "madness", "physical", "piercing", "poison",
+            "scarlet rot", "sleep", "slashing", "standard", "striking", "toxic", "lightning"
+        ],
+
+    "Concepts":
+        [
+            "abundance", "bad luck", "betrayal", "bliss", "bravery", "calmness", "clue", "comfort", "confidence",
+            "destruction", "depths", "distracted", "fear", "futility", "good fortune", "good luck", "hope", "injustice",
+            "introspection", "joy", "life", "love", "misfortune", "on the brink", "pickle", "regret", "revenge",
+            "research", "ruin", "sadness", "sacrifice", "secret", "tears", "victory", "vigilance", "wrath"
+        ],
+
+    "Phrases":
+        [
+            "I can't take this...", "I did it!", "I don't believe it...", "I don't think", "I want to go home...",
+            "I've failed...", "are you ready?", "beautiful...", "do it!", "don't give up", "don't you dare!",
+            "give up", "here again...", "here!", "help me...", "it's like a dream...", "just getting started",
+            "keep moving", "look carefully", "not here!", "seems familiar...", "so lonely...", "stay calm",
+            "think carefully", "too high up", "turn back", "well done", "you don't have the right"
+        ],
+
+    "Conjunctions":
+        [
+            "all the more", "and then", "by the way", "except", "in short", "or", "so to speak", "therefore", ","
         ]
 };
 
