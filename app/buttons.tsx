@@ -36,12 +36,16 @@ export class Button extends React.Component<{ word: Word }> {
                 onClick={this.inMessage ? this.handleMessageRemove : this.handleMessageAdd}
                 title={`${word.category}: "${word.text}"`}
                 style={{
-                    backgroundColor: "#472f17",
-                    padding: "10px 20px",
-                    margin: "5px",
+                    background: "linear-gradient(to right, transparent, #2c2a23, transparent)", // Gradient background
+                    padding: "5px 25px",
+                    margin: "7px",
                     fontFamily: "body-text",
-                    borderRadius: "9999px",
-                    lineHeight: "normal"
+                    borderRadius: "0px",
+                    lineHeight: "normal",
+                    border: "none", // Remove border if necessary
+                    color: "white", // Text color
+                    position: "relative", // Ensure proper stacking
+                    overflow: "hidden", // Hide overflow if needed
                 }}
             >
                 {word.text}
@@ -55,6 +59,7 @@ export class Button extends React.Component<{ word: Word }> {
             </button>
         );
     }
+    
 }
 
 // WordBank component to contain buttons

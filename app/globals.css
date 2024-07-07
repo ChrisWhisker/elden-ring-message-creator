@@ -5,16 +5,16 @@
 /* Define custom CSS variables for colors */
 :root {
   --foreground-rgb: 201, 168, 96; /* Default foreground color */
-  --background-start-rgb: 7, 23, 24; /* Default background gradient start color */
-  --background-end-rgb: 18, 41, 40; /* Default background gradient end color */
+  --background-start-rgb: 17,16,15; /* Default background gradient start color */
+  --background-end-rgb: 91,93,78; /* Default background gradient end color */
 }
 
 /* Media query for dark mode */
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 201, 168, 96; /* Dark mode foreground color */
-    --background-start-rgb: 7, 23, 24; /* Dark mode background gradient start color */
-    --background-end-rgb: 18, 41, 40; /* Dark mode background gradient end color */
+    --background-start-rgb: 17,16,15; /* Dark mode background gradient start color */
+    --background-end-rgb: 91,93,78; /* Dark mode background gradient end color */
   }
 }
 
