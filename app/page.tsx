@@ -69,9 +69,10 @@ const Home = () => {
                     id="inputBox"
                     ref={inputRef}
                     type="text"
-                    className="border border-gray-700 px-3 py-1 rounded-md bg-gray-800 text-white placeholder-gray-400 focus:outline-none"
+                    className="inputBox"
                     value={searchText}
                     onChange={handleInputChange}
+                    placeholder="Type to filter..."
                 />
             </div>
             <div className="h-4"></div>

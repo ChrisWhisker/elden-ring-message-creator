@@ -5,16 +5,16 @@
 /* Define custom CSS variables for colors */
 :root {
   --foreground-rgb: 201, 168, 96; /* Default foreground color */
-  --background-start-rgb: 17,16,15; /* Default background gradient start color */
-  --background-end-rgb: 91,93,78; /* Default background gradient end color */
+  --background-start-rgb: 17, 16, 15; /* Default background gradient start color */
+  --background-end-rgb: 91, 93, 78; /* Default background gradient end color */
 }
 
 /* Media query for dark mode */
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 201, 168, 96; /* Dark mode foreground color */
-    --background-start-rgb: 17,16,15; /* Dark mode background gradient start color */
-    --background-end-rgb: 91,93,78; /* Dark mode background gradient end color */
+    --background-start-rgb: 17, 16, 15; /* Dark mode background gradient start color */
+    --background-end-rgb: 91, 93, 78; /* Dark mode background gradient end color */
   }
 }
 
@@ -52,10 +52,26 @@ body {
 /* Title text styles */
 .title-text {
   font-family: 'Mantinia', sans-serif; /* Set font family */
-  color: '#dfaf37'; /* Title text color */
+  color: #d4af37; /* Adjusted to match Elden Ring gold */
 }
 
 /* Body text styles */
 .body-text {
   font-family: 'Garamond', sans-serif; /* Set font family */
+  color: white; /* Default text color */
+}
+
+/* Input styles */
+.inputBox {
+  border: 1px solid #d4af37; /* Adjusted border color */
+  background-color: #1d1d1d; /* Dark background color */
+  color: white; /* Text color */
+  padding: 0.75rem; /* Padding */
+  border-radius: 0.25rem; /* Rounded corners */
+  transition: border-color 0.3s ease; /* Smooth border transition */
+}
+
+.inputBox:focus {
+  outline: none; /* Remove outline on focus */
+  border-color: #dfaf37; /* Adjusted focus border color */
 }
