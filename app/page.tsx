@@ -5,39 +5,35 @@ import Filter from "./filter";
 import Message from './message';
 
 const Home = () => {
-    const inputRef = useRef<HTMLInputElement>(null); // Ref for the input element
+    const inputRef = useRef<HTMLInputElement>(null);
 
-    // State for input text, message text, and message buttons
     const [searchText, setSearchText] = useState<string>("");
     const [messageText, setMessageText] = useState<string>("");
     const [renderedButtons, setRenderedButtons] = useState<JSX.Element[]>([]);
 
-    // useEffect to run code when component mounts
     useEffect(() => {
         const handleMount = () => {
             Filter.filterWords();
-            Message.getInstance().update(); // Update message text
+            Message.getInstance().update();
 
             if (inputRef.current) {
-                inputRef.current.focus(); // Focus input element
+                inputRef.current.focus();
             }
         };
 
         handleMount();
 
         return () => {
-            Message.getInstance().onUpdate = null; // Cleanup
+            Message.getInstance().onUpdate = null;
         };
     }, []);
 
-    // Function to handle text change in input box
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { value } = event.target;
         setSearchText(value);
-        Filter.filterWords(value); // Call filter function
+        Filter.filterWords(value);
     };
 
-    // useEffect to listen for changes in Message instance
     useEffect(() => {
         const handleUpdate = () => {
             setMessageText(Message.getInstance().messageText);
@@ -48,7 +44,7 @@ const Home = () => {
         Message.getInstance().update();
 
         return () => {
-            Message.getInstance().onUpdate = null; // Cleanup
+            Message.getInstance().onUpdate = null;
         };
     }, []);
 
@@ -62,17 +58,16 @@ const Home = () => {
                 </h1>
                 <h2 className="text-lg body-text">Easily create messages for Elden Ring</h2>
             </div>
-            <div className="h-4"></div>
-            <div id="Filter label & input" className="z-10 w-full max-w-5xl items-center body-text text-sm lg:flex">
-                <div className="mr-4 body-text text-gray-400">Filter words:</div>
+            <div className="h-20"></div>
+            <div id="Filter input" className="z-10 w-full max-w-5xl flex items-center justify-center body-text text-sm lg:text-base">
                 <input
                     id="inputBox"
                     ref={inputRef}
                     type="text"
-                    className="inputBox"
+                    className="inputBox w-full lg:w-96 px-4 py-2 rounded border border-gray-400 focus:border-yellow-400 focus:outline-none"
                     value={searchText}
                     onChange={handleInputChange}
-                    placeholder="Type to filter..."
+                    placeholder="Filter words"
                 />
             </div>
             <div className="h-4"></div>
@@ -80,7 +75,7 @@ const Home = () => {
                 <div id="wordBank"
                     className="flex justify-between flex-wrap flex-grow overflow-auto"
                     style={{
-                        maxHeight: 'calc(100vh - 275px)',
+                        maxHeight: 'calc(100vh - 400px)',
                         borderRadius: 5,
                         backgroundColor: 'rgba(25, 25, 25, .5)',
                         scrollbarWidth: 'thin',
