@@ -75,7 +75,7 @@ const Home = () => {
             </div>
             <div className="h-4"></div>
             <div className="w-full max-w-5xl flex-grow flex flex-col overflow-hidden">
-                <div id="wordBank" className="flex justify-between flex-wrap flex-grow overflow-auto" style={{ maxHeight: 'calc(100vh - 320px)' }}>
+                <div id="wordBank" className="flex justify-between flex-wrap flex-grow overflow-auto" style={{ maxHeight: 'calc(100vh - 400px)' }}>
                     {/* Placeholder for dynamically added buttons */}
                 </div>
             </div>
