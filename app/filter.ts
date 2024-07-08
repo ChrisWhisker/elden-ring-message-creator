@@ -3,6 +3,11 @@ import Message from './message';
 import wordCategories from './wordCategories';
 import { ButtonRenderer } from './buttons';
 
+interface WordCategory {
+    word: string;
+    synonyms: string[];
+}
+
 export default class Filter {
     // Search query
     static query: string = "";
@@ -28,9 +33,9 @@ export default class Filter {
     };
 
     // Add a single word to the results array
-    private static addWord(category: string, word: string): void {
+    private static addWord(category: string, word: WordCategory): void {
         if (Filter.canAddWord(category)) {
-            const wordObj = new Word(category, word);
+            const wordObj = new Word(category, word.word);
             // Check for duplicates before adding
             if (!wordObj.isInArray(Filter.results)) {
                 Filter.results.push(wordObj);
@@ -66,8 +71,15 @@ export default class Filter {
             for (const category in wordCategories) {
                 for (const word of wordCategories[category]) {
                     // Check if any query word matches the current word
-                    if (queryWords.some(queryWord => word.toLowerCase().includes(queryWord))) {
+                    if (queryWords.some(queryWord => word.word.toLowerCase().includes(queryWord))) {
                         Filter.addWord(category, word);
+                    }
+
+                    // Check if any query word matches any of the word's synonyms
+                    for (const synonym of word.synonyms) {
+                        if (queryWords.some(queryWord => synonym.toLowerCase().includes(queryWord))) {
+                            Filter.addWord(category, word);
+                        }
                     }
                 }
                 // Add all words from the category if the category name matches the query

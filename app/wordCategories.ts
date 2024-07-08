@@ -1,220 +1,375 @@
-// Original order:
-/*
 const wordCategories: any = {
-    "Templates":
-        [
-            "**** ahead", "No **** ahead", "**** required ahead", "Be wary of ****", "Try ****",
-            "Likely ****", "First off, ****", "Seek ****", "Still no ****...",
-            "Why is it always ****?", "If only I had a ****...", "Didn't expect ****...",
-            "Visions of ****...", "Could this be a ****?", "Time for ****", "****, O ****",
-            "Behold, ****!", "Offer ****", "Praise the ****!", "Let there be ****", "Ahh, ****...",
-            "****", "****!", "****?", "****..."
-        ],
-    "Enemies":
-        [
-            "enemy", "weak foe", "strong foe", "monster", "dragon", "boss", "sentry", "group",
-            "pack", "decoy", "undead", "soldier", "knight", "cavalier", "archer", "sniper", "mage",
-            "ordnance", "monarch", "lord", "demi-human", "outsider", "giant", "horse", "dog",
-            "wolf", "rat", "beast", "bird", "raptor", "snake", "crab", "prawn", "octopus", "bug",
-            "scarab", "slug", "wraith", "skeleton", "monstrosity", "ill-omened creature"
-        ],
-    "People":
-        [
-            "Tarnished", "warrior", "swordfighter", "knight", "samurai", "sorcerer", "cleric",
-            "sage", "merchant", "teacher", "master", "friend", "lover", "old dear", "old codger",
-            "angel", "fat coinpurse", "pauper", "good sort", "wicked sort", "plump sort",
-            "skinny sort", "lovable sort", "pathetic sort", "strange sort", "nimble sort",
-            "laggardly sort", "invisible sort", "unfathomable sort", "giant sort", "sinner",
-            "thief", "liar", "dastard", "traitor", "pair", "trio", "noble", "aristocrat", "hero",
-            "champion", "monarch", "lord", "god"
-        ],
-    "Things":
-        [
-            "item", "necessary item", "precious item", "something", "something incredible",
-            "treasure chest", "corpse", "coffin", "trap", "armament", "shield", "bow",
-            "projectile weapon", "armor", "talisman", "skill", "sorcery", "incantation",
-            "map", "material", "flower", "grass", "tree", "fruit", "seed", "mushroom", "tear",
-            "crystal", "butterfly", "bug", "dung", "grace", "door", "key", "ladder", "lever",
-            "lift", "spiritspring", "sending gate", "stone astrolabe", "Birdseye Telescope",
-            "message", "bloodstain", "Erdtree", "Elden Ring"
-        ],
-    "Battle Tactics":
-        [
-            "close-quarters battle", "ranged battle", "horseback battle", "luring out",
-            "defeating one-by-one", "taking on all at once", "rushing in", "stealth", "mimicry",
-            "confusion", "pursuit", "fleeing", "summoning", "circling around", "jumping off",
-            "dashing through", "brief respite"
-        ],
-    "Actions":
-        [
-            "attacking", "jump attack", "running attack", "critical hit", "two-handing", "blocking",
-            "parrying", "guard counter", "sorcery", "incantation", "skill", "summoning", "throwing",
-            "healing", "running", "rolling", "backstepping", "jumping", "crouching", "target lock",
-            "item crafting", "gesturing"
-        ],
-    "Situations":
-        [
-            "morning", "noon", "evening", "night", "clear sky", "overcast", "rain", "storm", "mist",
-            "snow", "patrolling", "procession", "crowd", "surprise attack", "ambush",
-            "pincer attack", "beating to a pulp", "battle", "reinforcements", "ritual", "explosion",
-            "high spot", "defensible spot", "climbable spot", "bright spot", "dark spot",
-            "open area", "cramped area", "hiding place", "sniping spot", "recon spot", "safety",
-            "danger", "gorgeous view", "detour", "hidden path", "secret passage", "shortcut",
-            "dead end", "looking away", "unnoticed", "out of stamina"
-        ],
-    "Places":
-        [
-            "high road", "checkpoint", "bridge", "castle", "fort", "city", "ruins", "church",
-            "tower", "camp site", "house", "cemetery", "underground tomb", "tunnel", "cave",
-            "evergaol", "great tree", "cellar", "surface", "underground", "forest", "river", "lake",
-            "bog", "mountain", "valley", "cliff", "waterside", "nest", "hole"
-        ],
-    "Directions":
-        [
-            "east", "west", "south", "north", "ahead", "behind", "left", "right", "center", "up",
-            "down", "edge"
-        ],
-    "Body Parts":
-        [
-            "head", "stomach", "back", "arms", "legs", "rump", "tail", "core", "fingers"
-        ],
-    "Affinities":
-        [
-            "physical", "standard", "striking", "slashing", "piercing", "fire", "lightning",
-            "magic", "holy", "poison", "toxic", "scarlet rot", "blood loss", "frost", "sleep",
-            "madness", "death"
-        ],
-    "Concepts":
-        [
-            "life", "Death", "light", "dark", "stars", "fire", "Order", "chaos", "joy", "wrath",
-            "suffering", "sadness", "comfort", "bliss", "misfortune", "good fortune", "bad luck",
-            "hope", "despair", "victory", "defeat", "research", "faith", "abundance", "rot",
-            "loyalty", "injustice", "secret", "opportunity", "pickle", "clue", "friendship", "love",
-            "bravery", "vigor", "fortitude", "confidence", "distracted", "unguarded",
-            "introspection", "regret", "resignation", "futility", "on the brink", "betrayal",
-            "revenge", "destruction", "recklessness", "calmness", "vigilance", "tranquility",
-            "sound", "tears", "sleep", "depths", "dregs", "fear", "sacrifice", "ruin"
-        ],
-    "Phrases":
-        [
-            "good luck", "look carefully", "listen carefully", "think carefully", "well done",
-            "I did it!", "I've failed...", "here!", "not here!", "don't you dare!", "do it!",
-            "I can't take this...", "don't think", "so lonely...", "here again...",
-            "just getting started", "stay calm", "keep moving", "turn back", "give up",
-            "don't give up", "help me...", "I don't believe it...", "too high up",
-            "I want to go home...", "it's like a dream...", "seems familiar...", "beautiful...",
-            "you don't have the right", "are you ready?"
-        ],
-    "Conjunctions":
-        [
-            "and then", "or", "but", "therefore", "in short", "except", "by the way", "so to speak",
-            "all the more", ","
-        ]
-};
-*/
-
-// Alphabetical order:
-const wordCategories: any = {
-    "Templates":
-        [
-            "Ahh, ****...", "Be wary of ****", "Behold, ****!", "Could this be a ****?", "Didn't expect ****...",
-            "First off, ****", "If only I had a ****...", "Let there be ****", "Likely ****", "No **** ahead",
-            "Offer ****", "Praise the ****!", "Seek ****", "Still no ****...", "Time for ****", "Try ****",
-            "Visions of ****...", "Why is it always ****?", "****", "****!", "****?", "****...", "**** ahead",
-            "**** required ahead"
-        ],
-    "Enemies":
-        [
-            "archer", "beast", "bird", "boss", "bug", "cavalier", "crab", "decoy", "demi-human", "dog", "dragon",
-            "enemy", "giant", "group", "horse", "ill-omened creature", "knight", "mage", "monarch", "monstrosity",
-            "monster", "octopus", "ordnance", "outsider", "pack", "prawn", "rat", "raptor", "skeleton", "snake",
-            "sniper", "soldier", "sentry", "scarab", "slug", "strong foe", "undead", "weak foe", "wolf"
-        ],
-    "People":
-        [
-            "angel", "aristocrat", "champion", "cleric", "dastard", "fat coinpurse", "friend", "giant sort", "god",
-            "good sort", "hero", "invisible sort", "knight", "laggardly sort", "liar", "lovable sort", "lover", "lord",
-            "master", "merchant", "monarch", "nimble sort", "noble", "old codger", "old dear", "pauper",
-            "pathetic sort", "plump sort", "pair", "sage", "samurai", "skinny sort", "sinner", "sorcerer", "sort",
-            "strange sort", "swordfighter", "sorcerer", "teacher", "thief", "traitor", "trio", "Tarnished",
-            "unfathomable sort", "warrior", "wicked sort"
-        ],
-    "Things":
-        [
-            "armor", "armament", "Birdseye Telescope", "bloodstain", "bow", "butterfly", "coffin", "corpse", "crystal",
-            "door", "dung", "Elden Ring", "Erdtree", "flower", "fruit", "grace", "grass", "incantation", "item", "key",
-            "ladder", "lift", "map", "material", "message", "mushroom", "necessary item", "precious item",
-            "projectile weapon", "seed", "sending gate", "shield", "skill", "sorcery", "something",
-            "something incredible", "spiritspring", "stone astrolabe", "talisman", "tear", "trap", "tree",
-            "treasure chest"
-        ],
-    "Battle Tactics":
-        [
-            "brief respite", "circling around", "close-quarters battle", "confusion", "dashing through",
-            "defeating one-by-one", "jumping off", "luring out", "mimicry", "pursuit", "ranged battle", "rushing in",
-            "stealth", "taking on all at once"
-        ],
-
-    "Actions":
-        [
-            "attacking", "backstepping", "blocking", "critical hit", "gesturing", "healing", "incantation",
-            "item crafting", "jump attack", "parrying", "running", "running attack", "rolling", "skill", "sorcery",
-            "summoning", "throwing", "two-handing", "target lock"
-        ],
-
-    "Situations":
-        [
-            "ambush", "battle", "beating to a pulp", "bright spot", "climbable spot", "crowd", "cramped area", "danger",
-            "dark spot", "dead end", "defensible spot", "explosion", "evening", "gorgeous view", "high spot",
-            "hiding place", "mist", "morning", "noon", "open area", "overcast", "patrolling", "pincer attack",
-            "procession", "rain", "reinforcements", "ritual", "secret passage", "shortcut", "sniping spot", "snow",
-            "storm", "surprise attack", "unnoticed", "valley"
-        ],
-
-    "Places":
-        [
-            "bog", "bridge", "camp site", "castle", "cave", "cellar", "cemetery", "church", "city", "evergaol",
-            "forest", "fort", "great tree", "high road", "hole", "house", "lake", "mountain", "nest", "river", "ruins",
-            "surface", "tower", "tunnel", "underground", "underground tomb", "valley", "waterside"
-        ],
-
-    "Directions":
-        [
-            "ahead", "behind", "center", "down", "east", "edge", "left", "north", "right", "south", "up", "west"
-        ],
-
-    "Body Parts":
-        [
-            "arms", "back", "core", "fingers", "head", "legs", "rump", "stomach", "tail"
-        ],
-
-    "Affinities":
-        [
-            "blood loss", "death", "fire", "frost", "holy", "magic", "madness", "physical", "piercing", "poison",
-            "scarlet rot", "sleep", "slashing", "standard", "striking", "toxic", "lightning"
-        ],
-
-    "Concepts":
-        [
-            "abundance", "bad luck", "betrayal", "bliss", "bravery", "calmness", "clue", "comfort", "confidence",
-            "destruction", "depths", "distracted", "fear", "futility", "good fortune", "good luck", "hope", "injustice",
-            "introspection", "joy", "life", "love", "misfortune", "on the brink", "pickle", "regret", "revenge",
-            "research", "ruin", "sadness", "sacrifice", "secret", "tears", "victory", "vigilance", "wrath"
-        ],
-
-    "Phrases":
-        [
-            "I can't take this...", "I did it!", "I don't believe it...", "I don't think", "I want to go home...",
-            "I've failed...", "are you ready?", "beautiful...", "do it!", "don't give up", "don't you dare!",
-            "give up", "here again...", "here!", "help me...", "it's like a dream...", "just getting started",
-            "keep moving", "look carefully", "not here!", "seems familiar...", "so lonely...", "stay calm",
-            "think carefully", "too high up", "turn back", "well done", "you don't have the right"
-        ],
-
-    "Conjunctions":
-        [
-            "all the more", "and then", "by the way", "except", "in short", "or", "so to speak", "therefore", ","
-        ]
+    "Templates": [
+        { word: "Ahh, ****...", synonyms: ["Ooh, ohh", "Aha, darn..."] },
+        { word: "Be wary of ****", synonyms: ["cautious", "careful", "watchful"] },
+        { word: "Behold, ****!", synonyms: ["look", "see", "observe"] },
+        { word: "Could this be a ****?", synonyms: ["Is this a ****?", "Might this be a ****?"] },
+        { word: "Didn't expect ****...", synonyms: ["Unexpected ****...", "Surprising ****..."] },
+        { word: "First off, ****", synonyms: ["To start with, ****", "Initially ****"] },
+        { word: "If only I had a ****...", synonyms: ["Wish I had a ****...", "Desire for a ****..."] },
+        { word: "Let there be ****", synonyms: ["Make way for ****", "Grant ****"] },
+        { word: "Likely ****", synonyms: ["Probably ****", "High chance of ****"] },
+        { word: "No **** ahead", synonyms: ["Nothing ahead", "No **** in sight"] },
+        { word: "Offer ****", synonyms: ["Provide ****", "Give ****"] },
+        { word: "Praise the ****!", synonyms: ["Hail the ****!", "Applaud the ****!"] },
+        { word: "Seek ****", synonyms: ["Search for ****", "Look for ****"] },
+        { word: "Still no ****...", synonyms: ["No **** yet...", "None ****..."] },
+        { word: "Time for ****", synonyms: ["It's **** time", "Now ****"] },
+        { word: "Try ****", synonyms: ["Attempt ****", "Give **** a shot"] },
+        { word: "Visions of ****...", synonyms: ["Images of ****...", "Thoughts of ****..."] },
+        { word: "Why is it always ****?", synonyms: ["Why always ****?", "Why **** again?"] },
+        { word: "****", synonyms: [] },
+        { word: "****!", synonyms: [] },
+        { word: "****?", synonyms: [] },
+        { word: "****...", synonyms: [] },
+        { word: "**** ahead", synonyms: ["Ahead ****", "**** coming up"] },
+        { word: "**** required ahead", synonyms: ["Need **** ahead", "**** needed ahead"] }
+    ],
+    "Enemies": [
+        { word: "archer", synonyms: ["bowman", "marksman", "ranger", "sagittarius"] },
+        { word: "beast", synonyms: ["creature", "animal", "monster", "brute", "critter"] },
+        { word: "bird", synonyms: ["avian", "fowl", "winged creature", "birdie"] },
+        { word: "boss", synonyms: ["leader", "chief", "overlord", "supervisor", "commander"] },
+        { word: "bug", synonyms: ["insect", "creepy-crawly", "pest", "vermin", "invertebrate"] },
+        { word: "cavalier", synonyms: ["knight", "horseman", "equestrian", "chevalier"] },
+        { word: "crab", synonyms: ["crustacean", "shellfish", "crabby", "crabmeat"] },
+        { word: "decoy", synonyms: ["bait", "lure", "enticement", "trap", "distraction"] },
+        { word: "demi-human", synonyms: ["half-human", "semi-human", "part-human", "humanoid"] },
+        { word: "dog", synonyms: ["canine", "pooch", "hound", "doggy", "pup"] },
+        { word: "dragon", synonyms: ["wyvern", "drake", "serpent", "fire-breather", "lizard"] },
+        { word: "enemy", synonyms: ["foe", "opponent", "adversary", "rival", "antagonist"] },
+        { word: "giant", synonyms: ["colossus", "titan", "goliath", "juggernaut", "behemoth"] },
+        { word: "group", synonyms: ["pack", "gang", "team", "bunch", "collection"] },
+        { word: "horse", synonyms: ["steed", "stallion", "mare", "pony", "equine"] },
+        { word: "ill-omened creature", synonyms: ["omen", "bad omen", "portent", "harbinger"] },
+        { word: "knight", synonyms: ["champion", "knightly", "paladin", "cavalier", "sir"] },
+        { word: "mage", synonyms: ["wizard", "sorcerer", "enchanter", "magician", "spellcaster"] },
+        { word: "monarch", synonyms: ["ruler", "king", "queen", "emperor", "sovereign"] },
+        { word: "monstrosity", synonyms: ["abomination", "freak", "horror", "mutant", "anomaly"] },
+        { word: "monster", synonyms: ["creature", "beast", "fiend", "leviathan", "creature"] },
+        { word: "octopus", synonyms: ["cephalopod", "squid", "tentacle", "mollusk", "pulpo"] },
+        { word: "ordnance", synonyms: ["weaponry", "arms", "munitions", "artillery", "cannon"] },
+        { word: "outsider", synonyms: ["stranger", "foreigner", "alien", "outsider", "visitor"] },
+        { word: "pack", synonyms: ["group", "pack", "herd", "flock", "crowd"] },
+        { word: "prawn", synonyms: ["crustacean", "shrimp", "prawn", "crab", "lobster"] },
+        { word: "rat", synonyms: ["rodent", "mouse", "vermin", "rat", "pest"] },
+        { word: "raptor", synonyms: ["bird of prey", "eagle", "hawk", "falcon", "raptor"] },
+        { word: "skeleton", synonyms: ["bones", "corpse", "remains", "skeletal structure", "skeleton"] },
+        { word: "snake", synonyms: ["serpent", "python", "viper", "reptile", "snake"] },
+        { word: "sniper", synonyms: ["sharpshooter", "marksman", "rifleman", "gunman", "sniper"] },
+        { word: "soldier", synonyms: ["warrior", "troop", "infantry", "soldier", "combatant"] },
+        { word: "sentry", synonyms: ["guard", "watchman", "sentinel", "sentry", "warden"] },
+        { word: "scarab", synonyms: ["beetle", "dung beetle", "scarab", "insect", "bug"] },
+        { word: "slug", synonyms: ["snail", "mollusk", "slug", "gastropod", "shell-less"] },
+        { word: "strong foe", synonyms: ["formidable opponent", "powerful adversary", "strong enemy", "challenger"] },
+        { word: "undead", synonyms: ["living dead", "zombie", "specter", "undead", "ghoul"] },
+        { word: "weak foe", synonyms: ["feeble opponent", "weak adversary", "lesser enemy", "opponent"] },
+        { word: "wolf", synonyms: ["canine", "wolfish", "lupine", "wolf", "dog"] }
+    ],
+    "People": [
+        { word: "angel", synonyms: ["celestial being", "guardian", "spirit"] },
+        { word: "aristocrat", synonyms: ["noble", "peer", "elite"] },
+        { word: "champion", synonyms: ["hero", "victor", "winner", "defender"] },
+        { word: "cleric", synonyms: ["priest", "priestess", "clergy"] },
+        { word: "dastard", synonyms: ["coward", "scoundrel", "villain"] },
+        { word: "fat coinpurse", synonyms: ["wealthy individual", "rich person", "magnate"] },
+        { word: "friend", synonyms: ["companion", "ally", "mate", "buddy"] },
+        { word: "giant sort", synonyms: ["colossal figure", "titanic being"] },
+        { word: "god", synonyms: ["deity", "divinity", "immortal"] },
+        { word: "good sort", synonyms: ["kind person", "gentle soul", "decent human"] },
+        { word: "hero", synonyms: ["protagonist", "savior", "champion"] },
+        { word: "invisible sort", synonyms: ["unseen presence", "hidden figure"] },
+        { word: "knight", synonyms: ["warrior", "paladin", "knight-errant"] },
+        { word: "laggardly sort", synonyms: ["slowpoke", "sluggish individual"] },
+        { word: "liar", synonyms: ["deceiver", "fibber", "fabricator"] },
+        { word: "lovable sort", synonyms: ["adorable person", "charming individual", "endearing character"] },
+        { word: "lover", synonyms: ["romantic partner", "paramour", "beloved"] },
+        { word: "lord", synonyms: ["ruler", "master", "sovereign"] },
+        { word: "master", synonyms: ["expert", "adept", "proficient"] },
+        { word: "merchant", synonyms: ["trader", "vendor", "businessperson"] },
+        { word: "monarch", synonyms: ["king", "queen", "ruler"] },
+        { word: "nimble sort", synonyms: ["agile individual", "quick person", "fleet-footed"] },
+        { word: "noble", synonyms: ["honorable", "virtuous", "noble-minded"] },
+        { word: "old codger", synonyms: ["elderly person", "grumpy old man"] },
+        { word: "old dear", synonyms: ["elderly loved one", "beloved elder"] },
+        { word: "pauper", synonyms: ["beggar", "destitute person", "indigent"] },
+        { word: "pathetic sort", synonyms: ["pitiful individual", "miserable person"] },
+        { word: "plump sort", synonyms: ["chubby person", "round-bodied individual"] },
+        { word: "pair", synonyms: ["duo", "couple", "twosome"] },
+        { word: "sage", synonyms: ["wise person", "philosopher", "sage"] },
+        { word: "samurai", synonyms: ["warrior", "ronin", "bushi"] },
+        { word: "skinny sort", synonyms: ["thin person", "slender individual"] },
+        { word: "sinner", synonyms: ["wrongdoer", "transgressor", "evildoer"] },
+        { word: "sorcerer", synonyms: ["wizard", "mage", "enchanter"] },
+        { word: "sort", synonyms: ["type", "kind", "sort"] },
+        { word: "strange sort", synonyms: ["peculiar individual", "unusual character"] },
+        { word: "swordfighter", synonyms: ["duelist", "fencer", "sword master"] },
+        { word: "sorcerer", synonyms: ["wizard", "mage", "enchanter"] },
+        { word: "teacher", synonyms: ["educator", "instructor", "tutor"] },
+        { word: "thief", synonyms: ["burglar", "robber", "pickpocket"] },
+        { word: "traitor", synonyms: ["betrayer", "turncoat", "renegade"] },
+        { word: "trio", synonyms: ["three", "group of three", "threesome"] },
+        { word: "Tarnished", synonyms: ["stained one", "fallen one", "damaged soul"] },
+        { word: "unfathomable sort", synonyms: ["mysterious person", "enigmatic figure"] },
+        { word: "warrior", synonyms: ["fighter", "combatant", "soldier"] },
+        { word: "wicked sort", synonyms: ["evil individual", "villainous person", "sinister character"] }
+    ],
+    "Things": [
+        { word: "armor", synonyms: ["armour", "shield", "protection", "plate", "mail"] },
+        { word: "armament", synonyms: ["weapons", "arsenal", "gear", "munition", "armory"] },
+        { word: "Birdseye Telescope", synonyms: ["spyglass", "telescope", "binoculars", "optics", "scope"] },
+        { word: "bloodstain", synonyms: ["blood mark", "bloodstain", "blood spill", "splotch"] },
+        { word: "bow", synonyms: ["arch", "longbow", "crossbow", "composite bow", "recurve bow"] },
+        { word: "butterfly", synonyms: ["moth", "insect", "flutterer", "lepidopteran"] },
+        { word: "coffin", synonyms: ["casket", "sarcophagus", "grave", "tomb", "funerary box"] },
+        { word: "corpse", synonyms: ["dead body", "cadaver", "remains", "carcass", "deceased"] },
+        { word: "crystal", synonyms: ["gem", "mineral", "quartz", "crystalline", "jewel"] },
+        { word: "door", synonyms: ["gate", "entrance", "portal", "threshold", "hatch"] },
+        { word: "dung", synonyms: ["manure", "feces", "droppings", "excrement", "waste"] },
+        { word: "Elden Ring", synonyms: ["Elden Circle", "Ring of Elden", "Band of Elden", "Symbol of Elden"] },
+        { word: "Erdtree", synonyms: ["Sacred Tree", "Great Tree", "World Tree", "Yggdrasil"] },
+        { word: "flower", synonyms: ["blossom", "bloom", "floral", "petal", "bud"] },
+        { word: "fruit", synonyms: ["produce", "harvest", "crop", "edible", "juicy"] },
+        { word: "grace", synonyms: ["elegance", "poise", "charm", "gracefulness", "smoothness"] },
+        { word: "grass", synonyms: ["turf", "lawn", "vegetation", "herb", "sod"] },
+        { word: "incantation", synonyms: ["spell", "enchantment", "charm", "magic words", "bewitchment"] },
+        { word: "item", synonyms: ["object", "artifact", "piece", "thing", "article"] },
+        { word: "key", synonyms: ["lock key", "password", "access", "code", "solution"] },
+        { word: "ladder", synonyms: ["steps", "staircase", "climb", "ascend", "stepladder"] },
+        { word: "lift", synonyms: ["elevator", "hoist", "raise", "elevate", "platform"] },
+        { word: "map", synonyms: ["chart", "diagram", "guide", "plan", "cartography"] },
+        { word: "material", synonyms: ["substance", "matter", "stuff", "fabric", "element"] },
+        { word: "message", synonyms: ["note", "communication", "dispatch", "statement", "missive"] },
+        { word: "mushroom", synonyms: ["fungus", "toadstool", "mold", "mycelium", "spore"] },
+        { word: "necessary item", synonyms: ["essential", "required", "indispensable", "needful", "vital"] },
+        { word: "precious item", synonyms: ["valuable", "treasure", "jewel", "gem", "priceless"] },
+        { word: "projectile weapon", synonyms: ["ranged weapon", "shooting arm", "launcher", "firearm", "projector"] },
+        { word: "seed", synonyms: ["germ", "spore", "embryo", "offshoot", "descendant"] },
+        { word: "sending gate", synonyms: ["portal", "gate", "transmitter", "gateway", "entryway"] },
+        { word: "shield", synonyms: ["buckler", "guard", "protection", "barrier", "defender"] },
+        { word: "skill", synonyms: ["ability", "talent", "proficiency", "expertise", "capability"] },
+        { word: "sorcery", synonyms: ["magic", "witchcraft", "enchantment", "wizardry", "sorcery"] },
+        { word: "something", synonyms: ["thing", "object", "item", "entity", "article"] },
+        { word: "something incredible", synonyms: ["amazing thing", "unbelievable object", "astounding item", "extraordinary entity", "incredible article"] },
+        { word: "spiritspring", synonyms: ["magic well", "sacred spring", "enchanted fountain", "ethereal water", "spirit pool"] },
+        { word: "stone astrolabe", synonyms: ["ancient stone", "archaic astrolabe", "mystical relic", "stone artifact", "prehistoric device"] },
+        { word: "talisman", synonyms: ["charm", "amulet", "lucky charm", "protective token", "magic item"] },
+        { word: "tear", synonyms: ["teardrop", "cry", "weep", "lacrimation", "teary-eyed"] },
+        { word: "trap", synonyms: ["snare", "snares", "pitfall", "ambush", "deception"] },
+        { word: "tree", synonyms: ["plant", "flora", "wood", "timber", "grove"] },
+        { word: "treasure chest", synonyms: ["loot chest", "gold chest", "riches container", "jewel box", "coin hoard"] }
+    ],
+    "Battle Tactics": [
+        { word: "brief respite", synonyms: ["short break", "momentary pause", "brief rest", "quick breather"] },
+        { word: "circling around", synonyms: ["encircling", "surrounding", "moving around", "circling"] },
+        { word: "close-quarters battle", synonyms: ["hand-to-hand combat", "melee", "close combat", "close-range fight"] },
+        { word: "confusion", synonyms: ["chaos", "disarray", "bewilderment", "muddle"] },
+        { word: "dashing through", synonyms: ["running through", "speeding through", "darting through", "rushing through"] },
+        { word: "defeating one-by-one", synonyms: ["taking down individually", "eliminating one by one", "defeating separately"] },
+        { word: "jumping off", synonyms: ["leaping off", "diving off", "springing off", "bounding off"] },
+        { word: "luring out", synonyms: ["enticing out", "drawing out", "tempting out", "baiting out"] },
+        { word: "mimicry", synonyms: ["copying", "imitation", "emulation", "simulation"] },
+        { word: "pursuit", synonyms: ["chase", "hunt", "pursuing", "following"] },
+        { word: "ranged battle", synonyms: ["long-range combat", "distance fighting", "shooting battle", "sniper duel"] },
+        { word: "rushing in", synonyms: ["charging in", "storming in", "rushing forward", "sweeping in"] },
+        { word: "stealth", synonyms: ["sneakiness", "furtiveness", "covert tactics", "secretive approach"] },
+        { word: "taking on all at once", synonyms: ["engaging all at once", "confronting collectively", "battling in group"] }
+    ],
+    "Actions": [
+        { word: "attacking", synonyms: ["assaulting", "striking", "charging", "assailing", "attacking head-on"] },
+        { word: "backstepping", synonyms: ["retreating", "backing away", "stepping back"] },
+        { word: "blocking", synonyms: ["defending", "guarding", "shielding", "parrying"] },
+        { word: "critical hit", synonyms: ["critical strike", "precise hit", "devastating blow", "fatal strike"] },
+        { word: "gesturing", synonyms: ["signaling", "indicating", "making gestures"] },
+        { word: "healing", synonyms: ["rejuvenating", "restoring health", "recovering"] },
+        { word: "incantation", synonyms: ["chant", "spell", "magic incantation", "enchantment"] },
+        { word: "item crafting", synonyms: ["crafting", "creating items", "item creation"] },
+        { word: "jump attack", synonyms: ["leap attack", "diving attack", "lunging attack"] },
+        { word: "parrying", synonyms: ["blocking", "deflecting", "warding off", "counterattacking"] },
+        { word: "running", synonyms: ["sprinting", "dashing", "rushing", "hurrying"] },
+        { word: "running attack", synonyms: ["charging attack", "sprinting attack", "quick attack"] },
+        { word: "rolling", synonyms: ["evading", "dodging", "tumbling", "rolling away"] },
+        { word: "skill", synonyms: ["technique", "ability", "proficiency", "mastery"] },
+        { word: "sorcery", synonyms: ["magic", "wizardry", "spellcraft", "enchantment"] },
+        { word: "summoning", synonyms: ["calling forth", "conjuring", "summoning aid"] },
+        { word: "throwing", synonyms: ["tossing", "hurling", "pitching", "throwing away"] },
+        { word: "two-handing", synonyms: ["dual-wielding", "using both hands", "double-handing"] },
+        { word: "target lock", synonyms: ["locking onto", "focusing on target", "targeting"] }
+    ],
+    "Situations": [
+        { word: "ambush", synonyms: ["ambushment", "surprise attack", "trap", "ambuscade"] },
+        { word: "battle", synonyms: ["fight", "conflict", "combat", "warfare"] },
+        { word: "beating to a pulp", synonyms: ["severely beaten", "pummeled", "thrashed", "mauled"] },
+        { word: "bright spot", synonyms: ["highlight", "advantage", "positive aspect", "silver lining"] },
+        { word: "climbable spot", synonyms: ["scramble", "accessible point", "scaling point"] },
+        { word: "crowd", synonyms: ["group", "mass", "throng", "mob"] },
+        { word: "cramped area", synonyms: ["tight space", "confined area", "narrow passage"] },
+        { word: "danger", synonyms: ["risk", "peril", "hazard", "threat"] },
+        { word: "dark spot", synonyms: ["shadowy area", "dim corner", "unlit place"] },
+        { word: "dead end", synonyms: ["cul-de-sac", "no exit", "impasse", "blind alley"] },
+        { word: "defensible spot", synonyms: ["fortifiable position", "stronghold", "secure location"] },
+        { word: "explosion", synonyms: ["burst", "blast", "detonation", "eruption"] },
+        { word: "evening", synonyms: ["dusk", "sunset", "nightfall", "twilight"] },
+        { word: "gorgeous view", synonyms: ["beautiful sight", "scenic panorama", "breathtaking vista"] },
+        { word: "high spot", synonyms: ["elevated area", "summit", "peak", "height"] },
+        { word: "hiding place", synonyms: ["concealment", "shelter", "cover", "hideout"] },
+        { word: "mist", synonyms: ["fog", "haze", "miasma", "vapour"] },
+        { word: "morning", synonyms: ["dawn", "sunrise", "early hours", "daybreak"] },
+        { word: "noon", synonyms: ["midday", "noontime", "lunchtime", "noonday"] },
+        { word: "open area", synonyms: ["clearing", "plain", "field", "space"] },
+        { word: "overcast", synonyms: ["cloudy", "cloud-covered", "gloomy", "overclouded"] },
+        { word: "patrolling", synonyms: ["guarding", "watching", "policing", "prowling"] },
+        { word: "pincer attack", synonyms: ["flanking maneuver", "encirclement", "two-pronged attack"] },
+        { word: "procession", synonyms: ["parade", "march", "line", "column"] },
+        { word: "rain", synonyms: ["downpour", "shower", "precipitation", "drizzle"] },
+        { word: "reinforcements", synonyms: ["backup", "support", "reserves", "aid"] },
+        { word: "ritual", synonyms: ["ceremony", "tradition", "rite", "custom"] },
+        { word: "secret passage", synonyms: ["hidden route", "concealed pathway", "underground passage"] },
+        { word: "shortcut", synonyms: ["quick route", "direct path", "detour", "bypass"] },
+        { word: "sniping spot", synonyms: ["sharpshooting position", "sniper's nest", "vantage point"] },
+        { word: "snow", synonyms: ["snowfall", "blizzard", "snowstorm", "flurry"] },
+        { word: "storm", synonyms: ["tempest", "gale", "hurricane", "squall"] },
+        { word: "surprise attack", synonyms: ["ambush", "sneak attack", "raid", "assault"] },
+        { word: "unnoticed", synonyms: ["unseen", "unobserved", "unnoticed", "unperceived"] },
+        { word: "valley", synonyms: ["dale", "ravine", "glen", "canyon"] }
+    ],
+    "Places": [
+        { word: "bog", synonyms: ["swamp", "marsh", "wetland", "fen"] },
+        { word: "bridge", synonyms: ["span", "viaduct", "crossing", "overpass"] },
+        { word: "camp site", synonyms: ["campground", "camp", "tent site", "shelter"] },
+        { word: "castle", synonyms: ["fortress", "citadel", "palace", "stronghold"] },
+        { word: "cave", synonyms: ["cavern", "grotto", "den", "tunnel"] },
+        { word: "cellar", synonyms: ["basement", "underground room", "storage"] },
+        { word: "cemetery", synonyms: ["graveyard", "burial ground", "necropolis", "churchyard"] },
+        { word: "church", synonyms: ["chapel", "cathedral", "temple", "sanctuary"] },
+        { word: "city", synonyms: ["town", "metropolis", "urban center", "municipality"] },
+        { word: "evergaol", synonyms: ["prison", "penitentiary", "jail", "lockup"] },
+        { word: "forest", synonyms: ["woodland", "grove", "jungle", "thicket"] },
+        { word: "fort", synonyms: ["fortress", "stronghold", "barracks", "garrison"] },
+        { word: "great tree", synonyms: ["mighty tree", "ancient tree", "towering tree", "old oak"] },
+        { word: "high road", synonyms: ["main road", "thoroughfare", "highway", "arterial road"] },
+        { word: "hole", synonyms: ["pit", "cavity", "opening", "hollow"] },
+        { word: "house", synonyms: ["home", "dwelling", "residence", "shack"] },
+        { word: "lake", synonyms: ["pond", "reservoir", "lagoon", "water body"] },
+        { word: "mountain", synonyms: ["peak", "summit", "mount", "range"] },
+        { word: "nest", synonyms: ["lair", "roost", "home", "dwelling"] },
+        { word: "river", synonyms: ["stream", "waterway", "brook", "creek"] },
+        { word: "ruins", synonyms: ["remains", "wreckage", "debris", "decay"] },
+        { word: "surface", synonyms: ["top", "exterior", "outer part", "upper side"] },
+        { word: "tower", synonyms: ["tall building", "spire", "obelisk", "lookout"] },
+        { word: "tunnel", synonyms: ["underpass", "subway", "passage", "shaft"] },
+        { word: "underground", synonyms: ["subterranean", "below ground", "underneath", "underneath the surface"] },
+        { word: "underground tomb", synonyms: ["crypt", "mausoleum", "burial chamber", "grave"] },
+        { word: "valley", synonyms: ["dale", "glen", "hollow", "basin"] },
+        { word: "waterside", synonyms: ["waterfront", "shore", "riverside", "coast"] }
+    ],
+    "Directions": [
+        { word: "ahead", synonyms: ["forward", "onward", "straight", "ahead", "forth"] },
+        { word: "behind", synonyms: ["back", "rearward", "backward", "behind", "after"] },
+        { word: "center", synonyms: ["middle", "midpoint", "center", "central", "core"] },
+        { word: "down", synonyms: ["below", "under", "beneath", "downward", "descend"] },
+        { word: "east", synonyms: ["eastern", "eastward", "oriental"] },
+        { word: "edge", synonyms: ["border", "boundary", "periphery", "edge", "margin"] },
+        { word: "left", synonyms: ["leftward", "port", "left side"] },
+        { word: "north", synonyms: ["northern", "northward", "polar"] },
+        { word: "right", synonyms: ["rightward", "starboard", "right side"] },
+        { word: "south", synonyms: ["southern", "southward"] },
+        { word: "up", synonyms: ["above", "upward", "upwardly", "skyward", "ascend"] },
+        { word: "west", synonyms: ["western", "westward", "occidental"] }
+    ],
+    "Body Parts": [
+        { word: "arms", synonyms: ["limbs", "appendages", "forearms", "biceps", "triceps", "elbows", "hands"] },
+        { word: "back", synonyms: ["spine", "vertebrae", "dorsum", "shoulders", "scapulae", "lats"] },
+        { word: "core", synonyms: ["torso", "midsection", "abdomen", "trunk", "center", "midriff"] },
+        { word: "fingers", synonyms: ["digits", "phalanges", "thumbs", "index fingers", "pinky fingers"] },
+        { word: "head", synonyms: ["skull", "cranium", "face", "brain", "scalp", "forehead", "temple", "chin"] },
+        { word: "legs", synonyms: ["lower limbs", "thighs", "calves", "knees", "shins", "ankles", "feet"] },
+        { word: "rump", synonyms: ["buttocks", "behind", "rear", "derrière", "posterior", "gluteus maximus"] },
+        { word: "stomach", synonyms: ["belly", "abdomen", "gut", "tummy", "midsection", "navel"] },
+        { word: "tail", synonyms: ["appendage", "caudal appendage", "tailbone", "rear extension"] }
+    ],
+    "Affinities": [
+        { word: "blood loss", synonyms: ["hemorrhage", "bleeding", "bloodshed"] },
+        { word: "death", synonyms: ["demise", "passing", "expiration"] },
+        { word: "fire", synonyms: ["flames", "inferno", "blaze"] },
+        { word: "frost", synonyms: ["ice", "cold", "freezing"] },
+        { word: "holy", synonyms: ["sacred", "divine", "blessed"] },
+        { word: "magic", synonyms: ["sorcery", "enchantment", "wizardry"] },
+        { word: "madness", synonyms: ["insanity", "craziness", "derangement"] },
+        { word: "physical", synonyms: ["bodily", "corporeal", "material"] },
+        { word: "piercing", synonyms: ["penetrating", "sharp", "stabbing"] },
+        { word: "poison", synonyms: ["toxin", "venom", "poisoning"] },
+        { word: "scarlet rot", synonyms: ["red decay", "crimson corruption", "bloody affliction"] },
+        { word: "sleep", synonyms: ["slumber", "rest", "nap"] },
+        { word: "slashing", synonyms: ["cutting", "hacking", "chopping"] },
+        { word: "standard", synonyms: ["typical", "usual", "common"] },
+        { word: "striking", synonyms: ["impressive", "notable", "remarkable"] },
+        { word: "toxic", synonyms: ["harmful", "noxious", "dangerous"] },
+        { word: "lightning", synonyms: ["electricity", "thunderbolt", "shock"] }
+    ],
+    "Concepts": [
+        { word: "abundance", synonyms: ["plenty", "profusion", "wealth", "overflow", "excess"] },
+        { word: "bad luck", synonyms: ["misfortune", "ill luck", "hard luck", "unluckiness", "jinx"] },
+        { word: "betrayal", synonyms: ["treachery", "backstabbing", "deception", "double-cross", "disloyalty"] },
+        { word: "bliss", synonyms: ["joy", "happiness", "ecstasy", "euphoria", "delight"] },
+        { word: "bravery", synonyms: ["courage", "valor", "fearlessness", "gallantry", "heroism"] },
+        { word: "calmness", synonyms: ["serenity", "tranquility", "peacefulness", "composure", "poise"] },
+        { word: "clue", synonyms: ["hint", "tip", "cue", "lead", "indication"] },
+        { word: "comfort", synonyms: ["ease", "relief", "solace", "consolation", "reassurance"] },
+        { word: "confidence", synonyms: ["belief", "trust", "assurance", "certainty", "conviction"] },
+        { word: "destruction", synonyms: ["ruin", "demolition", "devastation", "wreckage", "obliteration"] },
+        { word: "depths", synonyms: ["deep", "bottom", "depth", "profoundness", "intensity"] },
+        { word: "distracted", synonyms: ["preoccupied", "inattentive", "absent-minded", "unfocused", "disoriented"] },
+        { word: "fear", synonyms: ["dread", "terror", "fright", "anxiety", "phobia"] },
+        { word: "futility", synonyms: ["pointlessness", "uselessness", "hopelessness", "ineffectiveness", "vainness"] },
+        { word: "good fortune", synonyms: ["luck", "fortunate", "blessing", "favorable", "prosperity"] },
+        { word: "good luck", synonyms: ["fortune", "lucky", "success", "chance", "serendipity"] },
+        { word: "hope", synonyms: ["optimism", "expectation", "aspiration", "wish", "desire"] },
+        { word: "injustice", synonyms: ["unfairness", "inequity", "wrong", "discrimination", "unjustness"] },
+        { word: "introspection", synonyms: ["self-reflection", "contemplation", "self-examination", "meditation", "self-analysis"] },
+        { word: "joy", synonyms: ["happiness", "glee", "delight", "jubilation", "elation"] },
+        { word: "life", synonyms: ["existence", "living", "being", "lifeblood", "vitality"] },
+        { word: "love", synonyms: ["affection", "passion", "devotion", "adoration", "romance"] },
+        { word: "misfortune", synonyms: ["bad luck", "adversity", "mishap", "calamity", "hardship"] },
+        { word: "on the brink", synonyms: ["at the edge", "close to", "near", "threshold", "brim"] },
+        { word: "pickle", synonyms: ["predicament", "jam", "dilemma", "plight", "tight spot"] },
+        { word: "regret", synonyms: ["remorse", "guilt", "sorrow", "repentance", "shame"] },
+        { word: "revenge", synonyms: ["retaliation", "vengeance", "payback", "reprisal", "retribution"] },
+        { word: "research", synonyms: ["study", "investigation", "analysis", "exploration", "examination"] },
+        { word: "ruin", synonyms: ["destruction", "collapse", "decay", "wreck", "downfall"] },
+        { word: "sadness", synonyms: ["sorrow", "grief", "melancholy", "despair", "heartache"] },
+        { word: "sacrifice", synonyms: ["offering", "surrender", "giving up", "loss", "forfeit"] },
+        { word: "secret", synonyms: ["confidential", "hidden", "mystery", "unknown", "concealed"] },
+        { word: "tears", synonyms: ["crying", "weeping", "sobbing", "teardrops", "emotional"] },
+        { word: "victory", synonyms: ["triumph", "success", "winning", "achievement", "conquest"] },
+        { word: "vigilance", synonyms: ["watchfulness", "alertness", "caution", "attentiveness", "vigil"] },
+        { word: "wrath", synonyms: ["anger", "rage", "fury", "ire", "wrathfulness"] }
+    ],
+    "Phrases": [
+        { word: "I can't take this...", synonyms: ["This is unbearable...", "I can't handle this..."] },
+        { word: "I did it!", synonyms: ["I succeeded!", "Victory!"] },
+        { word: "I don't believe it...", synonyms: ["Unbelievable...", "Incredible..."] },
+        { word: "I don't think", synonyms: ["I'm unsure...", "Not sure..."] },
+        { word: "I want to go home...", synonyms: ["Take me back...", "I miss home..."] },
+        { word: "I'm sorry...", synonyms: ["Apologies...", "Forgive me..."] },
+        { word: "It's a trap...", synonyms: ["Danger ahead...", "Watch out..."] },
+        { word: "Let's go!", synonyms: ["Time to move!", "Let's move out..."] },
+        { word: "Look out!", synonyms: ["Watch out!", "Be cautious..."] },
+        { word: "Now!", synonyms: ["Immediately!", "Right away..."] },
+        { word: "Oh!", synonyms: ["Surprise!", "Aha..."] },
+        { word: "Okay...", synonyms: ["Alright...", "Understood..."] },
+        { word: "Please, help me...", synonyms: ["Assist me...", "I need help..."] },
+        { word: "Run...", synonyms: ["Escape!", "Flee..."] },
+        { word: "Stay calm...", synonyms: ["Remain calm...", "Keep composed..."] },
+        { word: "This way...", synonyms: ["Over here...", "Follow me..."] },
+        { word: "Try tongue but hole", synonyms: ["Liar ahead...", "Tongue required but hole..."] },
+        { word: "Very good", synonyms: ["Excellent...", "Impressive..."] },
+        { word: "What is it?", synonyms: ["What's that?", "What's happening?"] },
+        { word: "Who are you?", synonyms: ["Identify yourself...", "State your name..."] },
+        { word: "Why?", synonyms: ["Why is that?", "Reason?"] },
+        { word: "Yes", synonyms: ["Affirmative...", "Indeed..."] },
+        { word: "You're welcome", synonyms: ["Welcome...", "No problem..."] }
+    ]
 };
 
 export default wordCategories;
