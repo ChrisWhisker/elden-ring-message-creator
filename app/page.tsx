@@ -73,15 +73,15 @@ const Home = () => {
             <div className="h-4"></div>
             <div className="w-full max-w-5xl flex-grow flex flex-col overflow-hidden">
                 <div id="wordBank"
-                    className="flex justify-between flex-wrap flex-grow overflow-auto"
+                    className="flex flex-wrap flex-grow overflow-auto space-x-2"
                     style={{
                         maxHeight: 'calc(100vh - 400px)',
                         borderRadius: 5,
-                        backgroundColor: 'rgba(25, 25, 25, .5)',
+                        backgroundColor: 'rgba(222, 184, 135, 0.05)',
                         scrollbarWidth: 'thin',
                         scrollbarColor: '#d4af37 rgba(0, 0, 0, 0.5)'
                     }}>
-                    {/* Placeholder for dynamically added buttons */}
+                    {renderedButtons}
                 </div>
             </div>
             <div id="messageContainer"
@@ -94,7 +94,7 @@ const Home = () => {
                 <div>
                     {messageText}
                 </div>
-                <div className="flex justify-center w-full">
+                <div className="flex justify-center w-full space-x-2">
                     {renderedButtons}
                 </div>
             </div>
