@@ -5,7 +5,7 @@ import { ButtonRenderer } from './buttons';
 
 interface WordCategory {
     word: string;
-    synonyms: string[];
+    keywords: string;
 }
 
 export default class Filter {
@@ -76,10 +76,8 @@ export default class Filter {
                     }
 
                     // Check if any query word matches any of the word's synonyms
-                    for (const synonym of word.synonyms) {
-                        if (queryWords.some(queryWord => synonym.toLowerCase().includes(queryWord))) {
-                            Filter.addWord(category, word);
-                        }
+                    if (queryWords.some(queryWord => word.keywords.toLowerCase().includes(queryWord))) {
+                        Filter.addWord(category, word);
                     }
                 }
                 // Add all words from the category if the category name matches the query
