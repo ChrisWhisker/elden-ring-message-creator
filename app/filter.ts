@@ -59,15 +59,19 @@ export default class Filter {
                 Filter.addWordsFromCategory(category);
             }
         } else {
-            // Search for query in all categories
+            // Split the query into individual words
+            const queryWords = Filter.query.split(" ");
+
+            // Search for each query word in all categories
             for (const category in wordCategories) {
                 for (const word of wordCategories[category]) {
-                    if (word.toLowerCase().includes(Filter.query)) {
+                    // Check if any query word matches the current word
+                    if (queryWords.some(queryWord => word.toLowerCase().includes(queryWord))) {
                         Filter.addWord(category, word);
                     }
                 }
                 // Add all words from the category if the category name matches the query
-                if (category.toLowerCase().includes(Filter.query)) {
+                if (queryWords.some(queryWord => category.toLowerCase().includes(queryWord))) {
                     Filter.addWordsFromCategory(category);
                 }
             }
