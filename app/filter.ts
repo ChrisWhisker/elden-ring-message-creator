@@ -56,7 +56,6 @@ export default class Filter {
         Filter.results = [];
         // Ensure query is not null and convert to lowercase
         Filter.query = newQuery ? newQuery.trim().toLowerCase() : "";
-        console.log(`Filtering words with query: ${Filter.query}`);
 
         // If query is empty, add all words from all categories
         if (!Filter.query) {
@@ -86,8 +85,6 @@ export default class Filter {
                 }
             }
         }
-
-        console.log(`Found ${Filter.results.length} results`);
 
         // Render buttons for the search results
         ButtonRenderer.renderButtons(Filter.results);
