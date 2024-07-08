@@ -80,18 +80,15 @@ export default class Message {
 
         // Set onUpdate callback if not already set, then call it
         if (!this.onUpdate) {
-            console.log("Setting onUpdate callback");
             this.onUpdate = () => {}; // Replace with your desired behavior if not set
         }
 
         // Call the onUpdate callback
-        console.log("Calling onUpdate callback");
         this.onUpdate();
     }
 
     // Function to handle click events on buttons
     private handleClick(button: Button): void {
-        console.log("Clicked on word:", button.props.word.text);
         this.remove(button);
         Filter.refilter(); // Redo the search to update the buttons
     }
