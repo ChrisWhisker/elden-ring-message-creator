@@ -1,6 +1,6 @@
 const wordcategories: any = {
     "Templates": [
-        { word: "ahh, ****...", keywords: "ooh, ohh aha wow woah whoa dot" },
+        { word: "ahh, ****...", keywords: "ooh, ohh aha wow woah whoa dot sex" },
         { word: "be wary of ****", keywords: "cautious careful watchful look out for" },
         { word: "behold, ****!", keywords: "look see observe check it out" },
         { word: "could this be a ****?", keywords: "is might this be maybe" },
@@ -23,7 +23,7 @@ const wordcategories: any = {
         { word: "****?", keywords: "blank question" },
         { word: "****...", keywords: "blank dot" },
         { word: "**** ahead", keywords: "upcoming coming up forward" },
-        { word: "****, O ****", keywords: "oh" },
+        { word: "****, O ****", keywords: "oh sex" },
         { word: "**** required ahead", keywords: "needed necessary" }
     ],
     "Enemies": [
@@ -33,7 +33,7 @@ const wordcategories: any = {
         { word: "boss", keywords: "leader chief overlord supervisor commander strong bad" },
         { word: "bug", keywords: "insect creepy-crawly pest vermin invertebrate worm" },
         { word: "cavalier", keywords: "knight horseman equestrian chevalier" },
-        { word: "crab", keywords: "crustacean shellfish lobster claw pinch" },
+        { word: "crab", keywords: "crustacean shellfish lobster claw pinch sex" },
         { word: "decoy", keywords: "bait lure enticement trap distraction fake" },
         { word: "demi-human", keywords: "half-human semi-human part-human humanoid monkey primate screech loud scream caveman" },
         { word: "dog", keywords: "canine pooch hound doggy pup wolf bark" },
@@ -268,7 +268,7 @@ const wordcategories: any = {
         { word: "fort", keywords: "fortress stronghold barracks garrison" },
         { word: "great tree", keywords: "mighty erdtree scadutree ancient towering old oak" },
         { word: "high road", keywords: "main road thoroughfare highway arterial road" },
-        { word: "hole", keywords: "pit cavity opening hollow butt butthole finger pickle" },
+        { word: "hole", keywords: "pit cavity opening hollow butt butthole finger pickle sex" },
         { word: "house", keywords: "home dwelling residence shack" },
         { word: "lake", keywords: "pond reservoir lagoon water body" },
         { word: "mountain", keywords: "peak summit mount range" },
@@ -301,7 +301,7 @@ const wordcategories: any = {
         { word: "arms", keywords: "limbs appendages forearms biceps triceps elbows hands" },
         { word: "back", keywords: "spine vertebrae dorsum shoulders scapulae lats" },
         { word: "core", keywords: "torso midsection abdomen trunk center midriff center middle" },
-        { word: "fingers", keywords: "digits phalanges thumbs index pinky try butt butthole" },
+        { word: "fingers", keywords: "digits phalanges thumbs index pinky try butt butthole sex" },
         { word: "head", keywords: "skull cranium face brain scalp forehead temple chin oral sex blowjob" },
         { word: "legs", keywords: "lower limbs thighs calves knees shins ankles feet" },
         { word: "rump", keywords: "buttocks behind rear derrière posterior gluteus maximus butt" },
@@ -419,6 +419,18 @@ const wordcategories: any = {
         { word: "turn back", keywords: "go around retreat" },
         { word: "well done", keywords: "good job nice work" },
         { word: "you don't have the right", keywords: "forbid stop no locked door" }
+    ],
+    "Conjunctions": [
+        { word: "all the more", keywords: "even so" },
+        { word: "and then", keywords: "next afterwards afterward subsequently" },
+        { word: "by the way", keywords: "incidentally as an aside" },
+        { word: "but", keywords: "however nevertheless nonetheless yet still butt hole sex" },
+        { word: "except", keywords: "excluding excluding apart from other than" },
+        { word: "in short", keywords: "briefly concisely succinctly" },
+        { word: "or", keywords: "either or else" },
+        { word: "so to speak", keywords: "as it were as if to say therefore thus hence consequently accordingly" },
+        { word: "therefore", keywords: "thus hence consequently accordingly" },
+        { word: ",", keywords: "and" }
     ]
 };
 
