@@ -75,7 +75,7 @@ export default class Filter {
                         Filter.addWord(category, word);
                     }
 
-                    // Check if any query word matches any of the word's synonyms
+                    // Check if any query word matches any of the word's keywords
                     if (queryWords.some(queryWord => word.keywords.toLowerCase().includes(queryWord))) {
                         Filter.addWord(category, word);
                     }
