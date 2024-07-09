@@ -77,11 +77,11 @@ const Home = () => {
                     style={{
                         height: 'calc(100vh - 525px)',
                         borderRadius: 5,
-                        backgroundColor: 'rgba(222, 184, 135, 0.05)',
+                        backgroundColor: 'rgba(222, 184, 135, 0.075)',
                         scrollbarWidth: 'thin',
                         scrollbarColor: '#d4af37 rgba(0, 0, 0, 0.5)'
                     }}>
-                    {renderedButtons}
+                    {/* Word bank buttons will be dynamically added here */}
                 </div>
             </div>
             <div id="messageContainer"
