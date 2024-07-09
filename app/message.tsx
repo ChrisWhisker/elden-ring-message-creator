@@ -1,7 +1,7 @@
 // Define the type for the message
-import Word from './word';
-import Filter from './filter';
-import { Button } from './buttons';
+import Word from "./word";
+import Filter from "./filter";
+import { Button } from "./buttons";
 
 export default class Message {
     // Words that make up a message

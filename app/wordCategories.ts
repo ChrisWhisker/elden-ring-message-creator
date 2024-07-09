@@ -1,4 +1,4 @@
-const wordcategories: any = {
+const wordCategories: any = {
     "Templates": [
         { word: "ahh, ****...", keywords: "ooh, ohh aha wow woah whoa dot sex" },
         { word: "be wary of ****", keywords: "cautious careful watchful look out for" },
@@ -9,11 +9,11 @@ const wordcategories: any = {
         { word: "if only i had a ****...", keywords: "wish i had a desire for a want need dot" },
         { word: "let there be ****", keywords: "make way for grant shall should" },
         { word: "likely ****", keywords: "probably high chance of most" },
-        { word: "no **** ahead", keywords: "nothing no in sight absent absense not here" },
+        { word: "no **** ahead", keywords: "nothing no in sight absent absence not here" },
         { word: "offer ****", keywords: "provide give present" },
         { word: "praise the ****!", keywords: "hail applaud worship" },
         { word: "seek ****", keywords: "search for look for seek out watch out find hidden" },
-        { word: "still no ****...", keywords: "no yet none nothing no in sight absent absense not here dot" },
+        { word: "still no ****...", keywords: "no yet none nothing no in sight absent absence not here dot" },
         { word: "time for ****", keywords: "it's time now clock" },
         { word: "try ****", keywords: "attempt give it a shot why not" },
         { word: "visions of ****...", keywords: "images thoughts pictures dreams dot" },
@@ -83,7 +83,7 @@ const wordcategories: any = {
         { word: "hero", keywords: "protagonist savior champion good super tarnished" },
         { word: "invisible sort", keywords: "unseen hidden hiding clear transparent" },
         { word: "knight", keywords: "warrior champion paladin cavalier sir shining armor" },
-        { word: "laggardly sort", keywords: "slowpoke sluggish lazy lathargic" },
+        { word: "laggardly sort", keywords: "slowpoke sluggish lazy lethargic" },
         { word: "liar", keywords: "deceiver fibber fabricator lies untrustworthy" },
         { word: "lovable sort", keywords: "adorable woman charming girl endearing" },
         { word: "lover", keywords: "romantic partner paramour beloved sex woman girl maiden" },
@@ -108,7 +108,7 @@ const wordcategories: any = {
         { word: "swordfighter", keywords: "duelist fencer master" },
         { word: "teacher", keywords: "educator instructor tutor wise wisdom knowledge" },
         { word: "thief", keywords: "burglar robber pickpocket steal stolen take" },
-        { word: "traitor", keywords: "betrayer turncoat renegade trader untrustworthy wvil bad" },
+        { word: "traitor", keywords: "betrayer turncoat renegade trader untrustworthy evil bad" },
         { word: "trio", keywords: "three group 3 threesome" },
         { word: "tarnished", keywords: "stained fallen damaged soul PC player character you me" },
         { word: "unfathomable sort", keywords: "mysterious enigmatic baffling impenetrable incomprehensible indecipherable inexplicable unknowable" },
@@ -164,7 +164,7 @@ const wordcategories: any = {
     ],
     "Battle Tactics": [
         { word: "brief respite", keywords: "short break momentary pause rest quick breather sanctuary" },
-        { word: "circling around", keywords: "encircling surrounding moving around backstab" },
+        { word: "circling around", keywords: "encircling surrounding moving around back stab" },
         { word: "close-quarters battle", keywords: "hand-to-hand combat melee close-range fight" },
         { word: "confusion", keywords: "chaos disarray bewilderment muddle" },
         { word: "dashing through", keywords: "running speeding darting rushing" },
@@ -200,7 +200,7 @@ const wordcategories: any = {
         { word: "running attack", keywords: "charging attack sprinting attack quick attack" },
         { word: "rolling", keywords: "evading dodging tumbling rolling away" },
         { word: "skill", keywords: "technique ability proficiency mastery git gud" },
-        { word: "sorcery", keywords: "magic wizardry spellcraft enchantment" },
+        { word: "sorcery", keywords: "magic wizardry spellcraft spells enchantment" },
         { word: "summoning", keywords: "calling forth aid spirit ashes help friend conjuring" },
         { word: "throwing", keywords: "tossing hurling pitching away" },
         { word: "two-handing", keywords: "dual-wielding both hands double 2" },
@@ -219,7 +219,7 @@ const wordcategories: any = {
         { word: "danger", keywords: "risk peril hazard threat" },
         { word: "dark spot", keywords: "shadowy area dim corner unlit place hide hidden" },
         { word: "dead end", keywords: "cul-de-sac no exit impasse blind alley" },
-        { word: "defensible spot", keywords: "fortifiable position stronghold secure location" },
+        { word: "defensible spot", keywords: "fortified position stronghold secure location" },
         { word: "detour", keywords: "quick route direct path detour bypass shortcut road closed" },
         { word: "explosion", keywords: "burst blast detonation eruption" },
         { word: "evening", keywords: "dusk sunset nightfall twilight" },
@@ -410,9 +410,9 @@ const wordcategories: any = {
         { word: "keep moving", keywords: "go forward keep going don't stop" },
         { word: "look carefully", keywords: "watch out seek search" },
         { word: "listen carefully", keywords: "hear heed" },
-        { word: "not here!", keywords: "absent absense" },
+        { word: "not here!", keywords: "absent absence" },
         { word: "seems familiar...", keywords: "deja vu been here before repeat repetitive" },
-        { word: "so lonely...", keywords: "alone solitude lonely lonelyness" },
+        { word: "so lonely...", keywords: "alone solitude lonely loneliness" },
         { word: "stay calm", keywords: "relax chill" },
         { word: "think carefully", keywords: "consider ponder" },
         { word: "too high up", keywords: "climb ladder fall death die cliff" },
@@ -434,4 +434,4 @@ const wordcategories: any = {
     ]
 };
 
-export default wordcategories;
+export default wordCategories;
