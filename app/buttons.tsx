@@ -34,7 +34,7 @@ export class Button extends React.Component<{ word: Word }> {
       <button
         key={word.toString()}
         onClick={this.inMessage ? this.handleMessageRemove : this.handleMessageAdd}
-        title={`${word.category}: "${word.text}"`}
+        title={this.inMessage ? `Remove "${word.text}"` : `Add "${word.text}"`}
         style={{
           background: "linear-gradient(to right, transparent, #2c2a23, transparent)", // Gradient background
           padding: "5px 25px",
