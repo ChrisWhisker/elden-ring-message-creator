@@ -1,4 +1,4 @@
-"use client"; // Enables useState, useEffect, and useRef hooks
+"use client"; // Do not remove. Enables useState, useEffect, and useRef hooks
 
 import React, { useState, useEffect, useRef } from "react";
 import Filter from "./filter";
@@ -104,7 +104,8 @@ const Home = () => {
         <div>{messageText}</div>
         <div className="flex justify-center w-full space-x-2">{renderedButtons}</div>
       </div>
-      <div className="body-text mt-auto text-center" style={{ color: "silver", fontSize: "0.8rem" }}>
+      <hr className="w-full mt-6 border-gray-300 mt-auto" />
+      <div className="body-text text-center" style={{ color: "silver", fontSize: "0.8rem" }}>
         <br />© 2024 Chris Worcester. All Rights Reserved.
       </div>
     </main>
