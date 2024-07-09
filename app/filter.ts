@@ -66,27 +66,27 @@ export default class Filter {
       // Split the query into individual words
       const queryWords = Filter.query.split(" ");
 
-            // Search for each query word in all categories
-            for (const category in wordCategories) {
-                for (const word of wordCategories[category]) {
-                    // Check if any query word matches the current word
-                    if (queryWords.some(queryWord => word.word.toLowerCase().includes(queryWord))) {
-                        Filter.addWord(category, word);
-                    }
+      // Search for each query word in all categories
+      for (const category in wordCategories) {
+        for (const word of wordCategories[category]) {
+          // Check if any query word matches the current word
+          if (queryWords.some((queryWord) => word.word.toLowerCase().includes(queryWord))) {
+            Filter.addWord(category, word);
+          }
 
-                    // Check if any query word matches any of the word's keywords
-                    if (queryWords.some(queryWord => word.keywords.toLowerCase().includes(queryWord))) {
-                        Filter.addWord(category, word);
-                    }
-                }
-                // Add all words from the category if the category name matches the query
-                if (queryWords.some(queryWord => category.toLowerCase().includes(queryWord))) {
-                    Filter.addWordsFromCategory(category);
-                }
-            }
+          // Check if any query word matches any of the word's keywords
+          if (queryWords.some((queryWord) => word.keywords.toLowerCase().includes(queryWord))) {
+            Filter.addWord(category, word);
+          }
         }
-
-        // Render buttons for the search results
-        ButtonRenderer.renderButtons(Filter.results);
+        // Add all words from the category if the category name matches the query
+        if (queryWords.some((queryWord) => category.toLowerCase().includes(queryWord))) {
+          Filter.addWordsFromCategory(category);
+        }
+      }
     }
+
+    // Render buttons for the search results
+    ButtonRenderer.renderButtons(Filter.results);
+  }
 }

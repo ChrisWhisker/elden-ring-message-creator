@@ -8,10 +8,8 @@ const inter = Inter({ subsets: ["latin"] });
 
 const customMetadata = {
   title: "Elden Ring Message Creator - Easily Compose Custom Messages",
-  description:
-    "Generate custom messages for Elden Ring. Elden Scribe is an easy-to-use tool for creating Elden Ring messages.",
-  keywords:
-    "Elden Ring, message generator, custom messages, game tool, Elden Scribe",
+  description: "Generate custom messages for Elden Ring. Elden Scribe is an easy-to-use tool for creating Elden Ring messages.",
+  keywords: "Elden Ring, message generator, custom messages, game tool, Elden Scribe",
   author: "Chris Worcester",
   siteUrl: "https://chriswhisker.github.io/elden-ring-message-creator/",
 };
