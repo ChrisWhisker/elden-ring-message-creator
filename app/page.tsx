@@ -80,7 +80,7 @@ const Home = () => {
           id="wordBank"
           className="w-full flex-wrap flex-grow overflow-auto"
           style={{
-            height: "calc(100vh - 525px)",
+            height: "calc(100vh - 400px)",
             borderRadius: 5,
             backgroundColor: "rgba(222, 184, 135, 0.075)",
             scrollbarWidth: "thin",
@@ -98,6 +98,7 @@ const Home = () => {
           borderColor: "#dfaf37",
           borderWidth: "1px",
           borderStyle: "solid",
+          color: "#d4af37"
         }}
       >
         <div>{messageText}</div>
