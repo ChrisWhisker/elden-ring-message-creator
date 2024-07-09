@@ -71,11 +71,11 @@ const Home = () => {
                 />
             </div>
             <div className="h-4"></div>
-            <div className="w-full max-w-5xl flex-grow flex flex-col overflow-hidden">
+            <div className="max-w-5xl h-full w-full flex flex-col overflow-hidden align-items-start">
                 <div id="wordBank"
-                    className="flex flex-wrap flex-grow overflow-auto space-x-2"
+                    className="w-full flex-wrap flex-grow overflow-auto"
                     style={{
-                        maxHeight: 'calc(100vh - 400px)',
+                        height: 'calc(100vh - 525px)',
                         borderRadius: 5,
                         backgroundColor: 'rgba(222, 184, 135, 0.05)',
                         scrollbarWidth: 'thin',
@@ -87,6 +87,7 @@ const Home = () => {
             <div id="messageContainer"
                 className="body-text text-center w-full max-w-5xl p-4 m-4 flex flex-col items-center"
                 style={{
+                    height: '100px',
                     borderColor: '#dfaf37',
                     borderWidth: '1px',
                     borderStyle: 'solid'
