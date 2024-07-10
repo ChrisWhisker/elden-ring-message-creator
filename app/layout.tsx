@@ -21,7 +21,6 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         <title>{customMetadata.title}</title>
         <meta name="description" content={customMetadata.description} />
         <meta name="keywords" content={customMetadata.keywords} />
-        {/* Meta tags for social media */}
         <meta name="author" content={customMetadata.author} />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         {/* Open Graph meta tags for Facebook */}
@@ -36,7 +35,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         {/* Canonical URL */}
         <link rel="canonical" href={customMetadata.siteUrl} />
         {/* Language */}
-        <meta http-equiv="Content-Language" content="en" />
+        <meta httpEquiv="Content-Language" content="en" />
         {/* Favicon */}
         <link rel="icon" href="/favicon.ico" />
       </Head>
