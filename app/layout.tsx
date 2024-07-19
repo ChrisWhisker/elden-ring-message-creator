@@ -18,7 +18,6 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html lang="en">
       <Head>
-        <title>{customMetadata.title}</title>
         <meta name="description" content={customMetadata.description} />
         <meta name="keywords" content={customMetadata.keywords} />
         <meta name="author" content={customMetadata.author} />
