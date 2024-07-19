@@ -22,6 +22,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         <meta name="keywords" content={customMetadata.keywords} />
         <meta name="author" content={customMetadata.author} />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="google-site-verification" content="LaNn_j2AC0c6w99SOPU92YGo2TBb2lYwkVyz75b7tf4" />
         {/* Open Graph meta tags for Facebook */}
         <meta property="og:title" content={customMetadata.title} />
         <meta property="og:description" content={customMetadata.description} />
