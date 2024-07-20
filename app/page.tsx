@@ -52,7 +52,7 @@ const Home = () => {
   return (
     <>
       <Head>
-        <title>Elden Ring Message Creator</title>
+        <title>Elden Ring Message Creator - Easily Compose Custom Messages</title>
         <meta name="google-site-verification" content="LaNn_j2AC0c6w99SOPU92YGo2TBb2lYwkVyz75b7tf4" />
       </Head>
       <main className="flex flex-col min-h-screen items-center p-4 lg:p-8 xl:p-12">
